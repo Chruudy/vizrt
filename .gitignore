@@ -1,4 +1,40 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# .NET Core
+project.lock.json
+.project.json.user
+*.csproj.user
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+bin/
+obj/
+nupkg/
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Rider
+.idea/
+
+# User-specific files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Publish output
+publish/
+
+# NuGet packages directory
+packages/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Ignore appsettings.json to protect sensitive information
+appsettings.json
 
 # dependencies
 /node_modules
@@ -17,7 +53,6 @@
 /build
 
 # misc
-.DS_Store
 *.pem
 
 # debug
@@ -37,4 +72,3 @@ next-env.d.ts
 
 # Ignore uploaded files
 api/public/uploads/*
-
