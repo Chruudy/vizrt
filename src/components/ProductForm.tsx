@@ -1,76 +1,72 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { TextField, Button } from '@mui/material';
+import Typography from '@mui/material/Typography';
 
-const ProductForm = () => {
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState(0);
-  const [category, setCategory] = useState('');
-  const [file, setFile] = useState<File | null>(null);
+const ProductForm = ({ productId }: { productId: number }) => {
+    const [name, setName] = useState('');
+    const [category, setCategory] = useState('');
+    const [price, setPrice] = useState(0);
+    const [image, setImage] = useState<File | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    useEffect(() => {
+        const fetchProduct = async () => {
+            const response = await axios.get(`http://localhost:5065/api/Product/${productId}`);
+            setName(response.data.name);
+            setCategory(response.data.category);
+            setPrice(response.data.price);
+        };
 
-    if (!file) return;
+        if (productId) {
+            fetchProduct();
+        }
+    }, [productId]);
 
-    const formData = new FormData();
-    formData.append('file', file);
+    const onImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setImage(event.target.files ? event.target.files[0] : null);
+    };
 
-    const uploadRes = await fetch('/api/upload', {
-      method: 'POST',
-      body: formData,
-    });
+    const onSubmit = async (event: React.FormEvent) => {
+        event.preventDefault();
 
-    const uploadData = await uploadRes.json();
-    const imageUrl = uploadData.fileUrl;
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('category', category);
+        formData.append('price', price.toString());
+        if (image) {
+            formData.append('image', image);
+        }
 
-    const productRes = await fetch('/api/products', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id: Date.now().toString(), name, price, category, imageUrl }),
-    });
+        try {
+            if (productId) {
+                await axios.put(`http://localhost:5065/api/Product/${productId}`, formData);
+            } else {
+                await axios.post('http://localhost:5065/api/Product', formData);
+            }
+        } catch (error) {
+            console.error('Error saving product', error);
+        }
+    };
 
-    const productData = await productRes.json();
-    console.log(productData);
-  };
+    const onDelete = async () => {
+        try {
+            await axios.delete(`http://localhost:5065/api/Product/${productId}`);
+        } catch (error) {
+            console.error('Error deleting product', error);
+        }
+    };
 
-  return (
-    <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-      <input
-        type="text"
-        placeholder="Product Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        className="border p-2"
-        required
-      />
-      <input
-        type="number"
-        placeholder="Price"
-        value={price}
-        onChange={(e) => setPrice(parseFloat(e.target.value))}
-        className="border p-2"
-        required
-      />
-      <input
-        type="text"
-        placeholder="Category"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-        className="border p-2"
-        required
-      />
-      <input
-        type="file"
-        onChange={(e) => setFile(e.target.files?.[0] || null)}
-        className="border p-2"
-        required
-      />
-      <button type="submit" className="bg-blue-500 text-white p-2">
-        Submit
-      </button>
-    </form>
-  );
+    return (
+        <form onSubmit={onSubmit}>
+            <Typography variant="h6">{productId ? 'Edit Product' : 'Add Product'}</Typography>
+            <TextField label="Name" value={name} onChange={e => setName(e.target.value)} />
+            <TextField label="Category" value={category} onChange={e => setCategory(e.target.value)} />
+            <TextField label="Price" value={price} onChange={e => setPrice(Number(e.target.value))} />
+            <input type="file" accept="image/*" onChange={onImageChange} />
+            <Button type="submit" variant="contained" color="primary">{productId ? 'Update' : 'Add'}</Button>
+            {productId && <Button variant="contained" color="secondary" onClick={onDelete}>Delete</Button>}
+        </form>
+    );
 };
 
 export default ProductForm;
