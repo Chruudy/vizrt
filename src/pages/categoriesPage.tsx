@@ -7,6 +7,7 @@ const CategoriesPage = () => {
   return (
     <div className="overflow-x-hidden">
       <Header />
+      
       <div className="mb-10">
         <CarouselItemsCategories />
       </div>
