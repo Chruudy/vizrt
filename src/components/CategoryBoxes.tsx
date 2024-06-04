@@ -53,7 +53,7 @@ const CategorySection = ({ title, images }: { title: string; images: { src: stri
   return (
     <div className="relative mb-10">
       <h2 className="mb-2 text-xl font-semibold text-white">{title}</h2>
-      <div className="overflow-hidden">
+      <div className="overflow-hidden" style={{ maxWidth: 'calc(8 * 8rem + 16 * 0.5rem)' }}> {/* Width of 8 boxes plus margin */}
         <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${slideIndex * 100}%)` }}>
           <div className="flex">
             {images.slice(0, 8).map((image, index) => (
@@ -70,7 +70,7 @@ const CategorySection = ({ title, images }: { title: string; images: { src: stri
       {slideIndex > 0 && (
         <button
           onClick={handlePrev}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 p-2 bg-orange-500 text-white rounded-full"
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 p-2 bg-orange-500 text-white rounded-full -ml-8"
         >
           {"<"}
         </button>
@@ -78,7 +78,7 @@ const CategorySection = ({ title, images }: { title: string; images: { src: stri
       {slideIndex < 1 && (
         <button
           onClick={handleNext}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 bg-orange-500 text-white rounded-full"
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 bg-orange-500 text-white rounded-full -mr-8"
         >
           {">"}
         </button>
