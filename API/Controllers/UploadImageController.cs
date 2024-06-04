@@ -1,23 +1,78 @@
 using Microsoft.AspNetCore.Mvc;
-namespace API.Controllers;
-[ApiController]
-[Route("[controller]")]
-public class UploadImageController : ControllerBase
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.Data.Sqlite;
+
+namespace API.Controllers
 {
-    private readonly IWebHostEnvironment hosting;
-    public UploadImageController(IWebHostEnvironment _hosting)
+    [ApiController]
+    [Route("[controller]")]
+    public class UploadImageController : ControllerBase
     {
-        hosting = _hosting;
-    }
-    [HttpPost]
-    public IActionResult SaveImage(IFormFile file)
-    {
-        string rootPath = hosting.WebRootPath;
-        string absolutePath = Path.Combine($"{rootPath}/images/{file.FileName}");
-        using(var fileStream = new FileStream(absolutePath, FileMode.Create))
+        private readonly IWebHostEnvironment _hosting;
+
+        public UploadImageController(IWebHostEnvironment hosting)
         {
-            file.CopyTo(fileStream);
+            _hosting = hosting;
         }
-        return Ok();
+
+        [HttpPost]
+        public IActionResult SaveImage(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No file uploaded.");
+            }
+
+            // Define the root path for uploads
+            string rootPath = Path.Combine(_hosting.ContentRootPath, "public", "uploads");
+
+            // Logging the root path
+            Console.WriteLine($"Root Path: {rootPath}");
+
+            // Create the uploads directory if it doesn't exist
+            if (!Directory.Exists(rootPath))
+            {
+                Directory.CreateDirectory(rootPath);
+            }
+
+            // Define the absolute path for the file
+            string absolutePath = Path.Combine(rootPath, file.FileName);
+
+            // Logging the absolute path
+            Console.WriteLine($"Absolute Path: {absolutePath}");
+
+            // Save the file
+            using (var fileStream = new FileStream(absolutePath, FileMode.Create))
+            {
+                file.CopyTo(fileStream);
+            }
+
+            // Generate the URL of the uploaded image
+            string imageUrl = $"{Request.Scheme}://{Request.Host}/public/uploads/{file.FileName}";
+
+            // Logging the image URL
+            Console.WriteLine($"Image URL: {imageUrl}");
+
+            // Connect to the existing database
+            string dbPath = Path.Combine(_hosting.ContentRootPath, "Product.db");
+
+            // Logging the database path
+            Console.WriteLine($"DB Path: {dbPath}");
+
+            using (SqliteConnection conn = new SqliteConnection($"Data Source={dbPath}"))
+            {
+                conn.Open();
+                using (SqliteCommand cmd = new SqliteCommand("INSERT INTO Product (Image) VALUES (@ImageUrl)", conn))
+                {
+                    cmd.Parameters.AddWithValue("@ImageUrl", imageUrl);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            return Ok(new { imageUrl });
+        }
+
     }
 }
