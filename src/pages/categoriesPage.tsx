@@ -1,4 +1,3 @@
-// src/pages/categoriesPage.tsx
 import Header from "../components/header";
 import Footer from "../components/footer";
 import CarouselItemsCategories from "@/components/CarouselItemsCategories";
@@ -8,8 +7,12 @@ const CategoriesPage = () => {
   return (
     <div className="overflow-x-hidden">
       <Header />
-      <CarouselItemsCategories />
-      <CategoryBoxes /> 
+      <div className="mb-10">
+        <CarouselItemsCategories />
+      </div>
+      <div className="container mx-auto p-5">
+        <CategoryBoxes /> 
+      </div>
       <Footer />
     </div>
   );
