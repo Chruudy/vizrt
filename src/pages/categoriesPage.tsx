@@ -1,15 +1,18 @@
+// src/pages/categoriesPage.tsx
 import Header from "../components/header";
 import Footer from "../components/footer";
-import Carousel from "@/components/Carousel";
-import CarouselItems from "@/components/CarouselItems";
 import CarouselItemsCategories from "@/components/CarouselItemsCategories";
+import CategoryBoxes from "@/components/CategoryBoxes"; // Importing the CategoryBoxes component
 
-export default function CategoriesPage() {
+const CategoriesPage = () => {
   return (
     <div className="overflow-x-hidden">
       <Header />
-      <CarouselItemsCategories/>
+      <CarouselItemsCategories />
+      <CategoryBoxes /> 
       <Footer />
     </div>
   );
-}
+};
+
+export default CategoriesPage;
