@@ -24,7 +24,7 @@ const Header: React.FC = () => {
           <SearchIcon className="text-black mx-2" />
         </button>
       </div>
-      <ul className="flex items-center text-white mr-6">
+      <ul className="flex items-center text-white mr-2">
         <li>
           <button className="transition-colors duration-400 ease-in-out hover:bg-orange-500 hover:text-black h-20 w-20">
             <MenuIcon />
