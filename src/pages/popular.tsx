@@ -1,6 +1,6 @@
 import Header from "../components/header";
 import Footer from "../components/footer";
-import PopularPage from "@/components/popularPage";
+import PopularPage from "../components/PopularPage";
 
 export default function Popular() {
   return (
