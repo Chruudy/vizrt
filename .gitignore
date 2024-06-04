@@ -72,3 +72,6 @@ next-env.d.ts
 
 # Ignore uploaded files
 api/public/uploads/*
+
+*.db-shm
+*.db-wal
