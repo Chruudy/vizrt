@@ -76,3 +76,4 @@ api/public/uploads/*
 API/*.db
 *.db-shm
 *.db-wal
+*.db
