@@ -10,7 +10,7 @@ export default function Home() {
       <Header />
       <Categories />
 
-      <Link href="/demoPage1">
+      <Link href="/demoInfoPage1">
         <p className="text-white text-center font-medium">Demo page (midlertidlig link)</p>
       </Link>
 

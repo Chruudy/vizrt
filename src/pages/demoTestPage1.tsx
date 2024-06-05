@@ -1,9 +1,9 @@
 import React from "react";
 import Header from '../components/header';
-import VizArenaDemo from "../components/VizArenaDemo";
+import VizArenaDemo from '../components/vizArenaDemo';
 import Footer from '../components/footer';
 
-export default function demoPage() {
+export default function demoInfoPage() {
     return (
         <div className="overflow-x-hidden">
             <Header />
