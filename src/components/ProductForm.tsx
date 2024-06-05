@@ -21,6 +21,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
   const [product, setProduct] = useState<Product | null>(null);
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -34,9 +35,10 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
           setPrice(productData.price);
           setProduct(productData);
           if (productData.image) {
-            setImagePreview(`http://localhost:5065${productData.image}`); // Updated to correctly set image preview
+            setImagePreview(productData.image);
           }
-        });
+        })
+        .catch((error) => console.error("Error fetching product:", error));
     }
   }, [productId]);
 
@@ -66,7 +68,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
         );
       } else {
         response = await axios.post(
-          "http://localhost:5065/api/Product",
+          "http://localhost:5065/UploadImage",
           formData,
           {
             headers: {
@@ -78,8 +80,16 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
       const productData: Product = response.data;
       setProduct(productData);
       if (productData.image) {
-        setImagePreview(`http://localhost:5065${productData.image}`); // Updated to correctly set image preview
+        setImagePreview(productData.image);
       }
+      // Clear the inputs and display success message
+      setName("");
+      setCategory("");
+      setPrice(0);
+      setImage(null);
+      setImagePreview(null);
+      setSuccessMessage("Product published successfully!");
+      setTimeout(() => setSuccessMessage(null), 3000); // Clear the message after 3 seconds
     } catch (error) {
       console.error("Error uploading product:", error);
     }
@@ -96,7 +106,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
   const onDelete = async () => {
     try {
       await axios.delete(`http://localhost:5065/api/Product/${productId}`);
-      router.push("/products");
+      alert("Product deleted successfully!");
+      // Optionally refresh the page or handle UI update
     } catch (error) {
       console.error("Error deleting product", error);
     }
@@ -108,6 +119,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
         <h2 className="text-2xl font-bold mb-5">
           {productId ? "Edit Product" : "Add Product"}
         </h2>
+        {successMessage && (
+          <div className="text-green-500 mb-4">{successMessage}</div>
+        )}
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Name:
@@ -152,15 +166,26 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
             type="file"
             accept="image/*"
             onChange={onImageChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
           />
         </div>
-        <div className="flex space-x-4">
+        {imagePreview && (
+          <div className="mb-4">
+            <Image
+              src={imagePreview}
+              alt="Image preview"
+              width={200}
+              height={200}
+              className="rounded-md"
+            />
+          </div>
+        )}
+        <div className="flex items-center justify-between">
           <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
-            {productId ? "Update" : "Add"}
+            {productId ? "Update" : "Add"} Product
           </button>
           {productId && (
             <button
@@ -168,46 +193,11 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
               onClick={onDelete}
               className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
-              Delete
+              Delete Product
             </button>
           )}
         </div>
       </form>
-      {imagePreview && (
-        <div className="mt-5">
-          <h2 className="text-2xl font-bold mb-5">Image Preview:</h2>
-          <Image
-            src={imagePreview}
-            alt="Image Preview"
-            width={500}
-            height={300}
-            layout="responsive"
-          />
-        </div>
-      )}
-      {product && (
-        <div className="mt-5">
-          <h2 className="text-2xl font-bold mb-5">Product Details:</h2>
-          <p className="mb-2">
-            <strong>Name:</strong> {product.name}
-          </p>
-          <p className="mb-2">
-            <strong>Category:</strong> {product.category}
-          </p>
-          <p className="mb-2">
-            <strong>Price:</strong> {product.price}
-          </p>
-          {product.image && (
-            <Image
-              src={`http://localhost:5065${product.image}`} // Updated to correctly display the image
-              alt={product.name}
-              width={500}
-              height={300}
-              layout="responsive"
-            />
-          )}
-        </div>
-      )}
     </div>
   );
 };
