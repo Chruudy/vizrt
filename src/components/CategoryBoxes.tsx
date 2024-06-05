@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+import volleyball from '../images/volleyball.jpg';
+import basketball from '../images/basketball.jpg';
+
+const sportArray = [volleyball, basketball].map((image) => image.src);
+
 
 const images1 = [
-  { src: '/path/to/graphic1.jpg', alt: 'Graphic 1' },
-  { src: '/path/to/graphic2.jpg', alt: 'Graphic 2' },
+  { src: sportArray[0], alt: 'Graphic 1' },
+  { src: sportArray[1], alt: 'Graphic 2' },
   { src: '/path/to/graphic3.jpg', alt: 'Graphic 3' },
   { src: '/path/to/graphic4.jpg', alt: 'Graphic 4' },
   { src: '/path/to/graphic5.jpg', alt: 'Graphic 5' },
