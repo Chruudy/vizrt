@@ -138,13 +138,19 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Category:
           </label>
-          <input
-            type="text"
+          <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             required
-          />
+          >
+            <option value="">Select a category</option>
+            <option value="Sport">Sport</option>
+            <option value="Graphics">Graphics</option>
+            <option value="Virtual & XR">Virtual & XR</option>
+            <option value="E-sport">E-sport</option>
+            <option value="Live Production">Live Production</option>
+          </select>
         </div>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
