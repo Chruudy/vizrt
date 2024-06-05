@@ -25,9 +25,6 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
   return (
     <div className="relative flex flex-col items-center justify-center">
       <div className="mb-16">
-        <h2 className="mt-6 text-sm font-medium text-white w-64 h-10 flex items-center justify-center rounded-md">
-          Our Most Popular Packages
-        </h2>
       </div>
       <div className="relative flex items-center justify-center perspective mt-16">
         <button
