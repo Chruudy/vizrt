@@ -38,9 +38,11 @@ const Header: React.FC = () => {
           </Link>
         </li>
         <li>
+        <Link href="/profile">
           <button className="transition-colors duration-400 ease-in-out hover:bg-orange-500 hover:text-black h-20 w-20">
             <Person2Icon />
           </button>
+          </Link>
         </li>
         <li>
           <Link href="/uploadtest">
