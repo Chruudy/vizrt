@@ -1,23 +1,37 @@
-"use client";
+// pages/profile.tsx
 import React from 'react';
-import Image from 'next/image';
-import profilePic from '../images/profilepic.jpeg'; 
+import Header from '../components/Header';  // Adjust the import path as needed
+import Footer from '../components/Footer';  // Adjust the import path as needed
+import ProfileInfo from '../components/ProfileInfo';
+import Experience from '../components/Experience';
+import FollowStats from '../components/FollowStats';
+import EditAccountButton from '../components/EditAccountButton';
+import Tabs from '../components/Tabs';
 
-const ProfileInfo: React.FC = () => {
+const Profile: React.FC = () => {
   return (
-    <div className="text-center mt-8">
-      <div className="relative flex items-center justify-center h-32 w-32 rounded-full overflow-hidden bg-gray-200 mx-auto border-4 border-white shadow-lg">
-        <div className="absolute inset-0 border-4 border-white rounded-full"></div>
-        <Image src={profilePic} alt="Profile Picture" layout="fill" objectFit="cover" />
-        <div className="absolute bottom-0 right-0 bg-white p-1 rounded-full border-2 border-gray-300">
-          <button className="bg-gray-800 text-white rounded-full p-1">+</button>
+    <div className="overflow-x-hidden">
+      <Header />
+      <main className="container mx-auto p-4">
+        <div className="flex justify-center items-center h-32 mt-8">
+          <div className="text-center">
+            <p className="text-xl font-bold">Estimated Earnings</p>
+            <p className="text-3xl text-green-500">$12,345</p>
+          </div>
         </div>
-      </div>
-      <h2 className="text-2xl font-bold mt-4">Nick Frost</h2>
-      <p className="text-gray-500">Product Designer</p>
-      <p className="text-gray-500">San Francisco</p>
+        <div className="flex mt-8">
+          <ProfileInfo />
+          <div className="ml-16 flex-grow">
+            <Experience />
+          </div>
+        </div>
+        <FollowStats />
+        <EditAccountButton />
+        <Tabs />
+      </main>
+      <Footer />
     </div>
   );
 };
 
-export default ProfileInfo;
+export default Profile;
