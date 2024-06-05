@@ -1,13 +1,24 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import Image from "next/image";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
-const ProductForm = ({ productId }: { productId: number | null }) => {
-  const [name, setName] = useState("");
-  const [category, setCategory] = useState("");
-  const [price, setPrice] = useState(0);
-  const [product, setProduct] = useState<any>(null);
+interface Product {
+  name: string;
+  category: string;
+  price: number;
+  image?: string;
+}
+
+interface ProductFormProps {
+  productId?: string | null;
+}
+
+const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
+  const [name, setName] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+  const [price, setPrice] = useState<number>(0);
+  const [product, setProduct] = useState<Product | null>(null);
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const router = useRouter();
@@ -17,12 +28,13 @@ const ProductForm = ({ productId }: { productId: number | null }) => {
       axios
         .get(`http://localhost:5065/api/Product/${productId}`)
         .then((response) => {
-          setName(response.data.name);
-          setCategory(response.data.category);
-          setPrice(response.data.price);
-          setProduct(response.data);
-          if (response.data.image) {
-            setImagePreview(`http://localhost:5065/${response.data.image}`);
+          const productData: Product = response.data;
+          setName(productData.name);
+          setCategory(productData.category);
+          setPrice(productData.price);
+          setProduct(productData);
+          if (productData.image) {
+            setImagePreview(`http://localhost:5065${productData.image}`); // Updated to correctly set image preview
           }
         });
     }
@@ -31,47 +43,45 @@ const ProductForm = ({ productId }: { productId: number | null }) => {
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    const productData = new FormData();
-    productData.append("Name", name);
-    productData.append("Category", category);
-    productData.append("Price", price.toString());
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("category", category);
+    formData.append("price", price.toString());
 
-    let response;
+    if (image) {
+      formData.append("file", image);
+    }
+
     try {
+      let response;
       if (productId) {
         response = await axios.put(
           `http://localhost:5065/api/Product/${productId}`,
-          productData
-        );
-      } else {
-        response = await axios.post(
-          "http://localhost:5065/api/Product",
-          productData
-        );
-      }
-      setProduct(response.data);
-    } catch (error) {
-      console.error("Error uploading product:", error);
-    }
-
-    if (image) {
-      const imageData = new FormData();
-      imageData.append("file", image); // change "Image" to "file"
-
-      try {
-        const imageResponse = await axios.post(
-          "http://localhost:5065/UploadImage",
-          imageData,
+          formData,
           {
             headers: {
               "Content-Type": "multipart/form-data",
             },
           }
         );
-        setImagePreview(`http://localhost:5065/${imageResponse.data.image}`);
-      } catch (error) {
-        console.error("Error uploading image:", error);
+      } else {
+        response = await axios.post(
+          "http://localhost:5065/api/Product",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
       }
+      const productData: Product = response.data;
+      setProduct(productData);
+      if (productData.image) {
+        setImagePreview(`http://localhost:5065${productData.image}`); // Updated to correctly set image preview
+      }
+    } catch (error) {
+      console.error("Error uploading product:", error);
     }
   };
 
@@ -86,7 +96,7 @@ const ProductForm = ({ productId }: { productId: number | null }) => {
   const onDelete = async () => {
     try {
       await axios.delete(`http://localhost:5065/api/Product/${productId}`);
-      router.push("/products"); // navigate to products page after deletion
+      router.push("/products");
     } catch (error) {
       console.error("Error deleting product", error);
     }
@@ -189,7 +199,7 @@ const ProductForm = ({ productId }: { productId: number | null }) => {
           </p>
           {product.image && (
             <Image
-              src={`http://localhost:5065/${product.image}`} // prepend your API URL
+              src={`http://localhost:5065${product.image}`} // Updated to correctly display the image
               alt={product.name}
               width={500}
               height={300}

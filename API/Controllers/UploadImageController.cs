@@ -18,11 +18,26 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveImage(IFormFile file)
+        public IActionResult SaveImage(IFormFile file, [FromForm] decimal price, [FromForm] string name, [FromForm] string category)
         {
             if (file == null || file.Length == 0)
             {
                 return BadRequest("No file uploaded.");
+            }
+
+            if (price <= 0)
+            {
+                return BadRequest("Invalid price.");
+            }
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return BadRequest("Invalid name.");
+            }
+
+            if (string.IsNullOrWhiteSpace(category))
+            {
+                return BadRequest("Invalid category.");
             }
 
             // Define the root path for uploads
@@ -64,15 +79,17 @@ namespace API.Controllers
             using (SqliteConnection conn = new SqliteConnection($"Data Source={dbPath}"))
             {
                 conn.Open();
-                using (SqliteCommand cmd = new SqliteCommand("INSERT INTO Product (Image) VALUES (@ImageUrl)", conn))
+                using (SqliteCommand cmd = new SqliteCommand("INSERT INTO Product (Name, Image, Price, Category) VALUES (@Name, @ImageUrl, @Price, @Category)", conn))
                 {
+                    cmd.Parameters.AddWithValue("@Name", name);
                     cmd.Parameters.AddWithValue("@ImageUrl", imageUrl);
+                    cmd.Parameters.AddWithValue("@Price", price);
+                    cmd.Parameters.AddWithValue("@Category", category);
                     cmd.ExecuteNonQuery();
                 }
             }
 
             return Ok(new { imageUrl });
         }
-
     }
 }
