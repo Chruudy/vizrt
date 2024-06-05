@@ -5,7 +5,7 @@ import Footer from '../components/footer';
 import ProfileInfo from '../components/ProfileInfo';
 import Experience from '../components/profileExperience';
 import FollowStats from '../components/profileFollow';
-import EditAccountButton from '../components/EditAccount';
+import EditAccountButton from '../components/editAccount';
 import Tabs from '../components/Tabs';
 
 const Profile: React.FC = () => {
