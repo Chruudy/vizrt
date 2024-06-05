@@ -30,7 +30,7 @@ const images2 = [
   { src: '/path/to/contribution10.jpg', alt: 'Contribution 10', description: 'Contribution 10 description', category: 'Contributions', price: '$100' },
 ];
 
-const GridItem = ({ src, alt, description, category, price }: { src: string; alt: string; description: string; category: string; price: string }) => (
+const GridItem = ({ src, alt, description, category, price, onQuickReview }: { src: string; alt: string; description: string; category: string; price: string; onQuickReview: () => void }) => (
   <div className="flex flex-col justify-between items-center bg-gray-200 rounded-lg p-2 focus:outline-none w-48 h-72 m-2 relative">
     <img src={src} alt={alt} className="w-full h-32 object-cover rounded-lg" />
     <div className="mt-2 text-sm text-center">
@@ -39,18 +39,34 @@ const GridItem = ({ src, alt, description, category, price }: { src: string; alt
       <p>Price: {price}</p>
     </div>
     {alt === 'Graphic 1' && (
-      <button className="text-xs font-medium text-white w-24 h-8 flex items-center justify-center rounded-md bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2">
+      <button className="text-xs font-medium text-white w-24 h-8 flex items-center justify-center rounded-md bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2" onClick={onQuickReview}>
         Quick Review
       </button>
     )}
   </div>
 );
 
-const CategorySection = ({ title, images, link }: { title: string; images: { src: string; alt: string; description: string; category: string; price: string }[], link: string }) => {
+const QuickReviewModal = ({ item, onClose }: { item: any; onClose: () => void }) => (
+  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div className="bg-white p-6 rounded-lg shadow-lg w-96 text-center">
+      <img src={item.src} alt={item.alt} className="w-full h-48 object-cover rounded-lg mb-4" />
+      <p>Description: {item.description}</p>
+      <p>Category: {item.category}</p>
+      <p>Price: {item.price}</p>
+      <button className="mt-4 text-white bg-orange-500 px-4 py-2 rounded-md" onClick={onClose}>Close</button>
+    </div>
+  </div>
+);
+
+const CategorySection = ({ title, images, link }: { title: string; images: { src: string; alt: string; description: string; category: string; price: string }[]; link: string }) => {
   const [slideIndex, setSlideIndex] = useState(0);
+  const [quickReviewItem, setQuickReviewItem] = useState<any>(null);
 
   const handlePrev = () => setSlideIndex((prevIndex) => Math.max(prevIndex - 1, 0));
   const handleNext = () => setSlideIndex((prevIndex) => Math.min(prevIndex + 1, 1));
+
+  const handleQuickReview = (item: any) => setQuickReviewItem(item);
+  const handleCloseQuickReview = () => setQuickReviewItem(null);
 
   return (
     <div className="relative mb-10">
@@ -64,12 +80,12 @@ const CategorySection = ({ title, images, link }: { title: string; images: { src
         <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${slideIndex * 100}%)` }}>
           <div className="flex">
             {images.slice(0, 6).map((image, index) => (
-              <GridItem key={index} src={image.src} alt={image.alt} description={image.description} category={image.category} price={image.price} />
+              <GridItem key={index} src={image.src} alt={image.alt} description={image.description} category={image.category} price={image.price} onQuickReview={() => handleQuickReview(image)} />
             ))}
           </div>
           <div className="flex">
             {images.slice(6, 12).map((image, index) => (
-              <GridItem key={index} src={image.src} alt={image.alt} description={image.description} category={image.category} price={image.price} />
+              <GridItem key={index} src={image.src} alt={image.alt} description={image.description} category={image.category} price={image.price} onQuickReview={() => handleQuickReview(image)} />
             ))}
           </div>
         </div>
@@ -90,6 +106,7 @@ const CategorySection = ({ title, images, link }: { title: string; images: { src
           {">"}
         </button>
       )}
+      {quickReviewItem && <QuickReviewModal item={quickReviewItem} onClose={handleCloseQuickReview} />}
     </div>
   );
 };
