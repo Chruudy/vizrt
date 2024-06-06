@@ -1,12 +1,12 @@
 import Header from "../components/header";
 import Footer from "../components/footer";
-import PopularPage from "../components/PopularPage";
+import SigninPage from "../components/SigninPage";
 
-export default function Popular() {
+export default function Home() {
   return (
     <div className="overflow-x-hidden">
       <Header />
-      <PopularPage />
+        <SigninPage />
       <Footer />
     </div>
   );
