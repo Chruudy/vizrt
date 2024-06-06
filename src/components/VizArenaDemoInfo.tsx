@@ -18,7 +18,7 @@ const VizArenaDemoInfo: React.FC = () => {
         <div>
             <div className="pt-8 pl-16">
                 <Link href="/">
-                    <Image src={backButton} alt="Back button" className="w-10 h-auto"></Image>
+                    <Image src={backButton} alt="Back button" className="w-12 h-auto"></Image>
                 </Link>
             </div>
 

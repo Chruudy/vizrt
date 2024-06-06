@@ -18,9 +18,9 @@ const VizArenaDemo: React.FC = () => {
         <div>
             <div className="flex pt-8 pl-16">
                 <Link href="/demoInfoPage1">
-                    <Image src={backButton} alt="Back button" className="w-10 h-auto"></Image>
+                    <Image src={backButton} alt="Back button" className="w-12 h-auto"></Image>
                 </Link>
-                <p className="text-white text-2xl pl-8 pt-1">Demo review</p>
+                <p className="text-white text-2xl pl-8 pt-2">Demo review</p>
             </div>
 
             <div className="pl-12 pt-8 relative flex">
