@@ -11,7 +11,11 @@ export default function Home() {
       <Categories />
 
       <Link href="/demoInfoPage1">
-        <p className="text-white text-center font-medium">Demo page (midlertidlig link)</p>
+        <p className="text-white text-center font-medium pb-6">Demo page (midlertidlig link)</p>
+      </Link>
+
+      <Link href="/premierLeaguePage">
+        <p className="text-white text-center font-medium">Premier League package (midlertidlig link)</p>
       </Link>
 
       <CarouselItems />
