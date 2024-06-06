@@ -4,6 +4,8 @@ import logo from "../images/Vizrt-Logo-Orange.webp";
 import phone from "../images/phone.svg";
 import location from "../images/location.svg";
 import email from "../images/email.svg";
+import Link from "next/link";
+import demoInfoPage from "@/pages/demoInfoPage1";
 
 const ContactItem = ({
   src,
@@ -102,7 +104,9 @@ const Footer = () => {
         <div className="col-span-1 space-y-4">
           <h3 className="font-bold">Products</h3>
           <div className="flex items-center">
-            <p className="text-blue-500">Viz Arena</p>
+            <Link href={"/demoInfoPage1"}>
+              <p className="text-blue-500">Viz Arena</p>
+            </Link>
           </div>
           <div className="flex items-center">
             <p className="text-blue-500">Viz Libero</p>
