@@ -7,14 +7,14 @@ const sportArray = [volleyball, basketball].map((image) => image.src);
 const images1 = [
   { src: sportArray[0], alt: 'Graphic 1', description: 'Volleyball game', category: 'Sports', price: '$49' },
   { src: sportArray[1], alt: 'Graphic 2', description: 'Basketball game', category: 'Sports', price: '$99' },
-  { src: '/path/to/graphic3.jpg', alt: 'Graphic 3', description: 'Graphic 3 description', category: 'Graphics', price: '$30' },
-  { src: '/path/to/graphic4.jpg', alt: 'Graphic 4', description: 'Graphic 4 description', category: 'Graphics', price: '$40' },
-  { src: '/path/to/graphic5.jpg', alt: 'Graphic 5', description: 'Graphic 5 description', category: 'Graphics', price: '$50' },
-  { src: '/path/to/graphic6.jpg', alt: 'Graphic 6', description: 'Graphic 6 description', category: 'Graphics', price: '$60' },
-  { src: '/path/to/graphic7.jpg', alt: 'Graphic 7', description: 'Graphic 7 description', category: 'Graphics', price: '$70' },
-  { src: '/path/to/graphic8.jpg', alt: 'Graphic 8', description: 'Graphic 8 description', category: 'Graphics', price: '$80' },
-  { src: '/path/to/graphic9.jpg', alt: 'Graphic 9', description: 'Graphic 9 description', category: 'Graphics', price: '$90' },
-  { src: '/path/to/graphic10.jpg', alt: 'Graphic 10', description: 'Graphic 10 description', category: 'Graphics', price: '$100' },
+  { src: sportArray[1], alt: 'Graphic 2', description: 'Basketball game', category: 'Sports', price: '$30' },
+  { src: sportArray[1], alt: 'Graphic 2', description: 'Basketball game', category: 'Sports', price: '$40' },
+  { src: sportArray[1], alt: 'Graphic 2', description: 'Basketball game', category: 'Sports', price: '$50' },
+  { src: sportArray[1], alt: 'Graphic 2', description: 'Basketball game', category: 'Sports', price: '$60' },
+  { src: sportArray[1], alt: 'Graphic 2', description: 'Basketball game', category: 'Sports', price: '$70' },
+  { src: sportArray[1], alt: 'Graphic 2', description: 'Basketball game', category: 'Sports', price: '$80' },
+  { src: sportArray[1], alt: 'Graphic 2', description: 'Basketball game', category: 'Sports', price: '$90' },
+  { src: sportArray[1], alt: 'Graphic 2', description: 'Basketball game', category: 'Sports', price: '$100' },
 ];
 
 const images2 = [
@@ -31,29 +31,30 @@ const images2 = [
 ];
 
 const GridItem = ({ src, alt, description, category, price, onQuickReview }: { src: string; alt: string; description: string; category: string; price: string; onQuickReview: () => void }) => (
-  <div className="flex flex-col justify-between items-center bg-gray-200 rounded-lg p-2 focus:outline-none w-48 h-72 m-2 relative">
-    <img src={src} alt={alt} className="w-full h-32 object-cover rounded-lg" />
-    <div className="mt-2 text-sm text-center">
+  <div className="flex flex-col justify-between items-center bg-transparent p-2 focus:outline-none w-48 h-72 m-2 relative border-2 border-white border-opacity-25">
+    <img src={src} alt={alt} className="w-full h-32 object-cover border-2 border-white border-opacity-25" />
+    <div className="mt-2 text-sm text-center text-white">
       <p>Description: {description}</p>
       <p>Category: {category}</p>
       <p>Price: {price}</p>
     </div>
-    {alt === 'Graphic 1' && (
-      <button className="text-xs font-medium text-white w-24 h-8 flex items-center justify-center rounded-md bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2" onClick={onQuickReview}>
-        Quick Review
-      </button>
-    )}
+    <button className="text-xs font-medium text-white w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2" onClick={onQuickReview}>
+      Quick Review
+    </button>
   </div>
 );
 
 const QuickReviewModal = ({ item, onClose }: { item: any; onClose: () => void }) => (
   <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-    <div className="bg-white p-6 rounded-lg shadow-lg w-96 text-center">
-      <img src={item.src} alt={item.alt} className="w-full h-48 object-cover rounded-lg mb-4" />
+    <div className="bg-gray-700 bg-opacity-95 p-6 shadow-lg w-96 text-center text-blue-100">
+      <img src={item.src} alt={item.alt} className="w-full h-48 object-cover mb-4 border-2 border-white border-opacity-25" />
       <p>Description: {item.description}</p>
       <p>Category: {item.category}</p>
       <p>Price: {item.price}</p>
-      <button className="mt-4 text-white bg-orange-500 px-4 py-2 rounded-md" onClick={onClose}>Close</button>
+      <div className="flex justify-center space-x-4 mt-4">
+        <button className="text-white bg-orange-500 px-4 py-2 rounded-md" onClick={() => console.log('Added to cart')}>Add to Cart</button>
+        <button className="text-white bg-orange-500 px-4 py-2 rounded-md" onClick={onClose}>Close</button>
+      </div>
     </div>
   </div>
 );
@@ -69,7 +70,7 @@ const CategorySection = ({ title, images, link }: { title: string; images: { src
   const handleCloseQuickReview = () => setQuickReviewItem(null);
 
   return (
-    <div className="relative mb-10">
+    <div className="relative mb-10 bg-gray-700 bg-opacity-50 p-4">
       <div className="flex items-center mb-2">
         <h2 className="text-xl font-semibold text-white mr-2">{title}</h2>
         <button className="text-xl font-semibold text-white bg-orange-500 rounded-full p-2" onClick={() => window.location.href = link}>

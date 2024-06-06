@@ -1,6 +1,6 @@
 "use client";
-import React from 'react';
-import Image from 'next/image';
+import React from 'react';import Image from 'next/image';
+
 import profilePic from '../images/profilepic.jpeg'; // Adjust the import path as needed
 
 const ProfileInfo: React.FC = () => {
