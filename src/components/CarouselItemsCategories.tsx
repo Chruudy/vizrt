@@ -12,10 +12,6 @@ const images = [tennis, football, esport2, volleyball, basketball, golf].map((im
 
 const CarouselItemsCategories = () => (
   <div className="relative flex flex-col items-center justify-center">
-    <div className="flex flex-col items-center mb-4">
-      <h2 className="text-2xl text-white">Sub-Categories</h2>
-      <div className="border-t border-white mt-2" style={{ width: '150%' }}></div>
-    </div>
     <Carousel images={images} />
   </div>
 );

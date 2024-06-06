@@ -3,6 +3,7 @@ import Footer from "../components/footer";
 import CarouselItemsCategories from "@/components/CarouselItemsCategories";
 import CategoryBoxes from "@/components/CategoryBoxes"; // Importing the CategoryBoxes component
 import Categories from "@/components/categories";
+import CarouselCategories from "@/components/CarouselCategories";
 const CategoriesPage = () => {
   return (
     <div className="overflow-x-hidden">
@@ -11,7 +12,7 @@ const CategoriesPage = () => {
       
       <Categories />
       <div className="mb-10">
-        <CarouselItemsCategories />
+       <CarouselCategories/>
       </div>
       <div className="container mx-auto p-5">
         <CategoryBoxes /> 

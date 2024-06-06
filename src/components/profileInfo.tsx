@@ -16,9 +16,9 @@ const ProfileInfo: React.FC = () => {
         </button>
       </div>
       <div>
-        <h2 className="text-2xl font-bold">Nick Frost</h2>
+        <h2 className="text-2xl font-bold">Nicole Frost</h2>
         <p className="text-gray-500">Product Designer</p>
-        <p className="text-gray-500">San Francisco</p>
+        <p className="text-black-500">San Francisco</p>
         <div className="flex space-x-4 mt-2">
           <div>
             <span className="font-bold">200</span> followers

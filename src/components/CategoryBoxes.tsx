@@ -116,7 +116,7 @@ const CategorySection = ({ title, images, link }: { title: string; images: { src
 
 const CategoryBoxes = () => {
   return (
-    <div className="p-5" style={{ backgroundColor: '#1D3641' }}>
+    <div className="p-5 mt-16" style={{ backgroundColor: '#1D3641' }}>
       <CategorySection title="Most Popular Graphics" images={images1} link="/popular" />
       <CategorySection title="Latest Contributions" images={images2} link="/contributions" />
     </div>

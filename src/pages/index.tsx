@@ -3,6 +3,7 @@ import React from 'react';
 import Header from '../components/Header';
 import Categories from '../components/Categories';
 import CarouselItems from '../components/CarouselItems';
+import Footer from '@/components/footer';
 
 export default function Home() {
     return (
@@ -10,6 +11,7 @@ export default function Home() {
             <Header />
             <Categories />
             <CarouselItems />
+            <Footer/>
         </div>
     );
 }
