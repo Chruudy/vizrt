@@ -34,9 +34,9 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v2", new OpenApiInfo 
     { 
-        Title = "VizrtProduct API", 
+        Title = "Vizrt API", 
         Version = "v2",
-        Description = "An API to perform CRUD operations on Products",
+        Description = "An API to perform CRUD operations",
     });
 });
 
@@ -48,7 +48,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v2/swagger.json", "VizrtProduct API V2");
+        c.SwaggerEndpoint("/swagger/v2/swagger.json", "Vizrt API V2");
     });
 }
 

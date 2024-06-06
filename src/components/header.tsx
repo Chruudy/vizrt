@@ -7,6 +7,7 @@ import StarIcon from "@mui/icons-material/Star";
 import Image from "next/image";
 import Logo from "../images/Vizrt-Logo-Orange.webp";
 import Link from "next/link";
+import CreateIcon from '@mui/icons-material/Create';
 
 const Header: React.FC = () => {
   return (
@@ -43,7 +44,7 @@ const Header: React.FC = () => {
             <Person2Icon />
           </button>
           </Link>
-        </li>
+        </li>  
         <li>
           <Link href="/uploadtest">
             <button className="transition-colors duration-400 ease-in-out hover:bg-orange-500 hover:text-black h-20 w-20">
@@ -51,6 +52,33 @@ const Header: React.FC = () => {
             </button>
           </Link>
         </li>
+        {isLoggedIn ? (
+          <li>
+            <Link href="/profile">
+              <button className="transition-colors duration-400 ease-in-out hover:bg-orange-500 hover:text-black h-20 w-20">
+                <Person2Icon />
+              </button>
+            </Link>
+          </li>
+        ) : (
+          <li>
+            <Link href="/login">
+              <button className="transition-colors duration-400 ease-in-out hover:bg-orange-500 hover:text-black h-20 w-20">
+                <Person2Icon />
+              </button>
+            </Link>
+          </li>
+        )}
+        {isLoggedIn && (
+          <li>
+            {/* New Icon for logged-in users */}
+            <Link href="/new-feature">
+              <button className="transition-colors duration-400 ease-in-out hover:bg-orange-500 hover:text-black h-20 w-20">
+                <CreateIcon />
+              </button>
+            </Link>
+          </li>
+        )}
       </ul>
     </header>
   );

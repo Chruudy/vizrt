@@ -1,10 +1,43 @@
-import React from 'react';
+/* eslint-disable react/no-unescaped-entities */
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { TextField, Button, IconButton } from '@mui/material';
 import { Google, Facebook, Twitter } from '@mui/icons-material';
+import axios from 'axios';
 import Logo from "../images/Vizrt-Logo-Orange.webp";
+
 const LoginPage: React.FC = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const router = useRouter();
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append('email', email);
+      formData.append('password', password);
+
+      const response = await axios.post("http://localhost:5065/user/login", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      setError('');
+      router.push('/');  // Redirect to the /index page after successful login
+    } catch (err) {
+      if (axios.isAxiosError(err) && err.response) {
+        setError(err.response.data);
+      } else {
+        setError("Error logging in.");
+      }
+    }
+  };
+
   return (
     <div className="flex flex-col items-center pb-6 pt-10 min-h-screen">
       <main className="w-full max-w-md space-y-8 px-8" style={{ minHeight: '500px' }}>
@@ -12,12 +45,14 @@ const LoginPage: React.FC = () => {
           <Image src={Logo} alt="Vizrt Logo" width={150} height={50} />
         </div>
         <h2 className="mt-6 text-2xl font-bold text-white text-center">Login to your Account</h2>
-        <form className="mt-8">
+        <form className="mt-8" onSubmit={handleLogin}>
           <TextField
             label="Email"
             variant="outlined"
             fullWidth
             className="mb-4"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             InputProps={{ className: 'bg-gray-700 text-white' }}
             InputLabelProps={{ className: 'text-gray-400' }}
           />
@@ -27,9 +62,14 @@ const LoginPage: React.FC = () => {
             variant="outlined"
             fullWidth
             className="mb-4"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             InputProps={{ className: 'bg-gray-700 text-white' }}
             InputLabelProps={{ className: 'text-gray-400' }}
           />
+          {error && (
+            <div className="text-red-500 mb-4">{error}</div>
+          )}
           <div className="flex items-center justify-between">
             <div className="text-sm ml-auto">
               <Link href="/forgot-password" passHref>
