@@ -104,15 +104,19 @@ const Footer = () => {
         <div className="col-span-1 space-y-4">
           <h3 className="font-bold">Products</h3>
           <div className="flex items-center">
-            <Link href={"/demoInfoPage1"}>
+            <Link href="/demoInfoPage1">
               <p className="text-blue-500">Viz Arena</p>
             </Link>
           </div>
           <div className="flex items-center">
-            <p className="text-blue-500">Viz Libero</p>
+            <Link href="/demoInfoPage2">
+              <p className="text-blue-500">Viz Libero</p>
+            </Link>
           </div>
           <div className="flex items-center">
-            <p className="text-blue-500">Viz World</p>
+            <Link href="/demoInfoPage3">
+              <p className="text-blue-500">Viz World</p>
+            </Link>
           </div>
         </div>
         <div className="col-span-1 space-y-4">

@@ -33,8 +33,8 @@ const PremierLeague: React.FC = () => {
                     </div>
 
                     <div className="flex items-center justify-center mt-4 space-x-8 px-4">
-                        <Image src={UnitedGraphic1} className="w-1/2 h-auto" alt="United Graphic 1"></Image>
-                        <Image src={UnitedGraphic2} className="w-1/2 h-auto" alt="United Graphic 2"></Image>
+                        <Image src={UnitedGraphic1} className="w-1/2 h-auto rounded-xl" alt="United Graphic 1"></Image>
+                        <Image src={UnitedGraphic2} className="w-1/2 h-auto rounded-xl" alt="United Graphic 2"></Image>
                     </div>
 
                     <div className="flex flex-wrap">

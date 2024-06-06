@@ -5,14 +5,12 @@ import Link from "next/link";
 import backButton from "../images/back-button.png"
 
 const VizArenaDemo: React.FC = () => {
-
     const [selectedColor, setSelectedColor] = useState('#000000');
 
     // Function to handle changes in the color picker
     const handleColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedColor(event.target.value);
     };
-
 
     return (
         <div>
