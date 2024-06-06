@@ -2,8 +2,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Configure ProductContext
 builder.Services.AddDbContext<ProductContext>(
     options => options.UseSqlite("Data Source=Product.db")
+);
+
+// Configure UserContext
+builder.Services.AddDbContext<UserContext>(
+    options => options.UseSqlite("Data Source=User.db")
 );
 
 // Add services to the container.
