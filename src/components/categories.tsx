@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
 import sport from "../images/sport.jpeg";
 import graphics from "../images/graphics.jpeg";
@@ -9,7 +8,7 @@ import live from "../images/live.jpeg";
 
 const Categories: React.FC = () => {
   return (
-    <div className="flex flex-col justify-center items-center my-2">
+    <div className="flex justify-center items-center my-2">
       <ul className="flex justify-center space-x-4">
         <li>
           <button className="relative w-24 h-24 rounded-3xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-200">
@@ -72,11 +71,6 @@ const Categories: React.FC = () => {
           </button>
         </li>
       </ul>
-      <Link href="/categoriesPage">
-        <button className="my-8 px-4 py-2 text-base font-medium text-white rounded-md bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200">
-          Go to Categories
-        </button>
-      </Link>
     </div>
   );
 };

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import volleyball from '../images/volleyball.jpg';
 import basketball from '../images/basketball.jpg';
+import img1 from '../images/img1.jpg'; 
+import img2 from '../images/img2.jpg';
 
-const sportArray = [volleyball, basketball].map((image) => image.src);
+const sportArray = [volleyball, basketball, img1, img2].map((image) => image.src);
 
 const images1 = [
   { src: sportArray[0], alt: 'Graphic 1', description: 'Volleyball game', category: 'Sports', price: '$49' },
@@ -18,16 +20,16 @@ const images1 = [
 ];
 
 const images2 = [
-  { src: '/path/to/contribution1.jpg', alt: 'Contribution 1', description: 'Contribution 1 description', category: 'Contributions', price: '$10' },
-  { src: '/path/to/contribution2.jpg', alt: 'Contribution 2', description: 'Contribution 2 description', category: 'Contributions', price: '$20' },
-  { src: '/path/to/contribution3.jpg', alt: 'Contribution 3', description: 'Contribution 3 description', category: 'Contributions', price: '$30' },
-  { src: '/path/to/contribution4.jpg', alt: 'Contribution 4', description: 'Contribution 4 description', category: 'Contributions', price: '$40' },
-  { src: '/path/to/contribution5.jpg', alt: 'Contribution 5', description: 'Contribution 5 description', category: 'Contributions', price: '$50' },
-  { src: '/path/to/contribution6.jpg', alt: 'Contribution 6', description: 'Contribution 6 description', category: 'Contributions', price: '$60' },
-  { src: '/path/to/contribution7.jpg', alt: 'Contribution 7', description: 'Contribution 7 description', category: 'Contributions', price: '$70' },
-  { src: '/path/to/contribution8.jpg', alt: 'Contribution 8', description: 'Contribution 8 description', category: 'Contributions', price: '$80' },
-  { src: '/path/to/contribution9.jpg', alt: 'Contribution 9', description: 'Contribution 9 description', category: 'Contributions', price: '$90' },
-  { src: '/path/to/contribution10.jpg', alt: 'Contribution 10', description: 'Contribution 10 description', category: 'Contributions', price: '$100' },
+  { src: sportArray[2], alt: 'Contribution 1', description: 'Contribution 1 description', category: 'Contributions', price: '$10' },
+  { src: sportArray[3], alt: 'Contribution 2', description: 'Contribution 2 description', category: 'Contributions', price: '$20' },
+  { src: sportArray[2], alt: 'Contribution 3', description: 'Contribution 3 description', category: 'Contributions', price: '$30' },
+  { src: sportArray[2], alt: 'Contribution 4', description: 'Contribution 4 description', category: 'Contributions', price: '$40' },
+  { src: sportArray[3], alt: 'Contribution 5', description: 'Contribution 5 description', category: 'Contributions', price: '$50' },
+  { src: sportArray[3], alt: 'Contribution 6', description: 'Contribution 6 description', category: 'Contributions', price: '$60' },
+  { src: sportArray[3], alt: 'Contribution 7', description: 'Contribution 7 description', category: 'Contributions', price: '$70' },
+  { src: sportArray[2], alt: 'Contribution 8', description: 'Contribution 8 description', category: 'Contributions', price: '$80' },
+  { src: sportArray[3], alt: 'Contribution 9', description: 'Contribution 9 description', category: 'Contributions', price: '$90' },
+  { src: sportArray[2], alt: 'Contribution 10', description: 'Contribution 10 description', category: 'Contributions', price: '$100' },
 ];
 
 const GridItem = ({ src, alt, description, category, price, onQuickReview }: { src: string; alt: string; description: string; category: string; price: string; onQuickReview: () => void }) => (
