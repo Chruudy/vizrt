@@ -14,10 +14,10 @@ const Header: React.FC = () => {
       <Link href="/">
         <Image src={Logo} alt="Site Icon" className="w-20 mx-16 my-4" />
       </Link>
-      <div className="relative text-white w-1/3 mx-6">
+      <div className="relative text-white w-1/3 ml-32">
         <input
           type="text"
-          className="pr-8 pl-3 py-1 rounded bg-white text-black w-full text-center"
+          className=" py-1 rounded bg-white text-black w-full text-center"
           placeholder="search"
         />
         <button className="absolute left-0 top-0 mt-1">
