@@ -58,38 +58,38 @@ namespace API.Controllers
             // Logging the absolute path
             Console.WriteLine($"Absolute Path: {absolutePath}");
 
-            // Save the file
-            using (var fileStream = new FileStream(absolutePath, FileMode.Create))
+            // Convert the uploaded file to a Base64 string
+            string base64Image;
+            using (var memoryStream = new MemoryStream())
             {
-                file.CopyTo(fileStream);
+                file.CopyTo(memoryStream);
+                byte[] fileBytes = memoryStream.ToArray();
+                base64Image = Convert.ToBase64String(fileBytes);
             }
-
-            // Generate the URL of the uploaded image
-            string imageUrl = $"{Request.Scheme}://{Request.Host}/public/uploads/{file.FileName}";
-
-            // Logging the image URL
-            Console.WriteLine($"Image URL: {imageUrl}");
-
+            
+            // Logging the Base64 string size
+            Console.WriteLine($"Base64 Image Size: {base64Image.Length}");
+            
             // Connect to the existing database
             string dbPath = Path.Combine(_hosting.ContentRootPath, "Product.db");
-
+            
             // Logging the database path
             Console.WriteLine($"DB Path: {dbPath}");
-
+            
             using (SqliteConnection conn = new SqliteConnection($"Data Source={dbPath}"))
             {
                 conn.Open();
-                using (SqliteCommand cmd = new SqliteCommand("INSERT INTO Product (Name, Image, Price, Category) VALUES (@Name, @ImageUrl, @Price, @Category)", conn))
+                using (SqliteCommand cmd = new SqliteCommand("INSERT INTO Product (Name, Image, Price, Category) VALUES (@Name, @Base64Image, @Price, @Category)", conn))
                 {
                     cmd.Parameters.AddWithValue("@Name", name);
-                    cmd.Parameters.AddWithValue("@ImageUrl", imageUrl);
+                    cmd.Parameters.AddWithValue("@Base64Image", base64Image); // Save Base64 string
                     cmd.Parameters.AddWithValue("@Price", price);
                     cmd.Parameters.AddWithValue("@Category", category);
                     cmd.ExecuteNonQuery();
                 }
             }
-
-            return Ok(new { imageUrl });
+            
+            return Ok(new { base64Image });
         }
     }
 }

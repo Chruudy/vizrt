@@ -7,7 +7,7 @@ interface Product {
   name: string;
   category: string;
   price: number;
-  image: string; // Assume the backend returns relative path to images
+  image: string;
 }
 
 const ProductList: React.FC = () => {
@@ -30,23 +30,24 @@ const ProductList: React.FC = () => {
     fetchProducts();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) return <div className="text-center py-4">Loading...</div>;
+  if (error) return <div className="text-center text-red-500 py-4">{error}</div>;
 
   return (
-    <div className="max-w-6xl mx-auto p-4 bg-white shadow-md rounded-md">
+    <div className="max-w-6xl mx-auto p-4 shadow-md rounded-md">
       <h2 className="text-2xl font-bold mb-5">Product List</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (
-          <div key={product.id} className="border rounded-lg p-4 shadow-md">
+          <div key={product.id} className="bg-white border rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out">
             <div className="mb-4">
               <Image
-                src={`/${product.image}`}
+                src={`data:image/jpeg;base64,${product.image}`}
                 alt={product.name}
                 width={200}
                 height={200}
+                layout="responsive"
+                unoptimized={true}
                 className="rounded-md"
-                unoptimized
               />
             </div>
             <h3 className="text-lg font-bold mb-2">{product.name}</h3>
