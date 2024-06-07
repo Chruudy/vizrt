@@ -52,33 +52,7 @@ const Header: React.FC = () => {
             </button>
           </Link>
         </li>
-        {isLoggedIn ? (
-          <li>
-            <Link href="/profile">
-              <button className="transition-colors duration-400 ease-in-out hover:bg-orange-500 hover:text-black h-20 w-20">
-                <Person2Icon />
-              </button>
-            </Link>
-          </li>
-        ) : (
-          <li>
-            <Link href="/login">
-              <button className="transition-colors duration-400 ease-in-out hover:bg-orange-500 hover:text-black h-20 w-20">
-                <Person2Icon />
-              </button>
-            </Link>
-          </li>
-        )}
-        {isLoggedIn && (
-          <li>
-            {/* New Icon for logged-in users */}
-            <Link href="/new-feature">
-              <button className="transition-colors duration-400 ease-in-out hover:bg-orange-500 hover:text-black h-20 w-20">
-                <CreateIcon />
-              </button>
-            </Link>
-          </li>
-        )}
+
       </ul>
     </header>
   );
