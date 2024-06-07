@@ -1,12 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import { useRouter } from 'next/router';
 
 interface CarouselProps {
   images: string[];
 }
 
 const Carousel: React.FC<CarouselProps> = ({ images }) => {
+  const router = useRouter();
   const middleIndex = Math.floor(images.length / 2);
   const [activeIndex, setActiveIndex] = useState(middleIndex);
 
@@ -22,12 +24,13 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
       return newIndex >= images.length ? 0 : newIndex;
     });
 
+  const handleMoreClick = () => {
+    router.push('/categoriesPage');
+  };
+
   return (
     <div className="relative flex flex-col items-center justify-center">
       <div className="mb-16">
-        <h2 className="mt-6 text-sm font-medium text-white w-64 h-10 flex items-center justify-center rounded-md">
-          Our Most Popular Packages
-        </h2>
       </div>
       <div className="relative flex items-center justify-center perspective mt-16">
         <button
@@ -83,7 +86,10 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
           {">"}
         </button>
       </div>
-      <button className="mt-24 my-8 text-sm font-medium text-white w-32 h-10 flex items-center justify-center rounded-md bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200">
+      <button
+        className="mt-24 my-8 text-sm font-medium text-white w-32 h-10 flex items-center justify-center rounded-md bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200"
+        onClick={handleMoreClick}
+      >
         More
       </button>
     </div>
