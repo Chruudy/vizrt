@@ -1,7 +1,7 @@
 // Example of corrected index.tsx file
 import React from 'react';
-import Header from '../components/Header';
-import Categories from '../components/Categories';
+import Header from '../components/header';
+import Categories from '../components/categories';
 import CarouselItems from '../components/CarouselItems';
 import Footer from '@/components/footer';
 
