@@ -1,89 +1,67 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import Header from "../components/header";
 import Footer from "../components/footer";
-import Football1 from "../images/Football1.avif";
-import Football2 from "../images/Football2.jpg";
-import news1 from "../images/news1.jpg";
-import news2 from "../images/news2.jpg";
-import news3 from "../images/news3.webp";
-
-const images = [
-  { src: Football1.src, price: 10, lastPublished: "2022-05-15", mostSold: 123, name: "Ronaldo Soccer", graphicType: "Scoreboard", type: "sport" },
-  { src: Football2.src, price: 15, lastPublished: "2023-01-20", mostSold: 456, name: "Perfect Goalkeeper", graphicType: "Lower Thirds", type: "sport" },
-  { src: news1.src, price: 5, lastPublished: "2023-08-10", mostSold: 789, name: "News Transition", graphicType: "Transitions", type: "news" },
-  { src: news2.src, price: 8, lastPublished: "2023-11-25", mostSold: 321, name: "Maldives Ban", graphicType: "Scoreboard", type: "news" },
-  { src: news3.src, price: 12, lastPublished: "2024-03-12", mostSold: 654, name: "Multiple News", graphicType: "Transitions", type: "news" }
-];
-
-// Define types for image parts and categories
-interface Image {
-  name: string;
-  src: string;
-  price: number;
-  lastPublished: string;
-  mostSold: number;
-  graphicType: string;
-  type: string;
-}
+import type { Product } from "../components/ProductList"; // Import the new Product interface
 
 const AllProductsPage = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null); // Explicitly type error state
   const [selectedCategory, setSelectedCategory] = useState("Show-all");
   const [sortBy, setSortBy] = useState("LastPublished");
   const [selectedType, setSelectedType] = useState("All");
+  const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({ min: 0, max: 1000 }); // Initial price range
 
-  const handleCategoryChange = (category: string) => {
-    setSelectedCategory(category);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get<Product[]>("http://localhost:5065/api/Product");
+        const productsWithBase64Images = response.data.map((product) => ({
+          ...product,
+          image: `data:image/jpeg;base64,${product.image}`, // Assuming the image format is JPEG, adjust if necessary
+        }));
+        setProducts(productsWithBase64Images);
+        setLoading(false);
+      } catch (err) {
+        setError("Error fetching products"); // Assign string to error state
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  // New filtering logic
+  const filteredProducts = products
+    .filter((product) => {
+      if (selectedCategory === "Show-all" || product.category === selectedCategory) {
+        return true;
+      }
+      return false;
+    })
+    .filter((product) => product.price >= priceRange.min && product.price <= priceRange.max)
+    .sort((a, b) => {
+      switch (sortBy) {
+        case "Price":
+          return a.price - b.price;
+        case "ReversePrice":
+          return b.price - a.price; // Sort by price in descending order
+        case "Alphabetical":
+          return a.name.localeCompare(b.name);
+        case "ReverseAlphabetical":
+          return b.name.localeCompare(a.name);
+        default:
+          return 0;
+      }
+    });
+
+  const handlePriceChange = (min: number, max: number) => {
+    setPriceRange({ min, max });
   };
 
-  const handleSortChange = (criteria: string) => {
-    setSortBy(criteria);
-  };
-
-  const handleTypeChange = (type: string) => {
-    setSelectedType(type);
-  };
-
-  const sportsImages: Image[] = images.filter(image => image.type === "sport");
-  const newsImages: Image[] = images.filter(image => image.type === "news");
-  
-
-  const renderImages = () => {
-    let filteredImages: Image[] = [];
-    if (selectedCategory === "Show-all") {
-      filteredImages = images;
-    } else if (selectedCategory === "Sports") {
-      filteredImages = sportsImages;
-    } else if (selectedCategory === "News") {
-      filteredImages = newsImages;
-    }
-
-    // Filter images based on selected type
-    if (selectedType !== "All") {
-      filteredImages = filteredImages.filter(image => image.graphicType === selectedType);
-    }
-
-    // Sort images based on selected criteria
-    if (sortBy === "Price") {
-      filteredImages.sort((a, b) => a.price - b.price);
-    } else if (sortBy === "Alphabetical") {
-      filteredImages.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (sortBy === "ReverseAlphabetical") {
-      filteredImages.sort((a, b) => b.name.localeCompare(a.name));
-    } else if (sortBy === "LastPublished") {
-      filteredImages.sort((a, b) => new Date(b.lastPublished).getTime() - new Date(a.lastPublished).getTime());
-    } else if (sortBy === "MostSold") {
-      filteredImages.sort((a, b) => b.mostSold - a.mostSold);
-    }
-
-    return filteredImages.map((image, index) => (
-      <div key={index} className="flex flex-col items-center mb-4">
-        <img src={image.src} alt={`Image ${index}`} className="w-32 h-auto rounded-lg" />
-        <p className="mt-2 text-white">${image.name}</p>
-        <p className="mt-2 text-white">${image.price}</p>
-        <p className="mt-2 text-white">${image.type}</p>
-      </div>
-    ));
-  };
+  if (loading) return <div className="text-center py-4">Loading...</div>;
+  if (error) return <div className="text-center text-red-500 py-4">{error}</div>;
 
   return (
     <div className="overflow-x-hidden">
@@ -96,29 +74,58 @@ const AllProductsPage = () => {
             </label>
             <select
               value={selectedCategory}
-              onChange={(e) => handleCategoryChange(e.target.value)}
+              onChange={(e) => setSelectedCategory(e.target.value)}
               className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             >
               <option value="Show-all">Show all</option>
-              <option value="Sports">Sports</option>
-              <option value="News">News</option>
+              <option value="Sport">Sport</option>
+              <option value="Graphics">Graphics</option>
+              <option value="Virtual & XR">Virtual & XR</option>
+              <option value="E-sport">E-sport</option>
+              <option value="Live Production">Live Production</option>
             </select>
-            {/* Dropdown for selecting type */}
-          <div className="mb-4">
-            <label className="block text-white font-bold mb-2" htmlFor="graphicType">
-              Graphic Type:
+            <div className="mb-4">
+              <label className="block text-white font-bold mb-2" htmlFor="graphicType">
+                Graphic Type:
+              </label>
+              <select
+                id="type"
+                value={selectedType}
+                onChange={(e) => setSelectedType(e.target.value)}
+                className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              >
+                <option value="All">All</option>
+                <option value="Scoreboard">Scoreboard</option>
+                <option value="Lower Thirds">Lower Thirds</option>
+                <option value="Transitions">Transitions</option>
+              </select>
+            </div>
+            <div className="mb-4">
+            <label className="block text-white font-bold mb-2" htmlFor="priceRange">
+              Price Range:
             </label>
-            <select
-              id="type"
-              value={selectedType}
-              onChange={(e) => handleTypeChange(e.target.value)}
-              className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            >
-              <option value="All">All</option>
-              <option value="Scoreboard">Scoreboard</option>
-              <option value="Lower Thirds">Lower Thirds</option>
-              <option value="Transitions">Transitions</option>
-            </select>
+            <input
+              type="range"
+              id="priceRange"
+              min="0"
+              max="1000"
+              value={priceRange.min}
+              onChange={(e) => handlePriceChange(parseInt(e.target.value), priceRange.max)}
+              className="w-full"
+            />
+            <input
+              type="range"
+              id="priceRange"
+              min="0"
+              max="1000"
+              value={priceRange.max}
+              onChange={(e) => handlePriceChange(priceRange.min, parseInt(e.target.value))}
+              className="w-full"
+            />
+            <div className="flex justify-between">
+              <span className="text-white">{priceRange.min}</span>
+              <span className="text-white">{priceRange.max}</span>
+            </div>
           </div>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-blue-700">
               <svg
@@ -135,7 +142,6 @@ const AllProductsPage = () => {
           </div>
         </div>
         <div className="bg-brandBG p-4 col-span-3">
-          {/* Dropdown for sorting */}
           <div className="mb-4">
             <label className="block text-white font-bold mb-2" htmlFor="sortBy">
               Sort By:
@@ -143,18 +149,25 @@ const AllProductsPage = () => {
             <select
               id="sortBy"
               value={sortBy}
-              onChange={(e) => handleSortChange(e.target.value)}
+              onChange={(e) => setSortBy(e.target.value)}
               className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             >
-              <option value="Price">Price</option>
+              <option value="Price">Price (Low to High)</option>
+              <option value="ReversePrice">Price (High to Low)</option>
               <option value="Alphabetical">Alphabetical</option>
               <option value="ReverseAlphabetical">Reverse Alphabetical</option>
-              <option value="LastPublished">Last Published</option>
-              <option value="MostSold">Most Sold</option>
             </select>
           </div>
-          {/* Render images */}
-          <div className="flex flex-wrap justify-around">{renderImages()}</div>
+          <div className="flex flex-wrap justify-around">
+            {filteredProducts.map((product, index) => (
+              <div key={index} className="flex flex-col items-center mb-4">
+                <img src={product.image} alt={`Product ${index}`} className="w-32 h-auto rounded-lg" />
+                <p className="mt-2 text-white">{product.name}</p>
+                <p className="mt-2 text-white">${product.price}</p>
+                <p className="mt-2 text-white">{product.category}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <Footer />

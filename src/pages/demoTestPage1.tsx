@@ -1,6 +1,6 @@
 import React from "react";
 import Header from '../components/header';
-import VizArenaDemo from '../components/vizArenaDemo';
+import VizArenaDemo from '../components/VizArenaDemo';
 import Footer from '../components/footer';
 
 export default function demoInfoPage() {
