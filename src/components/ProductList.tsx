@@ -3,7 +3,7 @@ import axios from "axios";
 import Image from "next/image";
 import StarIcon from "@mui/icons-material/Star"; // Import the star icon
 
-interface Product {
+export interface Product {
   id: string;
   name: string;
   category: string;
