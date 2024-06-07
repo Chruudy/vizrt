@@ -29,11 +29,15 @@ const Categories: React.FC = () => {
                   className="object-cover w-full h-full"
                 />
               </div>
+              <div className="absolute inset-0 bg-black opacity-60"></div>
               <span className="relative text-white z-10 font-bold">Sport</span>
             </button>
           </Link>
-          {isSportsPage && <div className="w-full h-0.5 mt-1 bg-orange-500"></div>}
+          {isSportsPage && (
+            <div className="w-full h-0.5 mt-2 bg-orange-500 rounded-full"></div>
+          )}
         </li>
+        {/* Repeat for each category with the black overlay */}
         <li className="flex flex-col items-center">
           <button className="relative w-24 h-24 rounded-3xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-200">
             <div className="absolute inset-0">
@@ -43,6 +47,7 @@ const Categories: React.FC = () => {
                 className="object-cover w-full h-full"
               />
             </div>
+            <div className="absolute inset-0 bg-black opacity-60"></div>
             <span className="relative text-white z-10 font-bold">Graphics</span>
           </button>
         </li>
@@ -55,9 +60,8 @@ const Categories: React.FC = () => {
                 className="object-cover w-full h-full"
               />
             </div>
-            <span className="relative text-white z-10 font-bold">
-              Virtual & XR
-            </span>
+            <div className="absolute inset-0 bg-black opacity-60"></div>
+            <span className="relative text-white z-10 font-bold">Virtual & XR</span>
           </button>
         </li>
         <li className="sm:flex hidden flex-col items-center">
@@ -69,6 +73,7 @@ const Categories: React.FC = () => {
                 className="object-cover w-full h-full"
               />
             </div>
+            <div className="absolute inset-0 bg-black opacity-60"></div>
             <span className="relative text-white z-10 font-bold">E-sport</span>
           </button>
         </li>
@@ -81,9 +86,8 @@ const Categories: React.FC = () => {
                 className="object-cover w-full h-full"
               />
             </div>
-            <span className="relative text-white z-10 font-bold">
-              Live Production
-            </span>
+            <div className="absolute inset-0 bg-black opacity-60"></div>
+            <span className="relative text-white z-10 font-bold">Live Production</span>
           </button>
         </li>
       </ul>
