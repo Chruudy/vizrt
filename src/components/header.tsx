@@ -46,7 +46,7 @@ const Header: React.FC = () => {
           </Link>
         </li>  
         <li>
-          <Link href="/uploadtest">
+          <Link href="/cart">
             <button className="transition-colors duration-400 ease-in-out hover:bg-orange-500 hover:text-black h-20 w-20">
               <ShoppingCartIcon />
             </button>

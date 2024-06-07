@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
 import volleyball from '../images/volleyball.jpg';
 import basketball from '../images/basketball.jpg';
 import img1 from '../images/img1.jpg'; 
 import img2 from '../images/img2.jpg';
 
-const sportArray = [volleyball, basketball, img1, img2].map((image) => image.src);
+const sportArray = [volleyball, basketball, img1, img2];
 
 const images1 = [
   { src: sportArray[0], alt: 'Graphic 1', description: 'Volleyball game', category: 'Sports', price: '$49' },
@@ -32,44 +33,76 @@ const images2 = [
   { src: sportArray[2], alt: 'Contribution 10', description: 'Contribution 10 description', category: 'Contributions', price: '$100' },
 ];
 
-const GridItem = ({ src, alt, description, category, price, onQuickReview }: { src: string; alt: string; description: string; category: string; price: string; onQuickReview: () => void }) => (
-  <div className="flex flex-col justify-between items-center bg-transparent p-2 focus:outline-none w-48 h-72 m-2 relative border-2 border-white border-opacity-25">
-    <img src={src} alt={alt} className="w-full h-32 object-cover border-2 border-white border-opacity-25" />
-    <div className="mt-2 text-sm text-center text-white">
-      <p>Description: {description}</p>
-      <p>Category: {category}</p>
-      <p>Price: {price}</p>
-    </div>
-    <button className="text-xs font-medium text-white w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2" onClick={onQuickReview}>
-      Quick Review
-    </button>
-  </div>
-);
+const GridItem = ({ src, alt, description, category, price, onQuickReview }) => {
+  const addToCart = () => {
+    const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const newItem = { src, alt, description, category, price };
+    localStorage.setItem('cart', JSON.stringify([...existingCart, newItem]));
+    console.log('Added to cart');
+  };
 
-const QuickReviewModal = ({ item, onClose }: { item: any; onClose: () => void }) => (
-  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-    <div className="bg-gray-700 bg-opacity-95 p-6 shadow-lg w-96 text-center text-blue-100">
-      <img src={item.src} alt={item.alt} className="w-full h-48 object-cover mb-4 border-2 border-white border-opacity-25" />
-      <p>Description: {item.description}</p>
-      <p>Category: {item.category}</p>
-      <p>Price: {item.price}</p>
-      <div className="flex justify-center space-x-4 mt-4">
-        <button className="text-white bg-orange-500 px-4 py-2 rounded-md" onClick={() => console.log('Added to cart')}>Add to Cart</button>
-        <button className="text-white bg-orange-500 px-4 py-2 rounded-md" onClick={onClose}>Close</button>
+  return (
+    <div className="flex flex-col justify-between items-center bg-transparent p-2 focus:outline-none w-48 h-72 m-2 relative border-2 border-white border-opacity-25">
+      <Image src={src} alt={alt} layout="responsive" width={192} height={128} className="w-full h-32 object-cover border-2 border-white border-opacity-25" />
+      <div className="mt-2 text-sm text-center text-white">
+        <p>Description: {description}</p>
+        <p>Category: {category}</p>
+        <p>Price: {price}</p>
+      </div>
+      <button className="text-xs font-medium text-white w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2" onClick={onQuickReview}>
+        Quick Review
+      </button>
+      <button className="text-xs font-medium text-white w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2" onClick={addToCart}>
+        Add to Cart
+      </button>
+    </div>
+  );
+};
+
+const QuickReviewModal = ({ item, onClose }) => {
+  const addToCart = () => {
+    const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const newItem = { src: item.src, alt: item.alt, description: item.description, category: item.category, price: item.price };
+    localStorage.setItem('cart', JSON.stringify([...existingCart, newItem]));
+    console.log('Added to cart');
+    onClose();
+  };
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+      <div className="bg-gray-700 bg-opacity-95 p-6 shadow-lg w-96 text-center text-blue-100">
+        <Image src={item.src} alt={item.alt} layout="responsive" width={384} height={192} className="w-full h-48 object-cover mb-4 border-2 border-white border-opacity-25" />
+        <p>Description: {item.description}</p>
+        <p>Category: {item.category}</p>
+        <p>Price: {item.price}</p>
+        <div className="flex justify-center space-x-4 mt-4">
+          <button className="text-white bg-orange-500 px-4 py-2 rounded-md" onClick={addToCart}>Add to Cart</button>
+          <button className="text-white bg-orange-500 px-4 py-2 rounded-md" onClick={onClose}>Close</button>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
-const CategorySection = ({ title, images, link }: { title: string; images: { src: string; alt: string; description: string; category: string; price: string }[]; link: string }) => {
+const CategorySection = ({ title, images, link }) => {
   const [slideIndex, setSlideIndex] = useState(0);
-  const [quickReviewItem, setQuickReviewItem] = useState<any>(null);
+  const [quickReviewItem, setQuickReviewItem] = useState(null);
+  const [showMessage, setShowMessage] = useState(false);
 
   const handlePrev = () => setSlideIndex((prevIndex) => Math.max(prevIndex - 1, 0));
   const handleNext = () => setSlideIndex((prevIndex) => Math.min(prevIndex + 1, 1));
 
-  const handleQuickReview = (item: any) => setQuickReviewItem(item);
+  const handleQuickReview = (item) => setQuickReviewItem(item);
   const handleCloseQuickReview = () => setQuickReviewItem(null);
+
+  const handleAddToCart = (item) => {
+    const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const newItem = { src: item.src, alt: item.alt, description: item.description, category: item.category, price: item.price };
+    localStorage.setItem('cart', JSON.stringify([...existingCart, newItem]));
+    console.log('Added to cart');
+    setShowMessage(true);
+    setTimeout(() => setShowMessage(false), 2000);
+  };
 
   return (
     <div className="relative mb-10 bg-gray-700 bg-opacity-50 p-4">
@@ -110,6 +143,13 @@ const CategorySection = ({ title, images, link }: { title: string; images: { src
         </button>
       )}
       {quickReviewItem && <QuickReviewModal item={quickReviewItem} onClose={handleCloseQuickReview} />}
+      {showMessage && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="bg-green-500 text-white px-4 py-2 rounded shadow-lg">
+            Added to cart!
+          </div>
+        </div>
+      )}
     </div>
   );
 };
