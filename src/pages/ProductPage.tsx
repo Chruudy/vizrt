@@ -2,7 +2,7 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 import ProductList from "../components/ProductList";
 
-export default function ProductPage() {
+const ProductPage: React.FC = () => {
   return (
     <div className="overflow-x-hidden">
       <Header />
@@ -10,4 +10,6 @@ export default function ProductPage() {
       <Footer />
     </div>
   );
-}
+};
+
+export default ProductPage;
