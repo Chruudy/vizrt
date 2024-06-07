@@ -72,6 +72,11 @@ const Categories: React.FC = () => {
           </button>
         </li>
       </ul>
+      <Link href="/categoriesPage">
+        <button className="my-8 px-4 py-2 text-base font-medium text-white rounded-md bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200">
+          View all Products
+        </button>
+      </Link>
     </div>
   );
 };
