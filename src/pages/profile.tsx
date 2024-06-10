@@ -3,7 +3,7 @@ import Header from '../components/header';
 import Footer from '../components/footer';  
 import ProfileInfo from '../components/ProfileInfo';
 import ProfileExperience from '../components/ProfileExperience';
-import EditAccountButton from '../components/editAccount';
+
 import Tabs from '../components/Tabs';
 
 const Profile: React.FC = () => {
@@ -21,9 +21,6 @@ const Profile: React.FC = () => {
                   <span key={skill} className="bg-gray-700 text-white py-1 px-3 m-2 rounded-full">{skill}</span>
                 ))}
               </div>
-            </div>
-            <div className="flex justify-center mt-4">
-              <EditAccountButton />
             </div>
           </div>
           <div className="w-2/3">

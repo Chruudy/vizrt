@@ -1,21 +1,21 @@
-"use client";
 import React from 'react';
 import Image from 'next/image';
 
-import profilePic from '../images/profilepic.jpeg'; // Adjust the import path as needed
+import profilePic from '../images/profilepic.jpeg'; // Ensure this is the correct path
 
 const ProfileInfo: React.FC = () => {
   return (
-    <div className="flex items-center space-x-4">
+    <div className="flex flex-col items-center md:flex-row md:items-start space-x-4">
       <div className="relative flex-shrink-0 h-32 w-32 rounded-full overflow-hidden shadow-lg">
         <Image
           src={profilePic}
           alt="Profile Picture"
-          fill
-          style={{ objectFit: 'cover' }}
+          layout="fill"
+          objectFit='cover'
+          className="rounded-full"
         />
       </div>
-      <div>
+      <div className="mt-4 md:mt-0">
         <h2 className="font-bold text-white">Nicole Frost</h2>
         <p className="font-bold text-white">Product Designer</p>
         <p className="font-bold text-white">San Francisco</p>
@@ -26,6 +26,14 @@ const ProfileInfo: React.FC = () => {
           <div>
             <span className="font-bold">100</span> following
           </div>
+        </div>
+        <div className="flex space-x-2 mt-2"> {/* Tighter space between buttons */}
+          <button className="text-xs px-2 py-1 text-white bg-blue-500 rounded-full hover:bg-blue-600 transition duration-200">
+            Change Profile Picture
+          </button>
+          <button className="text-xs px-2 py-1 text-white bg-orange-500 rounded-full hover:bg-orange-600 transition duration-200">
+            Edit Account
+          </button>
         </div>
       </div>
     </div>
