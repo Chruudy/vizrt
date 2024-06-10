@@ -3,66 +3,54 @@ import VizArenaBg from "../images/viz_arena_img.jpg";
 import Image from "next/image";
 import Link from "next/link";
 import StarIcon from "@mui/icons-material/Star";
-import backButton from "../images/back-button.png"
+import backButton from "../images/back-button.png";
 
 const VizArenaDemoInfo: React.FC = () => {
-    // useState hook to declare state variable for if "StarIcon" is clicked
-    const [isStarClicked, starStarClicked] = useState(false);
+    const [isStarClicked, setIsStarClicked] = useState(false);
 
-    // function to toggle the value of "isStarClicked" when called
     const handleStarClick = () => {
-        starStarClicked(!isStarClicked);
+        setIsStarClicked(!isStarClicked);
     };
 
     return (
-        <div>
-            <div className="pt-8 pl-16">
-                <Link href="/">
-                    <Image src={backButton} alt="Back button" className="w-12 h-auto"></Image>
+        <div className="max-w-4xl mx-auto my-10 p-6 bg-gray-900 rounded-xl">
+            <div className="flex justify-start mb-4">
+                <Link href="/" passHref>
+                    <Image src={backButton} alt="Back button" width={48} height={48} />
                 </Link>
             </div>
 
-            <div className="pl-12 pt-8 relative flex ">
-                <Image src={VizArenaBg} alt="Viz Arena Demo Picture" className="w-1/2 h-auto rounded-2xl" />
-                <div className="w-1/2 bg-[#212121] rounded-2xl mx-12">
-                    <div className="flex justify-between items-center pr-6">
-                        <h1 className="text-white text-center text-4xl font-medium py-4 flex-grow pl-12">Viz Arena</h1>
-                        <StarIcon className={`text-4xl cursor-pointer ${isStarClicked ? 'text-yellow-500' : 'text-white'}`} onClick={handleStarClick} />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <Image src={VizArenaBg} alt="Viz Arena Demo Picture" className="w-full h-auto rounded-xl" />
+                <div className="bg-gray-900 rounded-xl p-6 text-white">
+                    <div className="flex justify-between items-center mb-6">
+                        <h1 className="text-3xl font-semibold">Viz Arena</h1>
+                        <StarIcon className={`text-4xl cursor-pointer ${isStarClicked ? 'text-yellow-500' : 'text-gray-300'}`} onClick={handleStarClick} aria-label="Toggle favorite" />
                     </div>
-                    <p className="text-white text-2xl pb-6 px-6">
-                        Viz Arena is the leading image-based AR graphics and virtual advertising solution
-                        designed to keep fans engaged, sponsors satisfied, and costs low.
+                    <p className="text-xl mb-4">
+                        Viz Arena is the leading image-based AR graphics and virtual advertising solution designed to keep fans engaged, sponsors satisfied, and costs low.
                     </p>
-
-                    <p className="text-white text-2xl pb-6 px-6">
-                        It contains graphics like Virtual Ads,  Data Driven Graphics, 3D Virtual Graphics, Lineups & Player Presentations and so on.
+                    <p className="text-xl mb-4">
+                        It contains graphics like Virtual Ads, Data Driven Graphics, 3D Virtual Graphics, Lineups & Player Presentations and so on.
                     </p>
-
-                    <p className="text-white text-2xl pb-6 px-6">
+                    <p className="text-xl mb-4">
                         The software can display information on the field or screen in real-time, making the viewing experience more engaging and informative for fans.
-                        It helps broadcasters provide a more interactive and visually appealing presentation of sports games.
                     </p>
-
-                    <h1 className="text-white text-center text-4xl font-medium pt-4 pb-8">Price: 1499kr</h1>
-
-                    <div className="flex space-x-4 justify-evenly ">
-                        <Link href="/demoTestPage1">
-                            <button className="text-white font-medium text-lg rounded-lg px-6 py-3 w-56 bg-gradient-to-r from-orange-500 to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200">
+                    <h2 className="text-2xl font-semibold text-center my-6">Price: 1499kr</h2>
+                    <div className="flex justify-center gap-4">
+                        <Link href="/demoTestPage1" passHref>
+                            <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out">
                                 Demo
                             </button>
                         </Link>
-
-                        <Link href="/cart">
-                            <button className="text-white font-medium text-lg rounded-lg px-6 py-3 w-56 bg-gradient-to-r from-orange-500 to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200">
+                        <Link href="/cart" passHref>
+                            <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out">
                                 Add to shopping cart
                             </button>
                         </Link>
                     </div>
-
                 </div>
             </div>
-
-            <div className="pt-24"></div>
         </div>
     );
 };
