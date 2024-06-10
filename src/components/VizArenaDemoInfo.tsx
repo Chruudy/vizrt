@@ -7,9 +7,14 @@ import backButton from "../images/back-button.png";
 
 const VizArenaDemoInfo: React.FC = () => {
     const [isStarClicked, setIsStarClicked] = useState(false);
+    const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
     const handleStarClick = () => {
         setIsStarClicked(!isStarClicked);
+    };
+
+    const toggleImagePreview = () => {
+        setIsPreviewOpen(!isPreviewOpen);
     };
 
     return (
@@ -21,7 +26,9 @@ const VizArenaDemoInfo: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <Image src={VizArenaBg} alt="Viz Arena Demo Picture" className="w-full h-auto rounded-xl" />
+                <div onClick={toggleImagePreview} className="cursor-pointer">
+                    <Image src={VizArenaBg} alt="Viz Arena Demo Picture" className="w-full h-auto rounded-xl" />
+                </div>
                 <div className="bg-gray-900 rounded-xl p-6 text-white">
                     <div className="flex justify-between items-center mb-6">
                         <h1 className="text-3xl font-semibold">Viz Arena</h1>
@@ -39,18 +46,25 @@ const VizArenaDemoInfo: React.FC = () => {
                     <h2 className="text-2xl font-semibold text-center my-6">Price: 1499kr</h2>
                     <div className="flex justify-center gap-4">
                         <Link href="/demoTestPage1" passHref>
-                            <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out">
+                            <button className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out">
                                 Demo
                             </button>
                         </Link>
                         <Link href="/cart" passHref>
-                            <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out">
+                            <button className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out">
                                 Add to shopping cart
                             </button>
                         </Link>
                     </div>
                 </div>
             </div>
+            {isPreviewOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center" onClick={toggleImagePreview}>
+                    <div className="cursor-pointer" style={{ maxWidth: '80%', maxHeight: '80%' }}>
+                        <Image src={VizArenaBg} alt="Viz Arena Demo Picture" layout="intrinsic" width={800} height={450} objectFit="contain" />
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
