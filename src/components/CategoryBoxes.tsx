@@ -32,8 +32,10 @@ const GridItem = ({ src, alt, description, category, price, onQuickReview }) => 
   };
 
   return (
-    <div className="flex flex-col justify-between items-center bg-transparent p-2 focus:outline-none w-full h-72 m-2 relative border-2 border-white border-opacity-25">
-      <Image src={src} alt={alt} layout="responsive" width={192} height={128} className="w-full h-32 object-cover border-2 border-white border-opacity-25" />
+    <div className="flex flex-col justify-between items-center bg-transparent p-2 focus:outline-none w-full h-80 m-2 relative border-2 border-white border-opacity-25">
+      <div className="relative w-full h-32 border-2 border-white border-opacity-25">
+        <Image src={src} alt={alt} layout="fill" objectFit="cover" className="w-full h-full object-cover" />
+      </div>
       <div className="mt-2 text-sm text-center text-white">
         <p>Description: {description}</p>
         <p>Category: {category}</p>
@@ -61,7 +63,9 @@ const QuickReviewModal = ({ item, onClose }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-gray-700 bg-opacity-95 p-6 shadow-lg w-96 text-center text-blue-100">
-        <Image src={item.src} alt={item.alt} layout="responsive" width={384} height={192} className="w-full h-48 object-cover mb-4 border-2 border-white border-opacity-25" />
+        <div className="relative w-full h-48 mb-4 border-2 border-white border-opacity-25">
+          <Image src={item.src} alt={item.alt} layout="fill" objectFit="cover" className="w-full h-full object-cover" />
+        </div>
         <p>Description: {item.description}</p>
         <p>Category: {item.category}</p>
         <p>Price: {item.price}</p>
