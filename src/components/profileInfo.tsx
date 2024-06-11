@@ -35,6 +35,11 @@ const ProfileInfo: React.FC = () => {
             Edit Account
           </button>
         </div>
+        <div className="mt-2"> {/* Container for the Verify button */}
+          <button className="text-sm px-4 py-2 text-white bg-green-500 rounded-full hover:bg-green-600 transition duration-200">
+            Verify
+          </button>
+        </div>
       </div>
     </div>
   );
