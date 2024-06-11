@@ -1,5 +1,7 @@
 import React from 'react';
-import Image from 'next/image'; 
+import Image from 'next/image';
+import googleIcon from '../images/google.png';
+import airbnbIcon from '../images/airbnb.png';
 
 const ProfileExperience: React.FC = () => {
   return (
@@ -10,7 +12,7 @@ const ProfileExperience: React.FC = () => {
           <div className="bg-white shadow-md rounded p-3 w-64 max-w-xs flex items-center">
             <div className="relative w-6 h-6 mr-2"> 
               <Image 
-                src="/images/google.png"
+                src={googleIcon}
                 alt="Google"
                 layout="fill" 
                 objectFit="cover" 
@@ -24,7 +26,7 @@ const ProfileExperience: React.FC = () => {
           <div className="bg-white shadow-md rounded p-3 w-64 max-w-xs flex items-center">
             <div className="relative w-6 h-6 mr-2"> 
               <Image 
-                src="/images/airbnb.png"
+                src={airbnbIcon}
                 alt="Airbnb"
                 layout="fill"
                 objectFit="cover"
