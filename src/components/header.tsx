@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import Person2Icon from "@mui/icons-material/Person2";
 import SearchIcon from "@mui/icons-material/Search";
@@ -10,6 +10,10 @@ import Link from "next/link";
 import CreateIcon from "@mui/icons-material/Create";
 
 const Header: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
   return (
     <header className="flex justify-between items-center bg-[#212121] h-20">
       <Link href="/">
@@ -54,10 +58,35 @@ const Header: React.FC = () => {
             </button>
           </Link>
         </li>
-        <li>
-          <button className="transition-colors duration-400 ease-in-out hover:bg-orange-500 hover:text-black h-20 w-20">
-            <MenuIcon />
+        <li className="relative">
+          <button
+            onClick={toggleMenu}
+            className="transition-colors duration-400 ease-in-out hover:bg-orange-500 hover:text-black h-20 w-20 flex items-center justify-center"
+          >
+            <MenuIcon className="h-6 w-6" />
           </button>
+          {isMenuOpen && (
+            <div className="absolute right-0 bg-[#212121] shadow-lg">
+              <Link
+                href="/demoInfoPage1"
+                className="block text-white hover:bg-orange-500 hover:text-black px-4 py-2"
+              >
+                Viz Arena
+              </Link>
+              <Link
+                href="/demoInfoPage2"
+                className="block text-white hover:bg-orange-500 hover:text-black px-4 py-2"
+              >
+                Viz Libero
+              </Link>
+              <Link
+                href="/demoInfoPage3"
+                className="block text-white hover:bg-orange-500 hover:text-black px-4 py-2"
+              >
+                Viz World
+              </Link>
+            </div>
+          )}
         </li>
       </ul>
     </header>
