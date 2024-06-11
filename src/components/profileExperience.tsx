@@ -13,9 +13,7 @@ const ProfileExperience: React.FC = () => {
             <div className="relative w-6 h-6 mr-2"> 
               <Image 
                 src={googleIcon}
-                alt="Google"
-                layout="fill" 
-                objectFit="cover" 
+                alt="Google" 
               />
             </div>
             <div className="ml-2 text-black">
@@ -27,10 +25,7 @@ const ProfileExperience: React.FC = () => {
             <div className="relative w-6 h-6 mr-2"> 
               <Image 
                 src={airbnbIcon}
-                alt="Airbnb"
-                layout="fill"
-                objectFit="cover"
-              />
+                alt="Airbnb"/>
             </div>
             <div className="ml-2 text-black">
               <p className="text-black">Airbnb</p>
