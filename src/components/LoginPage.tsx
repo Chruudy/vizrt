@@ -28,7 +28,7 @@ const LoginPage: React.FC = () => {
       });
 
       setError('');
-      router.push('/');  // Redirect to the /index page after successful login
+      router.push('/profile');  // Redirect to the /index page after successful login
     } catch (err) {
       if (axios.isAxiosError(err) && err.response) {
         setError(err.response.data);

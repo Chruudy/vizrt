@@ -113,6 +113,12 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
     }
   };
 
+  const onChangeView = () => {
+    // Implement the logic to change view or redirect to another page
+    // For example, redirect to the product management page
+    router.push('/adminview');
+  };
+
   return (
     <div className="max-w-3xl mx-auto p-4 bg-white shadow-md rounded-md">
       <form onSubmit={onSubmit} className="space-y-4">
@@ -135,7 +141,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+        <label className="block text-gray-700 text-sm font-bold mb-2">
             Category:
           </label>
           <select
@@ -197,11 +203,18 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
             <button
               type="button"
               onClick={onDelete}
-              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
             >
               Delete Product
             </button>
           )}
+          <button
+            type="button"
+            onClick={onChangeView}
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Change View
+          </button>
         </div>
       </form>
     </div>
