@@ -27,11 +27,10 @@ const Header: React.FC = () => {
       </div>
       <ul className="flex items-center text-white mr-2">
         <li>
-        <Link href="/profile">
           <button className="transition-colors duration-400 ease-in-out hover:bg-orange-500 hover:text-black h-20 w-20">
             <MenuIcon />
           </button>
-          </Link>
+         
         </li>
         <li>
           <Link href="/favorites">
