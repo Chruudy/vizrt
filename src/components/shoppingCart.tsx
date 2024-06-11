@@ -2,21 +2,32 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
+interface Product {
+  image: string; // Changed from any to string
+  src: string;
+  alt: string;
+  name: string;
+  price: string | number; // Allowing both string and number types for price
+}
+
 const ShoppingCart = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    const cartItems = JSON.parse(localStorage.getItem('cart') || '[]');
+    const cartItems: Product[] = JSON.parse(localStorage.getItem('cart') || '[]');
     setProducts(cartItems);
   }, []);
 
-  const removeFromCart = (indexToRemove) => {
+  const removeFromCart = (indexToRemove: number) => {
     const updatedProducts = products.filter((_, index) => index !== indexToRemove);
     setProducts(updatedProducts);
     localStorage.setItem('cart', JSON.stringify(updatedProducts));
   };
 
-  const total = products.reduce((sum, product) => sum + parseInt(product.price.replace('$', '')), 0);
+  const total = products.reduce((sum, product) => {
+    const price = typeof product.price === 'string' ? parseFloat(product.price.replace('$', '')) : product.price;
+    return sum + (isNaN(price) ? 0 : price);
+  }, 0);
 
   return (
     <div className="min-h-screen text-white p-6">
@@ -26,14 +37,13 @@ const ShoppingCart = () => {
           {products.map((product, index) => (
             <div key={index} className="flex items-center mb-4 border-b border-gray-700 pb-4">
               <div className="w-32 h-20 relative">
-                <Image src={product.src} alt={product.alt} layout="fill" objectFit="cover" className="rounded-lg" />
+                <Image src={`data:image/jpeg;base64,${product.image}`} alt={product.alt} layout="fill" objectFit="cover" className="rounded-lg" />
               </div>
               <div className="ml-4 flex-1">
                 <h2 className="text-xl font-bold">{product.name}</h2>
-                <p className="text-gray-400">{product.description}</p>
               </div>
               <div className="ml-4 text-right">
-                <p className="text-xl font-bold">{product.price}</p>
+                <p className="text-xl font-bold">{typeof product.price === 'string' ? product.price : `$${product.price}`}</p>
                 <button className="text-red-500 hover:text-red-700" onClick={() => removeFromCart(index)}>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -45,7 +55,7 @@ const ShoppingCart = () => {
         </div>
         <div className="bg-gray-800 rounded-lg p-6 mb-6 flex justify-between items-center">
           <p className="text-2xl font-bold">Total:</p>
-          <p className="text-2xl font-bold">${total}</p>
+          <p className="text-2xl font-bold">${total.toFixed(2)}</p>
         </div>
         <div className="flex justify-end">
           <button className="bg-orange-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-orange-600 transition duration-300">Pay</button>
