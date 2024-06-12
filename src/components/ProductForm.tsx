@@ -17,6 +17,7 @@ interface ProductFormProps {
 const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
   const [name, setName] = useState<string>("");
   const [category, setCategory] = useState<string>("");
+  const [subCategory, setSubCategory] = useState<string>("")
   const [price, setPrice] = useState<number>(0);
   const [product, setProduct] = useState<Product | null>(null);
   const [image, setImage] = useState<File | null>(null);
@@ -32,6 +33,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
           const productData: Product = response.data;
           setName(productData.name);
           setCategory(productData.category);
+          /*setSubCategory(productData.subCategory);   I want to have a sub category so we choose what type of graphic it is as well*/
           setPrice(productData.price);
           setProduct(productData);
           if (productData.image) {
@@ -80,14 +82,14 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
       const productData: Product = response.data;
       setProduct(productData);
       if (productData.image) {
-        setImagePreview(productData.image);
+        setImagePreview(productData.image); // Set image preview to uploaded image URL
       }
       // Clear the inputs and display success message
       setName("");
       setCategory("");
+      /*setSubCategory("");*/
       setPrice(0);
       setImage(null);
-      setImagePreview(null);
       setSuccessMessage("Product published successfully!");
       setTimeout(() => setSuccessMessage(null), 3000); // Clear the message after 3 seconds
     } catch (error) {
@@ -113,110 +115,122 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
     }
   };
 
-  const onChangeView = () => {
-    // Implement the logic to change view or redirect to another page
-    // For example, redirect to the product management page
-    router.push('/adminview');
-  };
-
   return (
-    <div className="max-w-3xl mx-auto p-4 bg-white shadow-md rounded-md">
-      <form onSubmit={onSubmit} className="space-y-4">
-        <h2 className="text-2xl font-bold mb-5">
-          {productId ? "Edit Product" : "Add Product"}
-        </h2>
-        {successMessage && (
-          <div className="text-green-500 mb-4">{successMessage}</div>
-        )}
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Name:
-          </label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          />
-        </div>
-        <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2">
-            Category:
-          </label>
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          >
-            <option value="">Select a category</option>
-            <option value="Sport">Sport</option>
-            <option value="Graphics">Graphics</option>
-            <option value="Virtual & XR">Virtual & XR</option>
-            <option value="E-sport">E-sport</option>
-            <option value="Live Production">Live Production</option>
-          </select>
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Price:
-          </label>
-          <input
-            type="number"
-            value={price}
-            onChange={(e) => setPrice(Number(e.target.value))}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Image:
-          </label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={onImageChange}
-            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-          />
-        </div>
+    <div className="w-full h-full mx-auto p-4 bg-brandBGLighter shadow-md rounded-md grid grid-cols-3 gap-4 text-white">
+      <div className="col-span-2 bg-grey085 rounded">
+        <h2>
+          Preview
+          </h2>
         {imagePreview && (
           <div className="mb-4">
             <Image
               src={imagePreview}
               alt="Image preview"
-              width={200}
-              height={200}
+              layout="responsive"
+              width={400}
+              height={400}
               className="rounded-md"
             />
           </div>
         )}
-        <div className="flex items-center justify-between">
-          <button
-            type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            {productId ? "Update" : "Add"} Product
-          </button>
-          {productId && (
-            <button
-              type="button"
-              onClick={onDelete}
-              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
-            >
-              Delete Product
-            </button>
+      </div>
+      <div className="col-span-1">
+        <form onSubmit={onSubmit} className="space-y-4">
+          <h2 className="text-2xl font-bold mb-5">
+            {productId ? "Edit Product" : "Add Product"}
+          </h2>
+          {successMessage && (
+            <div className="text-green-500 mb-4">{successMessage}</div>
           )}
-          <button
-            type="button"
-            onClick={onChangeView}
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            Change View
-          </button>
-        </div>
-      </form>
+          <div className="mb-4">
+            <label className="block text-white text-sm font-bold mb-2">
+              Name:
+            </label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gre075 text-sm font-bold mb-2">
+              Category:
+            </label>
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+              required
+            >
+              <option value="">Select a category</option>
+              <option value="Sport">Sport</option>
+              <option value="Graphics">Graphics</option>
+              <option value="Virtual & XR">Virtual & XR</option>
+              <option value="E-sport">E-sport</option>
+              <option value="Live Production">Live Production</option>
+            </select>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gre075 text-sm font-bold mb-2">
+              Sub Category:
+            </label>
+            <select
+              value={subCategory}
+              onChange={(e) => setSubCategory(e.target.value)}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+              required
+            >
+              <option value="">Select a category</option>
+              <option value="Lower Third">Lower Third</option>
+              <option value="Scoreboard">Scoreboard</option>
+              <option value="Bumper">Bumper</option>
+              <option value="Sidebar">Sidebar</option>
+            </select>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gre075 text-sm font-bold mb-2">
+              Price:
+            </label>
+            <input
+              type="number"
+              value={price}
+              onChange={(e) => setPrice(Number(e.target.value))}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-white text-sm font-bold mb-2">
+              Image:
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={onImageChange}
+              className="block w-full text-sm border text-white border-grey075 rounded-lg cursor-pointer bg-gre075focus:outline-none"
+            />
+          </div>
+          <div className="flex items-center justify-between">
+            <button
+              type="submit"
+              className="bg-blue01 hover:bg-blue03 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              {productId ? "Update" : "Add"} Product
+            </button>
+            {productId && (
+              <button
+                type="button"
+                onClick={onDelete}
+                className="bg-red01 hover:bg-red03 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                Delete Product
+              </button>
+            )}
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
