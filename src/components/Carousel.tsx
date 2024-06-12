@@ -7,6 +7,11 @@ interface CarouselProps {
   images: string[];
 }
 
+
+
+
+
+
 const Carousel: React.FC<CarouselProps> = ({ images }) => {
   const router = useRouter();
   const middleIndex = Math.floor(images.length / 2);

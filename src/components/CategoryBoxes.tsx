@@ -31,7 +31,7 @@ const QuickReviewModal = ({ item, onClose }: { item: Product, onClose: () => voi
         <div className="relative w-full h-48 mb-4">
           <Image src={item.image} alt={item.name} layout="fill" objectFit="cover" className="w-full h-full object-cover" />
           {showMessage && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-lg font-bold">
+            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-green-500 text-lg font-bold">
               Added to cart!
             </div>
           )}
@@ -103,15 +103,15 @@ const CategoryBoxes = () => {
             <div className="relative" style={{ width: '256px', height: '144px' }}> {/* Adjusted width and height for 16:9 aspect ratio */}
               <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
               {showMessage[product.id] && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-lg font-bold">
+                <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-green-500 text-lg font-bold">
                   Added to cart!
                 </div>
               )}
             </div>
             <div className="p-2">
               <p className="text-lg font-semibold">{product.name}</p>
-              <p className="text-sm">{product.category}</p>
-              <p className="text-md font-bold">${product.price}</p>
+              <p className="text-sm text-gray-400 whitespace-nowrap">Category: {product.category}</p> {/* Updated text color and nowrap */}
+              <p className="text-md text-gray-400 whitespace-nowrap">Price: ${product.price}</p> {/* Updated text color and nowrap */}
               <div className="flex justify-between space-x-2 mt-2">
                 <button
                   className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2"
