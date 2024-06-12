@@ -31,7 +31,7 @@ const QuickReviewModal = ({ item, onClose }: { item: Product, onClose: () => voi
         <div className="relative w-full h-48 mb-4">
           <Image src={item.image} alt={item.name} layout="fill" objectFit="cover" className="w-full h-full object-cover" />
           {showMessage && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-lg font-bold">
+            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-green-500 text-lg font-bold">
               Added to cart!
             </div>
           )}
@@ -55,7 +55,6 @@ const CategoryBoxes = () => {
   const [error, setError] = useState('');
   const [quickReviewItem, setQuickReviewItem] = useState<Product | null>(null);
   const [showMessage, setShowMessage] = useState<{ [key: number]: boolean }>({});
-  const [favoriteProducts, setFavoriteProducts] = useState<number[]>([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -79,98 +78,54 @@ const CategoryBoxes = () => {
       }
     };
 
-    const favoriteIds = JSON.parse(localStorage.getItem('favoriteProducts') || '[]');
-    setFavoriteProducts(favoriteIds);
-
     fetchProducts();
   }, []);
-
-  useEffect(() => {
-    const timeoutIds = Object.keys(showMessage).map((id) => {
-      if (showMessage[parseInt(id)]) {
-        return setTimeout(() => {
-          setShowMessage((prev) => ({ ...prev, [parseInt(id)]: false }));
-        }, 2000);
-      }
-      return null;
-    });
-
-    return () => {
-      timeoutIds.forEach((id) => id && clearTimeout(id));
-    };
-  }, [showMessage]);
 
   const handleQuickReview = (item: Product) => setQuickReviewItem(item);
   const handleCloseQuickReview = () => setQuickReviewItem(null);
 
   const addToCart = (item: Product) => {
-    try {
-      const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
-      const newItem = { id: item.id, name: item.name, category: item.category, price: item.price, image: item.image };
-
-      localStorage.setItem('cart', JSON.stringify([...existingCart, newItem]));
-      console.log('Added to cart');
-      setShowMessage((prev) => ({ ...prev, [item.id]: true }));
-    } catch (e) {
-      if (e.name === 'QuotaExceededError') {
-        console.error('Local storage quota exceeded');
-        // Optionally, you can display a message to the user or take other actions
-      } else {
-        console.error('Error adding item to cart', e);
-      }
-    }
-  };
-
-  const toggleFavorite = (item: Product) => {
-    const updatedFavorites = favoriteProducts.includes(item.id)
-      ? favoriteProducts.filter(id => id !== item.id)
-      : [...favoriteProducts, item.id];
-
-    setFavoriteProducts(updatedFavorites);
-    localStorage.setItem('favoriteProducts', JSON.stringify(updatedFavorites));
+    const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const newItem = { id: item.id, name: item.name, category: item.category, price: item.price, image: item.image };
+    localStorage.setItem('cart', JSON.stringify([...existingCart, newItem]));
+    console.log('Added to cart');
+    setShowMessage({ ...showMessage, [item.id]: true });
+    setTimeout(() => {
+      setShowMessage({ ...showMessage, [item.id]: false });
+    }, 2000);
   };
 
   const renderProducts = (products: Product[]) => (
     <div className="flex flex-wrap -mx-2">
       {products.map((product) => (
         <div key={product.id} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 px-2 mb-4">
-          <div className="w-full h-full rounded-lg overflow-hidden shadow-lg p-4 bg-[#1D3641] text-white flex flex-col justify-between">
-            <div className="relative w-full h-36"> {/* Adjusted height for 16:9 aspect ratio */}
+          <div className="w-full rounded-lg overflow-hidden shadow-lg p-4 bg-[#1D3641] text-white">
+            <div className="relative" style={{ width: '256px', height: '144px' }}> {/* Adjusted width and height for 16:9 aspect ratio */}
               <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
               {showMessage[product.id] && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="bg-green-500 text-white text-lg font-bold px-4 py-2 rounded">
-                    Added to cart!
-                  </div>
+                <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-green-500 text-lg font-bold">
+                  Added to cart!
                 </div>
               )}
             </div>
-            <div className="p-2 flex-grow">
-              <div className="flex justify-between items-center">
-                <p className="text-lg font-semibold">{product.name}</p>
+            <div className="p-2">
+              <p className="text-lg font-semibold">{product.name}</p>
+              <p className="text-sm text-gray-400 whitespace-nowrap">Category: {product.category}</p> {/* Updated text color and nowrap */}
+              <p className="text-md text-gray-400 whitespace-nowrap">Price: ${product.price}</p> {/* Updated text color and nowrap */}
+              <div className="flex justify-between space-x-2 mt-2">
                 <button
-                  className={`text-lg ${favoriteProducts.includes(product.id) ? 'text-yellow-400' : 'text-gray-400'}`}
-                  onClick={() => toggleFavorite(product)}
+                  className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2"
+                  onClick={() => handleQuickReview(product)}
                 >
-                  ★
+                  Demo
+                </button>
+                <button
+                  className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2"
+                  onClick={() => addToCart(product)}
+                >
+                  Add to Cart
                 </button>
               </div>
-              <p className="text-md font-bold">${product.price}</p>
-              <p className="text-sm">Category: {product.category}</p>
-            </div>
-            <div className="flex justify-between space-x-2 mt-2">
-              <button
-                className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200"
-                onClick={() => handleQuickReview(product)}
-              >
-                Demo
-              </button>
-              <button
-                className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200"
-                onClick={() => addToCart(product)}
-              >
-                Add to Cart
-              </button>
             </div>
           </div>
         </div>
