@@ -12,12 +12,17 @@ type Product = {
 };
 
 const QuickReviewModal = ({ item, onClose }: { item: Product, onClose: () => void }) => {
+  const [showMessage, setShowMessage] = useState(false);
+
   const addToCart = () => {
     const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
     const newItem = { id: item.id, name: item.name, category: item.category, price: item.price, image: item.image };
     localStorage.setItem('cart', JSON.stringify([...existingCart, newItem]));
     console.log('Added to cart');
-    onClose();
+    setShowMessage(true);
+    setTimeout(() => {
+      setShowMessage(false);
+    }, 2000);
   };
 
   return (
@@ -25,6 +30,11 @@ const QuickReviewModal = ({ item, onClose }: { item: Product, onClose: () => voi
       <div className="bg-gray-700 bg-opacity-95 p-6 shadow-lg w-96 text-center text-blue-100">
         <div className="relative w-full h-48 mb-4">
           <Image src={item.image} alt={item.name} layout="fill" objectFit="cover" className="w-full h-full object-cover" />
+          {showMessage && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-lg font-bold">
+              Added to cart!
+            </div>
+          )}
         </div>
         <p>Description: {item.name}</p>
         <p>Category: {item.category}</p>
@@ -44,7 +54,7 @@ const CategoryBoxes = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [quickReviewItem, setQuickReviewItem] = useState<Product | null>(null);
-  const [showMessage, setShowMessage] = useState(false);
+  const [showMessage, setShowMessage] = useState<{ [key: number]: boolean }>({});
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -74,12 +84,30 @@ const CategoryBoxes = () => {
   const handleQuickReview = (item: Product) => setQuickReviewItem(item);
   const handleCloseQuickReview = () => setQuickReviewItem(null);
 
+  const addToCart = (item: Product) => {
+    const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const newItem = { id: item.id, name: item.name, category: item.category, price: item.price, image: item.image };
+    localStorage.setItem('cart', JSON.stringify([...existingCart, newItem]));
+    console.log('Added to cart');
+    setShowMessage({ ...showMessage, [item.id]: true });
+    setTimeout(() => {
+      setShowMessage({ ...showMessage, [item.id]: false });
+    }, 2000);
+  };
+
   const renderProducts = (products: Product[]) => (
     <div className="flex flex-wrap -mx-2">
       {products.map((product) => (
         <div key={product.id} className="w-1/5 px-2 mb-4">
           <div className="w-full rounded-lg overflow-hidden shadow-lg p-4 bg-[#1D3641] text-white">
-            <img src={product.image} alt={product.name} className="w-full h-48 object-cover" />
+            <div className="relative">
+              <img src={product.image} alt={product.name} className="w-full h-48 object-cover" />
+              {showMessage[product.id] && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-lg font-bold">
+                  Added to cart!
+                </div>
+              )}
+            </div>
             <div className="p-2">
               <p className="text-lg font-semibold">{product.name}</p>
               <p className="text-sm">{product.category}</p>
@@ -91,7 +119,10 @@ const CategoryBoxes = () => {
                 >
                   Demo
                 </button>
-                <button className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2">
+                <button
+                  className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2"
+                  onClick={() => addToCart(product)}
+                >
                   Add to Cart
                 </button>
               </div>
@@ -125,14 +156,6 @@ const CategoryBoxes = () => {
         renderProducts(mostPopularPackages)
       )}
       {quickReviewItem && <QuickReviewModal item={quickReviewItem} onClose={handleCloseQuickReview} />}
-
-      {showMessage && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-green-500 text-white px-4 py-2 rounded shadow-lg">
-            Added to cart!
-          </div>
-        </div>
-      )}
     </div>
   );
 };
