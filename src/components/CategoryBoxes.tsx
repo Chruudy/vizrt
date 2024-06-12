@@ -117,7 +117,6 @@ const CategoryBoxes = () => {
       ) : (
         renderProducts(mostPopularPackages)
       )}
-
       {quickReviewItem && <QuickReviewModal item={quickReviewItem} onClose={handleCloseQuickReview} />}
 
       {showMessage && (
