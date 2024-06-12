@@ -33,7 +33,8 @@ const images2 = [
   { src: sportArray[2], alt: 'Contribution 10', description: 'Contribution 10 description', category: 'Contributions', price: '$100' },
 ];
 
-const GridItem = ({ src, alt, description, category, price, onQuickReview }) => {
+
+const GridItem = ({ src, alt, description, category, price, onQuickReview }: any) => {
   const addToCart = () => {
     const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
     const newItem = { src, alt, description, category, price };
@@ -49,17 +50,17 @@ const GridItem = ({ src, alt, description, category, price, onQuickReview }) => 
         <p>Category: {category}</p>
         <p>Price: {price}</p>
       </div>
-      <button className="text-xs font-medium text-white w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2" onClick={onQuickReview}>
+      <button className="text-xs font-medium text-white w-24 h-8 flex items-center justify-center bg-gradient-to-r from-brandOrange to-red03 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2" onClick={onQuickReview}>
         Quick Review
       </button>
-      <button className="text-xs font-medium text-white w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2" onClick={addToCart}>
+      <button className="text-xs font-medium text-white w-24 h-8 flex items-center justify-center bg-gradient-to-r from-brandOrange to-red03 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2" onClick={addToCart}>
         Add to Cart
       </button>
     </div>
   );
 };
 
-const QuickReviewModal = ({ item, onClose }) => {
+const QuickReviewModal = ({ item, onClose }: any) => {
   const addToCart = () => {
     const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
     const newItem = { src: item.src, alt: item.alt, description: item.description, category: item.category, price: item.price };
@@ -76,15 +77,15 @@ const QuickReviewModal = ({ item, onClose }) => {
         <p>Category: {item.category}</p>
         <p>Price: {item.price}</p>
         <div className="flex justify-center space-x-4 mt-4">
-          <button className="text-white bg-orange-500 px-4 py-2 rounded-md" onClick={addToCart}>Add to Cart</button>
-          <button className="text-white bg-orange-500 px-4 py-2 rounded-md" onClick={onClose}>Close</button>
+          <button className="text-white bg-brandOrange px-4 py-2 rounded-md" onClick={addToCart}>Add to Cart</button>
+          <button className="text-white bg-brandOrange px-4 py-2 rounded-md" onClick={onClose}>Close</button>
         </div>
       </div>
     </div>
   );
 };
 
-const CategorySection = ({ title, images, link }) => {
+const CategorySection = ({ title, images, link }: any) => {
   const [slideIndex, setSlideIndex] = useState(0);
   const [quickReviewItem, setQuickReviewItem] = useState(null);
   const [showMessage, setShowMessage] = useState(false);
@@ -92,10 +93,10 @@ const CategorySection = ({ title, images, link }) => {
   const handlePrev = () => setSlideIndex((prevIndex) => Math.max(prevIndex - 1, 0));
   const handleNext = () => setSlideIndex((prevIndex) => Math.min(prevIndex + 1, 1));
 
-  const handleQuickReview = (item) => setQuickReviewItem(item);
+  const handleQuickReview = (item: any) => setQuickReviewItem(item);
   const handleCloseQuickReview = () => setQuickReviewItem(null);
 
-  const handleAddToCart = (item) => {
+  const handleAddToCart = (item: any) => {
     const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
     const newItem = { src: item.src, alt: item.alt, description: item.description, category: item.category, price: item.price };
     localStorage.setItem('cart', JSON.stringify([...existingCart, newItem]));
@@ -108,19 +109,19 @@ const CategorySection = ({ title, images, link }) => {
     <div className="relative mb-10 bg-gray-700 bg-opacity-50 p-4">
       <div className="flex items-center mb-2">
         <h2 className="text-xl font-semibold text-white mr-2">{title}</h2>
-        <button className="text-xl font-semibold text-white bg-orange-500 rounded-full p-2" onClick={() => window.location.href = link}>
+        <button className="text-xl font-semibold text-white bg-brandOrange rounded-full p-2" onClick={() => window.location.href = link}>
           {">"}
         </button>
       </div>
       <div className="overflow-hidden" style={{ maxWidth: 'calc(6 * 12rem)' }}>
         <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${slideIndex * 100}%)` }}>
           <div className="flex">
-            {images.slice(0, 6).map((image, index) => (
+            {images.slice(0, 6).map((image: any, index: any): any => (
               <GridItem key={index} src={image.src} alt={image.alt} description={image.description} category={image.category} price={image.price} onQuickReview={() => handleQuickReview(image)} />
             ))}
           </div>
           <div className="flex">
-            {images.slice(6, 12).map((image, index) => (
+            {images.slice(6, 12).map((image: any, index: any) => (
               <GridItem key={index} src={image.src} alt={image.alt} description={image.description} category={image.category} price={image.price} onQuickReview={() => handleQuickReview(image)} />
             ))}
           </div>
@@ -129,7 +130,7 @@ const CategorySection = ({ title, images, link }) => {
       {slideIndex > 0 && (
         <button
           onClick={handlePrev}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 p-2 bg-orange-500 text-white rounded-full -ml-8"
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 p-2 bg-brandOrange text-white rounded-full -ml-8"
         >
           {"<"}
         </button>
@@ -137,7 +138,7 @@ const CategorySection = ({ title, images, link }) => {
       {slideIndex < 1 && (
         <button
           onClick={handleNext}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 bg-orange-500 text-white rounded-full -mr-8"
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 bg-brandOrange text-white rounded-full -mr-8"
         >
           {">"}
         </button>

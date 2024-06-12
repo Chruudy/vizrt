@@ -28,7 +28,7 @@ const LoginPage: React.FC = () => {
       });
 
       setError('');
-      router.push('/profile');  // Redirect to the /index page after successful login
+      router.push('/');  // Redirect to the /index page after successful login
     } catch (err) {
       if (axios.isAxiosError(err) && err.response) {
         setError(err.response.data);
@@ -53,8 +53,8 @@ const LoginPage: React.FC = () => {
             className="mb-4"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            InputProps={{ className: 'bg-gray-700 text-white' }}
-            InputLabelProps={{ className: 'text-gray-400' }}
+            InputProps={{ className: 'bg-grey065 text-white' }}
+            InputLabelProps={{ className: 'text-grey065' }}
           />
           <TextField
             label="Password"
@@ -64,16 +64,16 @@ const LoginPage: React.FC = () => {
             className="mb-4"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            InputProps={{ className: 'bg-gray-700 text-white' }}
-            InputLabelProps={{ className: 'text-gray-400' }}
+            InputProps={{ className: 'bg-grey065 text-white' }}
+            InputLabelProps={{ className: 'text-grey065' }}
           />
           {error && (
-            <div className="text-red-500 mb-4">{error}</div>
+            <div className="text-red01 mb-4">{error}</div>
           )}
           <div className="flex items-center justify-between">
             <div className="text-sm ml-auto">
               <Link href="/forgot-password" passHref>
-                <Button className="font-medium text-gray-400 hover:text-white">Forgot your password?</Button>
+                <Button className="font-medium text-grey065 hover:text-white">Forgot your password?</Button>
               </Link>
             </div>
           </div>
@@ -87,10 +87,10 @@ const LoginPage: React.FC = () => {
           >
             Sign In
           </Button>
-          <div className="flex items-center justify-center mb-4 text-gray-400">
-            <hr className="w-1/3 border-t border-gray-400" />
+          <div className="flex items-center justify-center mb-4 text-grey065">
+            <hr className="w-1/3 border-t border-grey065" />
             <span className="mx-2 text-center">Other sign in methods</span>
-            <hr className="w-1/3 border-t border-gray-400" />
+            <hr className="w-1/3 border-t border-grey065" />
           </div>
           <div className="flex justify-center space-x-4 mb-4">
             <IconButton className="w-10 h-10 rounded-full bg-white">
@@ -104,7 +104,7 @@ const LoginPage: React.FC = () => {
             </IconButton>
           </div>
           <Link href="/signup" passHref>
-            <Button fullWidth className="text-[#ff7f50]">Don't have an account? Sign Up</Button>
+            <Button fullWidth className="text-brandTextOrange">Don't have an account? Sign Up</Button>
           </Link>
         </form>
       </main>

@@ -81,8 +81,8 @@ const SignUpPage: React.FC = () => {
             className="mb-4"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            InputProps={{ className: 'bg-gray-700 text-white' }}
-            InputLabelProps={{ className: 'text-gray-400' }}
+            InputProps={{ className: 'bg-grey070 text-white' }}
+            InputLabelProps={{ className: 'text-grey035' }}
           />
           {error && (
             <Typography color="error" className="mb-4">
@@ -100,14 +100,14 @@ const SignUpPage: React.FC = () => {
             variant="contained"
             color="primary"
             className="mb-4"
-            style={{ backgroundColor: '#ff7f50', color: '#fff' }}
+            style={{ backgroundColor: '#EF804E', color: '#fff' }}
           >
             Sign Up
           </Button>
-          <div className="flex items-center justify-center mb-4 text-gray-400">
-            <hr className="w-1/3 border-t border-gray-400" />
+          <div className="flex items-center justify-center mb-4 text-grey035">
+            <hr className="w-1/3 border-t border-grey035" />
             <span className="mx-2 text-center">Other sign in methods</span>
-            <hr className="w-1/3 border-t border-gray-400" />
+            <hr className="w-1/3 border-t border-grey035" />
           </div>
           <div className="flex justify-center space-x-4 mb-4">
             <IconButton className="w-10 h-10 rounded-full bg-white">
@@ -121,7 +121,7 @@ const SignUpPage: React.FC = () => {
             </IconButton>
           </div>
           <Link href="/login" passHref>
-            <Button fullWidth className="text-[#ff7f50]">Already have an account? Sign In</Button>
+            <Button fullWidth className="text-brandTextOrange">Already have an account? Sign In</Button>
           </Link>
         </form>
       </main>

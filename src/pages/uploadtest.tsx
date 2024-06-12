@@ -7,10 +7,9 @@ const TestPage = () => {
     return (
         <div className="overflow-hidden min-h-screen">
             <Header />
-            <main className="flex flex-col items-center justify-center py-8">
-                <h1 className="text-2xl font-bold mb-4">Test Page</h1>
-                <ProductForm productId={null} />
-            </main>
+                <div className='w-full h-full'>
+                    <ProductForm productId={null} />
+                </div>
             <Footer />
         </div>
     );
