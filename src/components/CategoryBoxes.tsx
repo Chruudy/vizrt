@@ -64,6 +64,7 @@ const CategoryBoxes = () => {
           ...product,
           image: `data:image/jpeg;base64,${product.image}`,
         }));
+
         // For simplicity, split products into two categories for demonstration
         const sportProducts = productsWithBase64Images.filter(product => product.category === "Sport");
 
@@ -93,6 +94,7 @@ const CategoryBoxes = () => {
       setShowMessage({ ...showMessage, [item.id]: false });
     }, 2000);
   };
+
   const renderProducts = (products: Product[]) => (
     <div className="flex flex-wrap -mx-2">
       {products.map((product) => (
