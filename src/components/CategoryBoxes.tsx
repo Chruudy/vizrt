@@ -98,10 +98,10 @@ const CategoryBoxes = () => {
   const renderProducts = (products: Product[]) => (
     <div className="flex flex-wrap -mx-2">
       {products.map((product) => (
-        <div key={product.id} className="w-1/5 px-2 mb-4">
+        <div key={product.id} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 px-2 mb-4">
           <div className="w-full rounded-lg overflow-hidden shadow-lg p-4 bg-[#1D3641] text-white">
-            <div className="relative">
-              <img src={product.image} alt={product.name} className="w-full h-48 object-cover" />
+            <div className="relative" style={{ width: '256px', height: '144px' }}> {/* Adjusted width and height for 16:9 aspect ratio */}
+              <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
               {showMessage[product.id] && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-lg font-bold">
                   Added to cart!
