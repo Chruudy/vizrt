@@ -2,6 +2,7 @@ import React from "react";
 import Header from '../components/header';
 import VizArena from "../components/VizArenaDemoInfo";
 import Footer from '../components/footer';
+//test
 
 export default function demoInfoPage() {
     return (
