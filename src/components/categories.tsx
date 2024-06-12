@@ -34,7 +34,7 @@ const Categories: React.FC = () => {
             </button>
           </Link>
           {isSportsPage && (
-            <div className="w-full h-0.5 mt-2 bg-brandOrange rounded-full"></div>
+            <div className="w-full h-0.5 mt-2 bg-orange-500 rounded-full"></div>
           )}
         </li>
         {/* Repeat for each category with the black overlay */}
@@ -92,7 +92,7 @@ const Categories: React.FC = () => {
         </li>
       </ul>
       <Link href="/allProductsPage">
-        <button className="my-8 px-4 py-2 text-base font-medium text-white rounded-md bg-gradient-to-r from-brandOrange to-red03 shadow-lg transform hover:scale-105 transition-transform duration-200">
+        <button className="my-8 px-4 py-2 text-base font-medium text-white rounded-md bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200">
           View all Products
         </button>
       </Link>

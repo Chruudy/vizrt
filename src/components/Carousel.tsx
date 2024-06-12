@@ -35,7 +35,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
       <div className="relative flex items-center justify-center perspective mt-16">
         <button
           onClick={handlePrev}
-          className={`absolute left-1/2 top-1/2 transform -translate-y-3/4 -translate-x-96 p-4 bg-brandOrange text-white rounded-full z-40 flex items-center justify-center ${activeIndex === 0 ? 'opacity-50' : ''}`}
+          className={`absolute left-1/2 top-1/2 transform -translate-y-3/4 -translate-x-96 p-4 bg-orange-500 text-white rounded-full z-40 flex items-center justify-center ${activeIndex === 0 ? 'opacity-50' : ''}`}
           style={{ width: "40px", height: "40px", borderRadius: "50%" }}
           disabled={activeIndex === 0}
         >
@@ -79,7 +79,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
         </div>
         <button
           onClick={handleNext}
-          className={`absolute right-1/2 top-1/2 transform -translate-y-3/4 translate-x-96 p-4 bg-brandOrange text-white rounded-full z-40 flex items-center justify-center ${activeIndex === images.length - 1 ? 'opacity-50' : ''}`}
+          className={`absolute right-1/2 top-1/2 transform -translate-y-3/4 translate-x-96 p-4 bg-orange-500 text-white rounded-full z-40 flex items-center justify-center ${activeIndex === images.length - 1 ? 'opacity-50' : ''}`}
           style={{ width: "40px", height: "40px", borderRadius: "50%" }}
           disabled={activeIndex === images.length - 1}
         >
@@ -87,7 +87,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
         </button>
       </div>
       <button
-        className="mt-24 my-8 text-sm font-medium text-white w-32 h-10 flex items-center justify-center rounded-md bg-gradient-to-r from-brandOrange to-red03 shadow-lg transform hover:scale-105 transition-transform duration-200"
+        className="mt-24 my-8 text-sm font-medium text-white w-32 h-10 flex items-center justify-center rounded-md bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200"
         onClick={handleMoreClick}
       >
         More

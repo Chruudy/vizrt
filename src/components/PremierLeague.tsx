@@ -48,13 +48,13 @@ const PremierLeague: React.FC = () => {
 
                         <div className="ml-auto mr-4 mb-4 pb-4">
                             <Link href="/">
-                                <button className="text-white font-medium text-lg rounded-lg px-6 py-3 w-56 bg-gradient-to-r from-brandOrange to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200 mb-4 md:mb-0 md:mr-36">
+                                <button className="text-white font-medium text-lg rounded-lg px-6 py-3 w-56 bg-gradient-to-r from-orange-500 to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200 mb-4 md:mb-0 md:mr-36">
                                     Test
                                 </button>
                             </Link>
 
                             <Link href="/cart">
-                                <button className="text-white font-medium text-lg rounded-lg px-6 py-3 w-56 bg-gradient-to-r from-brandOrange to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200 md:ml-4 md:mr-12">
+                                <button className="text-white font-medium text-lg rounded-lg px-6 py-3 w-56 bg-gradient-to-r from-orange-500 to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200 md:ml-4 md:mr-12">
                                     Add to shopping cart
                                 </button>
                             </Link>
