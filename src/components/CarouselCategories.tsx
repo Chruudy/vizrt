@@ -75,15 +75,17 @@ const CarouselCategories = () => {
                   boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.25)",
                 }}
               >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-xl"
-                />
-                <div className="absolute bottom-4 left-0 right-0 text-white text-center text-xs font-bold">
-                  {image.text}
+                <div className="relative w-full h-full group rounded-xl overflow-hidden">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-xl"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 text-white text-center text-xs font-bold bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl">
+                    {image.text}
+                  </div>
                 </div>
               </div>
             );

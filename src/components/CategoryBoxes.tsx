@@ -13,11 +13,6 @@ const images1 = [
   { src: sportArray[1], alt: 'Graphic 2', description: 'Basketball game', category: 'Sports', price: '$30' },
   { src: sportArray[1], alt: 'Graphic 2', description: 'Basketball game', category: 'Sports', price: '$40' },
   { src: sportArray[1], alt: 'Graphic 2', description: 'Basketball game', category: 'Sports', price: '$50' },
-  { src: sportArray[1], alt: 'Graphic 2', description: 'Basketball game', category: 'Sports', price: '$60' },
-  { src: sportArray[1], alt: 'Graphic 2', description: 'Basketball game', category: 'Sports', price: '$70' },
-  { src: sportArray[1], alt: 'Graphic 2', description: 'Basketball game', category: 'Sports', price: '$80' },
-  { src: sportArray[1], alt: 'Graphic 2', description: 'Basketball game', category: 'Sports', price: '$90' },
-  { src: sportArray[1], alt: 'Graphic 2', description: 'Basketball game', category: 'Sports', price: '$100' },
 ];
 
 const images2 = [
@@ -26,24 +21,21 @@ const images2 = [
   { src: sportArray[2], alt: 'Contribution 3', description: 'Contribution 3 description', category: 'Contributions', price: '$30' },
   { src: sportArray[2], alt: 'Contribution 4', description: 'Contribution 4 description', category: 'Contributions', price: '$40' },
   { src: sportArray[3], alt: 'Contribution 5', description: 'Contribution 5 description', category: 'Contributions', price: '$50' },
-  { src: sportArray[3], alt: 'Contribution 6', description: 'Contribution 6 description', category: 'Contributions', price: '$60' },
-  { src: sportArray[3], alt: 'Contribution 7', description: 'Contribution 7 description', category: 'Contributions', price: '$70' },
-  { src: sportArray[2], alt: 'Contribution 8', description: 'Contribution 8 description', category: 'Contributions', price: '$80' },
-  { src: sportArray[3], alt: 'Contribution 9', description: 'Contribution 9 description', category: 'Contributions', price: '$90' },
-  { src: sportArray[2], alt: 'Contribution 10', description: 'Contribution 10 description', category: 'Contributions', price: '$100' },
 ];
 
 const GridItem = ({ src, alt, description, category, price, onQuickReview }) => {
   const addToCart = () => {
     const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
-    const newItem = { src, alt, description, category, price };
+    const newItem = { src, alt, description, category, price: price.toString() };
     localStorage.setItem('cart', JSON.stringify([...existingCart, newItem]));
     console.log('Added to cart');
   };
 
   return (
-    <div className="flex flex-col justify-between items-center bg-transparent p-2 focus:outline-none w-48 h-72 m-2 relative border-2 border-white border-opacity-25">
-      <Image src={src} alt={alt} layout="responsive" width={192} height={128} className="w-full h-32 object-cover border-2 border-white border-opacity-25" />
+    <div className="flex flex-col justify-between items-center bg-transparent p-2 focus:outline-none w-full h-80 m-2 relative border-2 border-white border-opacity-25">
+      <div className="relative w-full h-32 border-2 border-white border-opacity-25">
+        <Image src={src} alt={alt} layout="fill" objectFit="cover" className="w-full h-full object-cover" />
+      </div>
       <div className="mt-2 text-sm text-center text-white">
         <p>Description: {description}</p>
         <p>Category: {category}</p>
@@ -62,7 +54,7 @@ const GridItem = ({ src, alt, description, category, price, onQuickReview }) => 
 const QuickReviewModal = ({ item, onClose }) => {
   const addToCart = () => {
     const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
-    const newItem = { src: item.src, alt: item.alt, description: item.description, category: item.category, price: item.price };
+    const newItem = { src: item.src, alt: item.alt, description: item.description, category: item.category, price: item.price.toString() };
     localStorage.setItem('cart', JSON.stringify([...existingCart, newItem]));
     console.log('Added to cart');
     onClose();
@@ -71,7 +63,9 @@ const QuickReviewModal = ({ item, onClose }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-gray-700 bg-opacity-95 p-6 shadow-lg w-96 text-center text-blue-100">
-        <Image src={item.src} alt={item.alt} layout="responsive" width={384} height={192} className="w-full h-48 object-cover mb-4 border-2 border-white border-opacity-25" />
+        <div className="relative w-full h-48 mb-4 border-2 border-white border-opacity-25">
+          <Image src={item.src} alt={item.alt} layout="fill" objectFit="cover" className="w-full h-full object-cover" />
+        </div>
         <p>Description: {item.description}</p>
         <p>Category: {item.category}</p>
         <p>Price: {item.price}</p>
@@ -85,19 +79,15 @@ const QuickReviewModal = ({ item, onClose }) => {
 };
 
 const CategorySection = ({ title, images, link }) => {
-  const [slideIndex, setSlideIndex] = useState(0);
   const [quickReviewItem, setQuickReviewItem] = useState(null);
   const [showMessage, setShowMessage] = useState(false);
-
-  const handlePrev = () => setSlideIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-  const handleNext = () => setSlideIndex((prevIndex) => Math.min(prevIndex + 1, 1));
 
   const handleQuickReview = (item) => setQuickReviewItem(item);
   const handleCloseQuickReview = () => setQuickReviewItem(null);
 
   const handleAddToCart = (item) => {
     const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
-    const newItem = { src: item.src, alt: item.alt, description: item.description, category: item.category, price: item.price };
+    const newItem = { src: item.src, alt: item.alt, description: item.description, category: item.category, price: item.price.toString() };
     localStorage.setItem('cart', JSON.stringify([...existingCart, newItem]));
     console.log('Added to cart');
     setShowMessage(true);
@@ -112,36 +102,11 @@ const CategorySection = ({ title, images, link }) => {
           {">"}
         </button>
       </div>
-      <div className="overflow-hidden" style={{ maxWidth: 'calc(6 * 12rem)' }}>
-        <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${slideIndex * 100}%)` }}>
-          <div className="flex">
-            {images.slice(0, 6).map((image, index) => (
-              <GridItem key={index} src={image.src} alt={image.alt} description={image.description} category={image.category} price={image.price} onQuickReview={() => handleQuickReview(image)} />
-            ))}
-          </div>
-          <div className="flex">
-            {images.slice(6, 12).map((image, index) => (
-              <GridItem key={index} src={image.src} alt={image.alt} description={image.description} category={image.category} price={image.price} onQuickReview={() => handleQuickReview(image)} />
-            ))}
-          </div>
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+        {images.map((image, index) => (
+          <GridItem key={index} src={image.src} alt={image.alt} description={image.description} category={image.category} price={image.price} onQuickReview={() => handleQuickReview(image)} />
+        ))}
       </div>
-      {slideIndex > 0 && (
-        <button
-          onClick={handlePrev}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 p-2 bg-orange-500 text-white rounded-full -ml-8"
-        >
-          {"<"}
-        </button>
-      )}
-      {slideIndex < 1 && (
-        <button
-          onClick={handleNext}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 bg-orange-500 text-white rounded-full -mr-8"
-        >
-          {">"}
-        </button>
-      )}
       {quickReviewItem && <QuickReviewModal item={quickReviewItem} onClose={handleCloseQuickReview} />}
       {showMessage && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
