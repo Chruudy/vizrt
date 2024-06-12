@@ -104,11 +104,21 @@ const CategoryBoxes = () => {
   const handleCloseQuickReview = () => setQuickReviewItem(null);
 
   const addToCart = (item: Product) => {
-    const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
-    const newItem = { id: item.id, name: item.name, category: item.category, price: item.price, image: item.image };
-    localStorage.setItem('cart', JSON.stringify([...existingCart, newItem]));
-    console.log('Added to cart');
-    setShowMessage((prev) => ({ ...prev, [item.id]: true }));
+    try {
+      const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const newItem = { id: item.id, name: item.name, category: item.category, price: item.price, image: item.image };
+
+      localStorage.setItem('cart', JSON.stringify([...existingCart, newItem]));
+      console.log('Added to cart');
+      setShowMessage((prev) => ({ ...prev, [item.id]: true }));
+    } catch (e) {
+      if (e.name === 'QuotaExceededError') {
+        console.error('Local storage quota exceeded');
+        // Optionally, you can display a message to the user or take other actions
+      } else {
+        console.error('Error adding item to cart', e);
+      }
+    }
   };
 
   const toggleFavorite = (item: Product) => {
@@ -125,7 +135,7 @@ const CategoryBoxes = () => {
       {products.map((product) => (
         <div key={product.id} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 px-2 mb-4">
           <div className="w-full h-full rounded-lg overflow-hidden shadow-lg p-4 bg-[#1D3641] text-white flex flex-col justify-between">
-            <div className="relative" style={{ width: '100%', height: '144px' }}> {/* Adjusted height for 16:9 aspect ratio */}
+            <div className="relative w-full h-36"> {/* Adjusted height for 16:9 aspect ratio */}
               <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
               {showMessage[product.id] && (
                 <div className="absolute inset-0 flex items-center justify-center">
