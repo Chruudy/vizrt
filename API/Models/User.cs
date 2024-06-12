@@ -10,4 +10,5 @@ public class User
 
     [Required]
     public required string Password { get; set; }
+    public string PhoneNumber { get; set; } = "";
 }

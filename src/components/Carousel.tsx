@@ -29,7 +29,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center">
+    <div className="mb-24 relative flex flex-col items-center justify-center">
       <div className="mb-16">
       </div>
       <div className="relative flex items-center justify-center perspective mt-16">
