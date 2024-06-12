@@ -34,10 +34,8 @@ const CarouselCategories = () => {
     });
 
   return (
-    <div className="relative flex flex-col items-center justify-center">
-      <div className="mb-16">
-      </div>
-      <div className="relative flex items-center justify-center perspective mt-16">
+    <div className="relative flex flex-col items-center justify-center mt-14"> {/* Adjusted margin-top */}
+      <div className="relative flex items-center justify-center perspective mt-14"> {/* Adjusted margin-top */}
         <button
           onClick={handlePrev}
           className={`absolute left-1/2 top-1/2 transform -translate-y-1/2 -translate-x-96 p-4 bg-brandOrange text-white rounded-full z-40 flex items-center justify-center ${activeIndex === 0 ? 'opacity-50' : ''}`}
