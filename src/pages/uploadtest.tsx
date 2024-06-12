@@ -8,7 +8,6 @@ const TestPage = () => {
         <div className="overflow-hidden min-h-screen">
             <Header />
             <main className="flex flex-col items-center justify-center py-8">
-                <h1 className="text-2xl font-bold mb-4">Test Page</h1>
                 <ProductForm productId={null} />
             </main>
             <Footer />
