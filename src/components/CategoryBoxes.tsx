@@ -23,15 +23,15 @@ const QuickReviewModal = ({ item, onClose }: { item: Product, onClose: () => voi
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-gray-700 bg-opacity-95 p-6 shadow-lg w-96 text-center text-blue-100">
-        <div className="relative w-full h-48 mb-4 border-2 border-white border-opacity-25">
+        <div className="relative w-full h-48 mb-4">
           <Image src={item.image} alt={item.name} layout="fill" objectFit="cover" className="w-full h-full object-cover" />
         </div>
         <p>Description: {item.name}</p>
         <p>Category: {item.category}</p>
         <p>Price: ${item.price}</p>
         <div className="flex justify-center space-x-4 mt-4">
-          <button className="text-white bg-orange-500 px-4 py-2 rounded-md" onClick={addToCart}>Add to Cart</button>
-          <button className="text-white bg-orange-500 px-4 py-2 rounded-md" onClick={onClose}>Close</button>
+          <button className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2" onClick={addToCart}>Add to Cart</button>
+          <button className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2" onClick={onClose}>Close</button>
         </div>
       </div>
     </div>
@@ -58,7 +58,7 @@ const CategoryBoxes = () => {
         // For simplicity, split products into two categories for demonstration
         const sportProducts = productsWithBase64Images.filter(product => product.category === "Sport");
 
-        // Divide the products into two lists for the two slideshows
+        // Divide the products into two lists for the two rows
         setLatestContributions(sportProducts.slice(0, 5));
         setMostPopularPackages(sportProducts.slice(5, 10));
       } catch (err) {
@@ -75,20 +75,27 @@ const CategoryBoxes = () => {
   const handleCloseQuickReview = () => setQuickReviewItem(null);
 
   const renderProducts = (products: Product[]) => (
-    <div className="flex space-x-4 overflow-x-auto py-4">
+    <div className="flex flex-wrap -mx-2">
       {products.map((product) => (
-        <div key={product.id} className="flex-shrink-0 w-64 border border-gray-200 rounded-lg overflow-hidden shadow-lg p-4 bg-white">
-          <img src={product.image} alt={product.name} className="w-full h-48 object-cover" />
-          <div className="p-2">
-            <p className="text-lg font-semibold">{product.name}</p>
-            <p className="text-sm text-gray-600">{product.category}</p>
-            <p className="text-md font-bold">${product.price}</p>
-            <button className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleQuickReview(product)}>
-              Quick Review
-            </button>
-            <button className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              Add to Cart
-            </button>
+        <div key={product.id} className="w-1/5 px-2 mb-4">
+          <div className="w-full rounded-lg overflow-hidden shadow-lg p-4 bg-[#1D3641] text-white">
+            <img src={product.image} alt={product.name} className="w-full h-48 object-cover" />
+            <div className="p-2">
+              <p className="text-lg font-semibold">{product.name}</p>
+              <p className="text-sm">{product.category}</p>
+              <p className="text-md font-bold">${product.price}</p>
+              <div className="flex justify-between space-x-2 mt-2">
+                <button
+                  className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2"
+                  onClick={() => handleQuickReview(product)}
+                >
+                  Demo
+                </button>
+                <button className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2">
+                  Add to Cart
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       ))}
