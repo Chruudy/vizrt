@@ -156,7 +156,7 @@ const CategoryBoxes = () => {
                 </button>
               </div>
               <p className="text-md font-bold">${product.price}</p>
-              <p className="text-sm">{product.category}</p>
+              <p className="text-sm">Category: {product.category}</p>
             </div>
             <div className="flex justify-between space-x-2 mt-2">
               <button
