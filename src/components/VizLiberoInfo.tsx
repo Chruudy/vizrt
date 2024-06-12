@@ -30,6 +30,18 @@ const VizLiberoDemoInfo: React.FC = () => {
     const isAlreadyInCart = existingCart.some(
       (item: { id: string }) => item.id === productToAdd.id
     );
+
+    if (!isAlreadyInCart) {
+      localStorage.setItem(
+        "cart",
+        JSON.stringify([...existingCart, productToAdd])
+      );
+      alert("Penis");
+    } else {
+      alert(
+        "Tiss"
+      );
+    }
   };
 
   return (
