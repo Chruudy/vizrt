@@ -7,11 +7,6 @@ interface CarouselProps {
   images: string[];
 }
 
-
-
-
-
-
 const Carousel: React.FC<CarouselProps> = ({ images }) => {
   const router = useRouter();
   const middleIndex = Math.floor(images.length / 2);
@@ -63,15 +58,14 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
                 alt={`Carousel image ${index}`}
                 width={1000}
                 height={1000}
-                className={`rounded-xl absolute top-0 left-0 w-full h-full object-cover transition-all duration-500 ease-in-out ${
-                  isCurrent
+                className={`rounded-xl absolute top-0 left-0 w-full h-full object-cover transition-all duration-500 ease-in-out ${isCurrent
                     ? "opacity-100 z-30"
                     : isNextOrPrev
-                    ? "opacity-100 z-20"
-                    : isNotInSight
-                    ? "opacity-100 z-10"
-                    : "opacity-100 z-10"
-                }`}
+                      ? "opacity-100 z-20"
+                      : isNotInSight
+                        ? "opacity-100 z-10"
+                        : "opacity-100 z-10"
+                  }`}
                 style={{
                   transform: `rotateY(${rotation}deg) translateZ(280px) scale(3)`,
                   height: isCurrent ? "80%" : isNextOrPrev ? "70%" : "60%",

@@ -82,8 +82,7 @@ const LoginPage: React.FC = () => {
             fullWidth
             variant="contained"
             color="primary"
-            className="mt-9 mb-4"
-            style={{ backgroundColor: '#ff7f50', color: '#fff' }}
+            className="mt-9 mb-4 bg-gradient-to-r from-orange-500 to-orange-800"
           >
             Sign In
           </Button>

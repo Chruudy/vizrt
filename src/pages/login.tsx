@@ -6,7 +6,7 @@ export default function Login() {
   return (
     <div className="overflow-x-hidden">
       <Header />
-        <LoginPage />
+      <LoginPage />
       <Footer />
     </div>
   );

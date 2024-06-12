@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import StarIcon from "@mui/icons-material/Star";
 import backButton from "../images/back-button.png";
-import dickpick3 from "../images/viz_world_img.jpg"
 
 const VizWorldDemoInfo: React.FC = () => {
   const [isStarClicked, setStarClicked] = useState(false);
@@ -20,10 +19,10 @@ const VizWorldDemoInfo: React.FC = () => {
 
   const handleAddToCart = () => {
     const productToAdd = {
-      image: dickpick3,
+      image: VizWorldImage,
       name: "Viz World",
-      price: 999283,
-      id: "Viz World",
+      price: 2699,
+      id: "viz-world-1",
     };
 
     const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -36,10 +35,9 @@ const VizWorldDemoInfo: React.FC = () => {
         "cart",
         JSON.stringify([...existingCart, productToAdd])
       );
-      alert("Penis");
     } else {
       alert(
-        "Tiss"
+        "Already added 'Viz World' to cart"
       );
     }
   };
@@ -52,7 +50,7 @@ const VizWorldDemoInfo: React.FC = () => {
         </Link>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-8 items-stretch">
+      <div className="flex flex-row gap-8 items-stretch">
         <div onClick={toggleImagePreview} className="cursor-pointer flex-1">
           <div className="h-full">
             <Image
@@ -67,9 +65,8 @@ const VizWorldDemoInfo: React.FC = () => {
             <div className="flex justify-between items-center mb-4">
               <h1 className="text-2xl font-semibold">Viz World</h1>
               <StarIcon
-                className={`text-3xl cursor-pointer ${
-                  isStarClicked ? "text-yellow-500" : "text-gray-300"
-                }`}
+                className={`text-3xl cursor-pointer ${isStarClicked ? "text-yellow-500" : "text-gray-300"
+                  }`}
                 onClick={handleStarClick}
                 aria-label="Toggle favorite"
               />
@@ -99,26 +96,20 @@ const VizWorldDemoInfo: React.FC = () => {
                 Demo
               </button>
             </Link>
-            <Link href="/cart" passHref>
-              <button
-                onClick={handleAddToCart}
-                className="bg-gradient-to-r from-orange-500 to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out text-sm"
-              >
-                Add to cart
-              </button>
-            </Link>
+            <button
+              onClick={handleAddToCart}
+              className="bg-gradient-to-r from-orange-500 to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out text-sm">
+              Add to cart
+            </button>
           </div>
         </div>
       </div>
+
       {isPreviewOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center"
-          onClick={toggleImagePreview}
-        >
-          <div
-            className="cursor-pointer"
-            style={{ maxWidth: "60%", maxHeight: "100%" }}
-          >
+          onClick={toggleImagePreview}>
+          <div className="cursor-pointer" style={{ maxWidth: "60%", maxHeight: "100%" }}>
             <Image
               src={VizWorldImage}
               alt="Viz World"

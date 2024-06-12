@@ -117,10 +117,10 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
 
   return (
     <div className="w-full h-full mx-auto p-4 bg-brandBGLighter shadow-md rounded-md grid grid-cols-3 gap-4 text-white">
-      <div className="col-span-2 bg-grey085 rounded">
-        <h2>
+      <div className="col-span-2 bg-gray-800 rounded border border-black">
+        <h2 className="p-2">
           Preview
-          </h2>
+        </h2>
         {imagePreview && (
           <div className="mb-4">
             <Image
@@ -215,7 +215,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
           <div className="flex items-center justify-between">
             <button
               type="submit"
-              className="bg-blue01 hover:bg-blue03 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline bg-gradient-to-r from-orange-500 to-orange-800"
             >
               {productId ? "Update" : "Add"} Product
             </button>

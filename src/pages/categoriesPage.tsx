@@ -1,7 +1,6 @@
 import Header from "../components/header";
 import Footer from "../components/footer";
-import CarouselItemsCategories from "@/components/CarouselItemsCategories";
-import CategoryBoxes from "@/components/CategoryBoxes"; // Importing the CategoryBoxes component
+import CategoryBoxes from "@/components/CategoryBoxes";
 import Categories from "@/components/categories";
 import CarouselCategories from "@/components/CarouselCategories";
 
@@ -11,7 +10,7 @@ const CategoriesPage = () => {
       <Header />
       <Categories />
       <div className="text-center my-10">
-        <h2 className="text-5xl font-bold text-white">SUBCATEGORY</h2>
+        <h2 className="text-5xl font-bold text-white">SUBCATEGORIES</h2>
         <div className="mt-2 border-b-4 border-orange-500 w-1/4 mx-auto"></div>
       </div>
       <div className="mb-10">

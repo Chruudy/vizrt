@@ -179,8 +179,8 @@ const AllProducts: React.FC = () => {
             >
               <option value="Price">Price (Low to High)</option>
               <option value="ReversePrice">Price (High to Low)</option>
-              <option value="Alphabetical">Alphabetical</option>
-              <option value="ReverseAlphabetical">Reverse Alphabetical</option>
+              <option value="Alphabetical">Alphabetical (Ascending)</option>
+              <option value="ReverseAlphabetical">Alphabetical (Descending)</option>
             </select>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">

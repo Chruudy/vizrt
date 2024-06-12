@@ -19,18 +19,43 @@ const VizArenaDemo: React.FC = () => {
     setIsPreviewOpen(!isPreviewOpen);
   };
 
+  const handleAddToCart = () => {
+    const productToAdd = {
+      image: { VizArena },
+      name: "Viz Arena",
+      price: 1499,
+      id: "viz-arena-1",
+    };
+
+    const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const isAlreadyInCart = existingCart.some(
+      (item: { id: string }) => item.id === productToAdd.id
+    );
+
+    if (!isAlreadyInCart) {
+      localStorage.setItem(
+        "cart",
+        JSON.stringify([...existingCart, productToAdd])
+      );
+    } else {
+      alert(
+        "Already added 'Viz Arena' to cart"
+      );
+    }
+  };
+
   return (
     <div>
-      <div className="flex pt-4 md:pl-96 lg:pl-52">
+      <div className="flex pt-4 pl-52">
         <Link href="/demoInfoPage1">
           <Image src={backButton} alt="Back button" width={32} height={32}></Image>
         </Link>
         <p className="text-white text-lg pl-4 pt-0.5">Demo review</p>
       </div>
 
-      <div className="pl-4 lg:pl-52 pt-4 relative flex flex-col lg:flex-row md: pl-40">
-        <Image src={VizArenaInput} alt="Viz Arena Demo Picture" className="w-full md:w-3/5 lg:w-2/5 h-fill rounded-xl border border-gray-900" />
-        <div className="max-w-xl bg-gray-900 rounded-xl mx-4 md:mx-8 lg:mx-12 p-4 mt-4 md:mt-0 lg:mt-0">
+      <div className="pl-52 pt-4 relative flex flex-col lg:flex-row ">
+        <Image src={VizArenaInput} alt="Viz Arena Demo Picture" className="w-2/5 h-fill rounded-xl border border-black" />
+        <div className="max-w-xl bg-gray-900 rounded-xl mx-8 p-4 border border-black">
           <div className="flex flex-col space-y-4">
             <div className="flex items-center justify-between">
               <p className="text-white font-medium text-lg">Name:</p>
@@ -56,8 +81,6 @@ const VizArenaDemo: React.FC = () => {
                 <option value="Select Nation">Norway</option>
                 <option value="Select Nation">United Kingdom</option>
                 <option value="Select Nation">United States</option>
-
-
               </select>
             </div>
 
@@ -90,11 +113,11 @@ const VizArenaDemo: React.FC = () => {
                 </button>
               </div>
 
-              <Link href="/cart">
-                <button className="text-white font-medium text-base rounded-lg px-4 py-2 w-36 bg-gradient-to-r from-orange-500 to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200">
-                  Add to cart
-                </button>
-              </Link>
+              <button
+                onClick={handleAddToCart}
+                className="text-white font-medium text-base rounded-lg px-4 py-2 w-36 bg-gradient-to-r from-orange-500 to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200">
+                Add to cart
+              </button>
             </div>
           </div>
         </div>

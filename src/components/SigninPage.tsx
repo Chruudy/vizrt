@@ -99,8 +99,7 @@ const SignUpPage: React.FC = () => {
             fullWidth
             variant="contained"
             color="primary"
-            className="mb-4"
-            style={{ backgroundColor: '#ff7f50', color: '#fff' }}
+            className="mb-4 bg-gradient-to-r from-orange-500 to-orange-800"
           >
             Sign Up
           </Button>
