@@ -1,7 +1,7 @@
 import Header from "../components/header";
 import Footer from "../components/footer";
 import CarouselItemsCategories from "@/components/CarouselItemsCategories";
-import CategoryBoxes from "@/components/CategoryBoxes"; // Importing the CategoryBoxes component
+
 import Categories from "@/components/categories";
 import CarouselCategories from "@/components/CarouselCategories";
 
