@@ -7,9 +7,10 @@ interface CarouselProps {
   images: string[];
 }
 
-const Carousel: React.FC<CarouselProps> = ({ images }) => {
+const Carousel: React.FC<CarouselProps> = ({ images = [] }) => {
   const router = useRouter();
-  const middleIndex = Math.floor(images.length / 2);
+  // Ensure images is always an array and handle the case where it might be empty
+  const middleIndex = images.length > 0 ? Math.floor(images.length / 2) : 0;
   const [activeIndex, setActiveIndex] = useState(middleIndex);
 
   const handlePrev = () =>

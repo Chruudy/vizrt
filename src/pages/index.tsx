@@ -1,4 +1,3 @@
-// Example of corrected index.tsx file
 import React from 'react';
 import Header from '../components/header';
 import Categories from '../components/categories';

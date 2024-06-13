@@ -67,20 +67,27 @@ public class ProductController : ControllerBase
         await context.SaveChangesAsync();
         return NoContent();
     }
-    // New endpoint to fetch image URLs
-        [HttpGet("images")]
-        public async Task<ActionResult<List<string>>> GetImages()
-        {
-            var images = await context.Product
-                .Select(p => p.Image)
-                .Take(6)
-                .ToListAsync();
-
-            if (images == null || images.Count == 0)
+    // New endpoint to fetch products with Base64 encoded images
+    [HttpGet("base64")]
+    public async Task<ActionResult<List<Product>>> GetProductsWithBase64Images()
+    {
+        var productsWithBase64Images = await context.Product
+            .Select(p => new Product
             {
-                return NotFound("No images found.");
-            }
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Price = p.Price,
+                Category = p.Category,
+                Image = Convert.ToBase64String(System.IO.File.ReadAllBytes(p.Image))
+            })
+            .ToListAsync();
 
-            return Ok(images);
+        if (productsWithBase64Images == null || productsWithBase64Images.Count == 0)
+        {
+            return NotFound("No products found.");
         }
+
+        return Ok(productsWithBase64Images);
+    }
 }
