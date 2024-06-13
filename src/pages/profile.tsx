@@ -1,8 +1,8 @@
 import React from 'react';
 import Header from '../components/header';
 import Footer from '../components/footer';
-import ProfileInfo from '../components/ProfileInfo';
-import ProfileExperience from '../components/ProfileExperience';
+import ProfileInfo from '../components/profileInfo';
+import ProfileExperience from '../components/profileExperience';
 import Tabs from '../components/Tabs';
 
 const Profile: React.FC = () => {
@@ -18,7 +18,7 @@ const Profile: React.FC = () => {
               <div className="flex flex-wrap mt-2">
                 {['JavaScript', 'React', 'CSS', 'HTML', 'Node.js', 'Figma'].map((skill) => (
                   <span key={skill}
-                        className="bg-gray-700 text-white py-1 px-3 m-2 rounded-full cursor-pointer 
+                    className="bg-gray-700 text-white py-1 px-3 m-2 rounded-full cursor-pointer 
                                    hover:bg-gray-800 hover:text-gray-300 transition duration-300">
                     {skill}
                   </span>

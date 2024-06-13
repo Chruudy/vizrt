@@ -1,6 +1,6 @@
 import React from "react";
 import Header from '../components/header';
-import VizArena from "../components/VizArenaDemoInfo";
+import VizArena from "../components/VizArenaInfo";
 import Footer from '../components/footer';
 //test
 

@@ -1,15 +1,54 @@
-import React, { useState } from "react";
-import VizArenaBg from "../images/viz_arena_img.jpg";
+import React, { useState, useEffect } from "react";
+import VizArenaImage from "../images/viz_arena_img.jpg";
 import Image from "next/image";
 import Link from "next/link";
 import StarIcon from "@mui/icons-material/Star";
 import backButton from "../images/back-button.png";
 
+const FAVORITES_KEY = 'favoriteProducts';
+
+const getFavoritesFromLocalStorage = (): string[] => {
+  if (typeof window === 'undefined') return [];
+  const favorites = localStorage.getItem(FAVORITES_KEY);
+  return favorites ? JSON.parse(favorites) : [];
+};
+
+const saveFavoriteToLocalStorage = (productId: string) => {
+  const favorites = getFavoritesFromLocalStorage();
+  if (!favorites.includes(productId)) {
+    favorites.push(productId);
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+  }
+};
+
+const removeFavoriteFromLocalStorage = (productId: string) => {
+  let favorites = getFavoritesFromLocalStorage();
+  favorites = favorites.filter(id => id !== productId);
+  localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+};
+
 const VizArenaDemoInfo: React.FC = () => {
   const [isStarClicked, setIsStarClicked] = useState(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
+  const product = {
+    image: VizArenaImage,
+    name: "Viz Arena",
+    price: 1499,
+    id: "35",
+  };
+
+  useEffect(() => {
+    const favorites = getFavoritesFromLocalStorage();
+    setIsStarClicked(favorites.includes(product.id));
+  }, [product.id]);
+
   const handleStarClick = () => {
+    if (isStarClicked) {
+      removeFavoriteFromLocalStorage(product.id);
+    } else {
+      saveFavoriteToLocalStorage(product.id);
+    }
     setIsStarClicked(!isStarClicked);
   };
 
@@ -19,10 +58,10 @@ const VizArenaDemoInfo: React.FC = () => {
 
   const handleAddToCart = () => {
     const productToAdd = {
-      image: { VizArenaBg },
+      image: { VizArenaImage },
       name: "Viz Arena",
       price: 1499,
-      id: "viz-arena-1",
+      id: "35",
     };
 
     const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -50,10 +89,10 @@ const VizArenaDemoInfo: React.FC = () => {
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 grid-cols-2 gap-8 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         <div onClick={toggleImagePreview} className="cursor-pointer">
           <Image
-            src={VizArenaBg}
+            src={VizArenaImage}
             alt="Viz Arena Demo Picture"
             className="w-full h-auto rounded-xl transform scale-100 scale-105"
           />
@@ -93,7 +132,8 @@ const VizArenaDemoInfo: React.FC = () => {
             </Link>
             <button
               onClick={handleAddToCart}
-              className="bg-gradient-to-r from-orange-500 to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200 text-white font-bold py-2 px-3 rounded transition duration-200 ease-in-out text-xs md:text-sm">
+              className="bg-gradient-to-r from-orange-500 to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200 text-white font-bold py-2 px-3 rounded transition duration-200 ease-in-out text-xs md:text-sm"
+            >
               Add to cart
             </button>
           </div>
@@ -103,7 +143,7 @@ const VizArenaDemoInfo: React.FC = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center" onClick={toggleImagePreview}>
           <div className="cursor-pointer" style={{ maxWidth: "60%", maxHeight: "100%" }}>
             <Image
-              src={VizArenaBg}
+              src={VizArenaImage}
               alt="Viz Arena Demo Picture"
               layout="intrinsic"
               width={1200}

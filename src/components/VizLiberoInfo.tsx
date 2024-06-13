@@ -1,16 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import VizLiberoImage from "../images/viz_libero_img.jpg";
 import Image from "next/image";
 import Link from "next/link";
 import StarIcon from "@mui/icons-material/Star";
 import backButton from "../images/back-button.png";
 
+const FAVORITES_KEY = 'favoriteProducts';
+
+const getFavoritesFromLocalStorage = (): string[] => {
+  if (typeof window === 'undefined') return [];
+  const favorites = localStorage.getItem(FAVORITES_KEY);
+  return favorites ? JSON.parse(favorites) : [];
+};
+
+const saveFavoriteToLocalStorage = (productId: string) => {
+  const favorites = getFavoritesFromLocalStorage();
+  if (!favorites.includes(productId)) {
+    favorites.push(productId);
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+  }
+};
+
+const removeFavoriteFromLocalStorage = (productId: string) => {
+  let favorites = getFavoritesFromLocalStorage();
+  favorites = favorites.filter(id => id !== productId);
+  localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+};
+
 const VizLiberoDemoInfo: React.FC = () => {
-  const [isStarClicked, setStarClicked] = useState(false);
+  const [isStarClicked, setIsStarClicked] = useState(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
+  const product = {
+    image: VizLiberoImage,
+    name: "Viz Libero",
+    price: 1049,
+    id: "36",
+  };
+
+  useEffect(() => {
+    const favorites = getFavoritesFromLocalStorage();
+    setIsStarClicked(favorites.includes(product.id));
+  }, [product.id]);
+
   const handleStarClick = () => {
-    setStarClicked(!isStarClicked);
+    if (isStarClicked) {
+      removeFavoriteFromLocalStorage(product.id);
+    } else {
+      saveFavoriteToLocalStorage(product.id);
+    }
+    setIsStarClicked(!isStarClicked);
   };
 
   const toggleImagePreview = () => {
@@ -22,7 +61,7 @@ const VizLiberoDemoInfo: React.FC = () => {
       Image: VizLiberoImage,
       name: "Viz Libero",
       price: 1049,
-      id: "viz-libero-1",
+      id: "36",
     };
 
     const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
