@@ -14,6 +14,10 @@ const Profile: React.FC = () => {
           <div className="w-1/3">
             <ProfileInfo />
             <div className="mt-8">
+              <div className="text-left mb-8">
+                <p className="text-xl font-bold">Estimated Earnings</p>
+                <p className="text-3xl text-green-500">$12,345</p>
+              </div>
               <h3 className="text-xl font-bold text-white">Skills</h3>
               <div className="flex flex-wrap mt-2">
                 {['TypeScript', 'React', 'TailWind CSS', 'HTML', 'Node.js', 'Figma'].map((skill) => (
@@ -26,15 +30,11 @@ const Profile: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="w-2/3">
-            <div className="text-right">
-              <p className="text-xl font-bold">Estimated Earnings</p>
-              <p className="text-3xl text-green-500">$12,345</p>
-            </div>
+          <div className="w-2/3 flex justify-end">
             <ProfileExperience />
           </div>
         </div>
-        <div className="w-full">
+        <div className="w-full mt-8">
           <Tabs />
         </div>
       </main>
