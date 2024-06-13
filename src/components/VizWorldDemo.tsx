@@ -17,7 +17,7 @@ const VizWorldDemo: React.FC = () => {
             image: VizWorld,
             name: "Viz World",
             price: 2699,
-            id: "viz-world-1",
+            id: "38",
         };
 
         const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");

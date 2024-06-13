@@ -35,7 +35,7 @@ const VizLiberoDemoInfo: React.FC = () => {
     image: VizLiberoImage,
     name: "Viz Libero",
     price: 1049,
-    id: "36",
+    id: "37",
   };
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const VizLiberoDemoInfo: React.FC = () => {
       Image: VizLiberoImage,
       name: "Viz Libero",
       price: 1049,
-      id: "36",
+      id: "37",
     };
 
     const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");

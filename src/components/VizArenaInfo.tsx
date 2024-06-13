@@ -35,7 +35,7 @@ const VizArenaDemoInfo: React.FC = () => {
     image: VizArenaImage,
     name: "Viz Arena",
     price: 1499,
-    id: "35",
+    id: "36",
   };
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const VizArenaDemoInfo: React.FC = () => {
       image: { VizArenaImage },
       name: "Viz Arena",
       price: 1499,
-      id: "35",
+      id: "36",
     };
 
     const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");

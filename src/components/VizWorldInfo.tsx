@@ -35,7 +35,7 @@ const VizWorldDemoInfo: React.FC = () => {
     image: VizWorldImage,
     name: "Viz World",
     price: 1049,
-    id: "37",
+    id: "38",
   };
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const VizWorldDemoInfo: React.FC = () => {
       image: VizWorldImage,
       name: "Viz World",
       price: 2699,
-      id: "37",
+      id: "38",
     };
 
     const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
