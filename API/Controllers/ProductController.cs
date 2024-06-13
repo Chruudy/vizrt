@@ -67,4 +67,20 @@ public class ProductController : ControllerBase
         await context.SaveChangesAsync();
         return NoContent();
     }
+    // New endpoint to fetch image URLs
+        [HttpGet("images")]
+        public async Task<ActionResult<List<string>>> GetImages()
+        {
+            var images = await context.Product
+                .Select(p => p.Image)
+                .Take(6)
+                .ToListAsync();
+
+            if (images == null || images.Count == 0)
+            {
+                return NotFound("No images found.");
+            }
+
+            return Ok(images);
+        }
 }
