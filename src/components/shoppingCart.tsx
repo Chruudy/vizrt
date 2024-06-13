@@ -1,17 +1,17 @@
-"use client";
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 interface Product {
-  image: string; // Changed from any to string
+  image: string;
   src: string;
   alt: string;
   name: string;
-  price: string | number; // Allowing both string and number types for price
+  price: string | number;
 }
 
 const ShoppingCart = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [transactionComplete, setTransactionComplete] = useState(false);
 
   useEffect(() => {
     const cartItems: Product[] = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -22,6 +22,12 @@ const ShoppingCart = () => {
     const updatedProducts = products.filter((_, index) => index !== indexToRemove);
     setProducts(updatedProducts);
     localStorage.setItem('cart', JSON.stringify(updatedProducts));
+  };
+
+  const handlePayment = () => {
+    setProducts([]);
+    localStorage.setItem('cart', JSON.stringify([]));
+    setTransactionComplete(true);
   };
 
   const total = products.reduce((sum, product) => {
@@ -53,13 +59,21 @@ const ShoppingCart = () => {
             </div>
           ))}
         </div>
-        <div className="bg-gray-800 rounded-lg p-6 mb-6 flex justify-between items-center">
-          <p className="text-2xl font-bold">Total:</p>
-          <p className="text-2xl font-bold">${total.toFixed(2)}</p>
-        </div>
-        <div className="flex justify-end">
-          <button className="bg-orange-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-orange-600 transition duration-300">Pay</button>
-        </div>
+        {transactionComplete ? (
+          <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded shadow-lg z-50">
+            Transaction Complete
+          </div>
+        ) : (
+          <>
+            <div className="bg-gray-800 rounded-lg p-6 mb-6 flex justify-between items-center">
+              <p className="text-2xl font-bold">Total:</p>
+              <p className="text-2xl font-bold">${total.toFixed(2)}</p>
+            </div>
+            <div className="flex justify-end">
+              <button className="bg-orange-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-orange-600 transition duration-300" onClick={handlePayment}>Pay</button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
