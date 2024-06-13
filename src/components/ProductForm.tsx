@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Image from "next/image";
@@ -93,7 +93,11 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
       setPrice(0);
       setImage(null);
       setSuccessMessage("Product published successfully!");
-      setTimeout(() => setSuccessMessage(null), 3000); // Clear the message after 3 seconds
+      setTimeout(() => {
+        setSuccessMessage(null);
+        // Redirect to the main page after 3 seconds
+        router.push("/");
+      }, 3000);
     } catch (error) {
       console.error("Error uploading product:", error);
     }
