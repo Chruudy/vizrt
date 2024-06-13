@@ -1,23 +1,35 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
+
+// Import the images
+import unitedgraphic1 from '../images/unitedgraphic1.jpg';
+import graphic1 from '../images/graphic1.webp';
+import graphic2 from '../images/graphic2.webp';
+import graphic3 from '../images/graphic3.webp';
+import graphic4 from '../images/graphic4.webp';
+import graphic5 from '../images/graphic5.jpeg';
+import unitedgraphic2 from '../images/unitedgraphic2.jpg';
+import graphic6 from '../images/graphic6.webp';
+import graphic7 from '../images/graphic7.jpeg';
 
 const Tabs: React.FC = () => {
   const [activeTab, setActiveTab] = useState('Owned');
 
   const images = {
     Owned: [
-      '/images/owned1.jpg',
-      '/images/owned2.jpg',
-      '/images/owned3.jpg',
+      { src: unitedgraphic1, alt: 'Owned Image 1' },
+      { src: graphic1, alt: 'Owned Image 2' },
+      { src: graphic2, alt: 'Owned Image 3' },
     ],
     Wishlist: [
-      '/images/wishlist1.jpg',
-      '/images/wishlist2.jpg',
-      '/images/wishlist3.jpg',
+      { src: graphic3, alt: 'Wishlist Image 1' },
+      { src: graphic4, alt: 'Wishlist Image 2' },
+      { src: graphic5, alt: 'Wishlist Image 3' },
     ],
     Projects: [
-      '/images/projects1.jpg',
-      '/images/projects2.jpg',
-      '/images/projects3.jpg',
+      { src: unitedgraphic2, alt: 'Projects Image 1' },
+      { src: graphic6, alt: 'Projects Image 2' },
+      { src: graphic7, alt: 'Projects Image 3' },
     ],
   };
 
@@ -35,9 +47,15 @@ const Tabs: React.FC = () => {
           </button>
         ))}
       </div>
-      <div className="flex justify-center mt-8 space-x-4">
-        {images[activeTab].map((src, index) => (
-          <img key={index} src={src} alt={activeTab} className="w-32 h-32 object-cover rounded-lg shadow-md" />
+      <div className="flex justify-start mt-8 ml-4 space-x-4">
+        {images[activeTab].map((image, index) => (
+          <div key={index} className="relative w-48 h-48 rounded-lg overflow-hidden shadow-md">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              className="rounded-lg w-full h-full object-cover"
+            />
+          </div>
         ))}
       </div>
     </div>

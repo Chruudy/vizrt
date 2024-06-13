@@ -9,7 +9,8 @@ const AllProducts: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState("Show-all");
   const [sortBy, setSortBy] = useState("LastPublished");
   const [selectedType, setSelectedType] = useState("All");
-  const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({ min: 0, max: 1000 });
+  const [highestPrice, setHighestPrice] = useState<number>(0);
+  const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({ min: 0, max: 0 });
   const [showMessage, setShowMessage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -23,6 +24,11 @@ const AllProducts: React.FC = () => {
 
         setProducts(productsWithBase64Images);
         setLoading(false);
+
+        // Calculate and set the highest price
+        const maxPrice = Math.max(...productsWithBase64Images.map((product: any) => product.price));
+        setHighestPrice(maxPrice);
+        setPriceRange({ min: 0, max: maxPrice }); // Set initial price range
       } catch (err) {
         setError("Error fetching products");
         setLoading(false);
@@ -76,6 +82,9 @@ const AllProducts: React.FC = () => {
     } else {
       localStorage.setItem('cart', JSON.stringify([...existingCart, productToAdd]));
       setShowMessage("Added to cart");
+
+      // Trigger storage event to update cart count
+      window.dispatchEvent(new Event('storage'));
     }
 
     setTimeout(() => setShowMessage(null), 3000); // Hide the message after 3 seconds
@@ -87,7 +96,7 @@ const AllProducts: React.FC = () => {
   return (
     <div className="overflow-x-hidden">
       {showMessage && (
-        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-orange-600 text-white py-2 px-4 rounded shadow-lg z-50">
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded shadow-lg z-50">
           {showMessage}
         </div>
       )}
@@ -133,7 +142,7 @@ const AllProducts: React.FC = () => {
                 type="range"
                 id="priceRange"
                 min="0"
-                max="1000"
+                max={highestPrice}
                 value={priceRange.min}
                 onChange={(e) => handlePriceChange(parseInt(e.target.value), priceRange.max)}
                 className="w-full"
@@ -142,7 +151,7 @@ const AllProducts: React.FC = () => {
                 type="range"
                 id="priceRange"
                 min="0"
-                max="1000"
+                max={highestPrice}
                 value={priceRange.max}
                 onChange={(e) => handlePriceChange(priceRange.min, parseInt(e.target.value))}
                 className="w-full"

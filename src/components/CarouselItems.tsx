@@ -1,14 +1,42 @@
-"use client";
-import React from 'react';
-import Carousel from './Carousel';
-import img1 from '../images/img1.jpg';
-import img2 from '../images/img2.jpg';
-import img3 from '../images/img3.jpg';
-import img4 from '../images/img4.jpg';
-import img5 from '../images/img5.jpg';
-import img6 from '../images/img6.jpg';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Carousel from "./Carousel";
+import { Product } from "../components/ProductCard"; // Assuming the Product type is exported from ProductCard
 
-const images = [img1, img2, img3, img4, img5, img6].map((image) => image.src);
+const CarouselItems = () => {
+  const [images, setImages] = useState<string[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-const CarouselItems = () => <Carousel images={images} />;
+  useEffect(() => {
+  const fetchAllImages = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get("http://localhost:5065/api/Product");
+      // Shuffle array and select the first 10 products
+      const shuffledProducts = response.data
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 9);
+      const productsWithBase64Images = shuffledProducts.map((product: Product) => {
+        const base64Image = `data:image/jpeg;base64,${product.image}`;
+        return base64Image;
+      });
+
+      setImages(productsWithBase64Images);
+    } catch (err) {
+      console.error("Error fetching images:", err);
+      setError("Error fetching images");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchAllImages();
+}, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+  return <Carousel images={images} />;
+};
+
 export default CarouselItems;
