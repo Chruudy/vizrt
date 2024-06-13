@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import Person2Icon from "@mui/icons-material/Person2";
 import SearchIcon from "@mui/icons-material/Search";
@@ -11,8 +11,26 @@ import CreateIcon from "@mui/icons-material/Create";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  // Function to get cart items from localStorage
+  const getCartCount = () => {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    setCartCount(cart.length);
+  };
+
+  // Update cart count on component mount
+  useEffect(() => {
+    getCartCount();
+
+    // Add event listener to update cart count when cart is updated
+    window.addEventListener('storage', getCartCount);
+    return () => {
+      window.removeEventListener('storage', getCartCount);
+    };
+  }, []);
 
   return (
     <header className="flex justify-between items-center bg-[#212121] h-20">
@@ -44,10 +62,15 @@ const Header: React.FC = () => {
             </button>
           </Link>
         </li>
-        <li>
+        <li className="relative">
           <Link href="/cart">
-            <button className="transition-colors duration-400 ease-in-out hover:bg-orange-500 hover:text-black h-20 w-20">
+            <button className="transition-colors duration-400 ease-in-out hover:bg-orange-500 hover:text-black h-20 w-20 flex items-center justify-center">
               <ShoppingCartIcon />
+              {cartCount > 0 && (
+                <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
+                  {cartCount}
+                </span>
+              )}
             </button>
           </Link>
         </li>

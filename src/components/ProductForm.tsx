@@ -6,6 +6,7 @@ import Image from "next/image";
 interface Product {
   name: string;
   category: string;
+  subCategory: string;
   price: number;
   image?: string;
 }
@@ -17,7 +18,7 @@ interface ProductFormProps {
 const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
   const [name, setName] = useState<string>("");
   const [category, setCategory] = useState<string>("");
-  const [subCategory, setSubCategory] = useState<string>("")
+  const [subCategory, setSubCategory] = useState<string>("");
   const [price, setPrice] = useState<number>(0);
   const [product, setProduct] = useState<Product | null>(null);
   const [image, setImage] = useState<File | null>(null);
@@ -33,7 +34,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
           const productData: Product = response.data;
           setName(productData.name);
           setCategory(productData.category);
-          /*setSubCategory(productData.subCategory);   I want to have a sub category so we choose what type of graphic it is as well*/
+          setSubCategory(productData.subCategory);
           setPrice(productData.price);
           setProduct(productData);
           if (productData.image) {
@@ -50,6 +51,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("category", category);
+    formData.append("subCategory", subCategory);
     formData.append("price", price.toString());
 
     if (image) {
@@ -87,7 +89,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
       // Clear the inputs and display success message
       setName("");
       setCategory("");
-      /*setSubCategory("");*/
+      setSubCategory("");
       setPrice(0);
       setImage(null);
       setSuccessMessage("Product published successfully!");
@@ -118,9 +120,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
   return (
     <div className="w-full h-full mx-auto p-4 bg-brandBGLighter shadow-md rounded-md grid grid-cols-3 gap-4 text-white">
       <div className="col-span-2 bg-gray-800 rounded border border-black">
-        <h2 className="p-2">
-          Preview
-        </h2>
+        <h2 className="p-2">Preview</h2>
         {imagePreview && (
           <div className="mb-4">
             <Image
@@ -130,6 +130,12 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
               width={400}
               height={400}
               className="rounded-md"
+              style={{
+                maxHeight: "32rem",
+                maxWidth: "auto,",
+                objectFit: "contain",
+                position: "relative"
+              }}
             />
           </div>
         )}
@@ -155,7 +161,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gre075 text-sm font-bold mb-2">
+            <label className="block text-gray-500 text-sm font-bold mb-2">
               Category:
             </label>
             <select
@@ -173,7 +179,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
             </select>
           </div>
           <div className="mb-4">
-            <label className="block text-gre075 text-sm font-bold mb-2">
+            <label className="block text-gray-500 text-sm font-bold mb-2">
               Sub Category:
             </label>
             <select
@@ -182,7 +188,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
               required
             >
-              <option value="">Select a category</option>
+              <option value="">Select a sub-category</option>
               <option value="Lower Third">Lower Third</option>
               <option value="Scoreboard">Scoreboard</option>
               <option value="Bumper">Bumper</option>
@@ -190,7 +196,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
             </select>
           </div>
           <div className="mb-4">
-            <label className="block text-gre075 text-sm font-bold mb-2">
+            <label className="block text-gray-500 text-sm font-bold mb-2">
               Price:
             </label>
             <input
@@ -209,7 +215,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
               type="file"
               accept="image/*"
               onChange={onImageChange}
-              className="block w-full text-sm border text-white border-grey075 rounded-lg cursor-pointer bg-gre075focus:outline-none"
+              className="block w-full text-sm border text-white border-gray-500 rounded-lg cursor-pointer bg-gray-500 focus:outline-none"
             />
           </div>
           <div className="flex items-center justify-between">
@@ -223,7 +229,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
               <button
                 type="button"
                 onClick={onDelete}
-                className="bg-red01 hover:bg-red03 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               >
                 Delete Product
               </button>

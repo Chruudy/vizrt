@@ -16,7 +16,7 @@ const Profile: React.FC = () => {
             <div className="mt-8">
               <h3 className="text-xl font-bold text-white">Skills</h3>
               <div className="flex flex-wrap mt-2">
-                {['JavaScript', 'React', 'CSS', 'HTML', 'Node.js', 'Figma'].map((skill) => (
+                {['TypeScript', 'React', 'TailWind CSS', 'HTML', 'Node.js', 'Figma'].map((skill) => (
                   <span key={skill}
                     className="bg-gray-700 text-white py-1 px-3 m-2 rounded-full cursor-pointer 
                                    hover:bg-gray-800 hover:text-gray-300 transition duration-300">

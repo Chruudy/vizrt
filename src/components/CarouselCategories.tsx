@@ -34,12 +34,11 @@ const CarouselCategories = () => {
     });
 
   return (
-    <div className="relative flex flex-col items-center justify-center mt-14"> {/* Adjusted margin-top */}
-      <div className="relative flex items-center justify-center perspective mt-14"> {/* Adjusted margin-top */}
+    <div className="relative flex flex-col items-center justify-center mt-14"> 
+      <div className="relative flex items-center justify-center perspective mt-14"> 
         <button
           onClick={handlePrev}
-          className={`absolute left-1/2 top-1/2 transform -translate-y-1/2 -translate-x-96 p-4 bg-orange-500 text-white rounded-full z-40 flex items-center justify-center ${activeIndex === 0 ? 'opacity-50' : ''}`}
-          style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+          className={`absolute left-1/2 top-1/2 transform -translate-y-1/2 -translate-x-96 p-4 bg-orange-500 text-white rounded-full z-40 flex items-center justify-center w-10 h-10 ${activeIndex === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
           disabled={activeIndex === 0}
         >
           {"<"}
@@ -81,7 +80,7 @@ const CarouselCategories = () => {
                     objectFit="cover"
                     className="rounded-xl"
                   />
-                  <div className="absolute bottom-0 left-0 right-0 text-white text-center text-xs font-bold bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl">
+                  <div className="absolute bottom-0 left-0 right-0 text-white text-center font-bold bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" style={{ fontSize: '0.625rem' }}>
                     {image.text}
                   </div>
                 </div>
@@ -91,8 +90,7 @@ const CarouselCategories = () => {
         </div>
         <button
           onClick={handleNext}
-          className={`absolute right-1/2 top-1/2 transform -translate-y-1/2 translate-x-96 p-4 bg-orange-500 text-white rounded-full z-40 flex items-center justify-center ${activeIndex === images.length - 1 ? 'opacity-50' : ''}`}
-          style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+          className={`absolute right-1/2 top-1/2 transform -translate-y-1/2 translate-x-96 p-4 bg-orange-500 text-white rounded-full z-40 flex items-center justify-center w-10 h-10 ${activeIndex === images.length - 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
           disabled={activeIndex === images.length - 1}
         >
           {">"}

@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import profilePic from '../images/profilepic.jpeg'; // Ensure this is the correct path
 
@@ -36,9 +37,11 @@ const ProfileInfo: React.FC = () => {
           </button>
         </div>
         <div className="mt-2"> {/* Container for the Verify button */}
-          <button className="text-sm px-4 py-2 text-white bg-green-500 rounded-full hover:bg-green-600 transition duration-200">
-            Verify
-          </button>
+          <Link href="/Verify" passHref>
+            <button className="text-sm px-4 py-2 text-white bg-green-500 rounded-full hover:bg-green-600 transition duration-200">
+              Verify
+            </button>
+          </Link>
         </div>
       </div>
     </div>
