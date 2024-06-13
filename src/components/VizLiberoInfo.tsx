@@ -121,7 +121,7 @@ const VizLiberoDemoInfo: React.FC = () => {
             time.
           </p>
           <h2 className="text-xl font-semibold text-center my-4">
-            Price: 1049kr
+            Price: $1049
           </h2>
           <div className="flex justify-center gap-4">
             <Link href="/demoTestPage2" passHref>

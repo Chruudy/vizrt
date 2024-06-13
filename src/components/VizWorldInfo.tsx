@@ -127,7 +127,7 @@ const VizWorldDemoInfo: React.FC = () => {
             </p>
           </div>
           <h2 className="text-xl font-semibold text-center my-4">
-            Price: 2699kr
+            Price: $2699
           </h2>
           <div className="flex justify-center gap-4">
             <Link href="/demoTestPage3" passHref>
