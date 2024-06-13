@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
+import StarIcon from '@mui/icons-material/Star';
 
 // Define a type for the products to ensure type safety
 type Product = {
@@ -9,6 +10,28 @@ type Product = {
   category: string;
   price: number;
   image: string; // Assume the image is a base64-encoded string
+};
+
+const FAVORITES_KEY = 'favoriteProducts';
+
+const getFavoritesFromLocalStorage = (): number[] => {
+  if (typeof window === 'undefined') return [];
+  const favorites = localStorage.getItem(FAVORITES_KEY);
+  return favorites ? JSON.parse(favorites) : [];
+};
+
+const saveFavoriteToLocalStorage = (productId: number) => {
+  const favorites = getFavoritesFromLocalStorage();
+  if (!favorites.includes(productId)) {
+    favorites.push(productId);
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+  }
+};
+
+const removeFavoriteFromLocalStorage = (productId: number) => {
+  let favorites = getFavoritesFromLocalStorage();
+  favorites = favorites.filter(id => id !== productId);
+  localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
 };
 
 const QuickReviewModal = ({ item, onClose }: { item: Product, onClose: () => void }) => {
@@ -54,7 +77,8 @@ const CategoryBoxes = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [quickReviewItem, setQuickReviewItem] = useState<Product | null>(null);
-  const [showMessage, setShowMessage] = useState<{ [key: number]: boolean }>({});
+  const [showMessage, setShowMessage] = useState<string | null>(null);
+  const [favorites, setFavorites] = useState<number[]>(getFavoritesFromLocalStorage());
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -86,46 +110,66 @@ const CategoryBoxes = () => {
 
   const addToCart = (item: Product) => {
     const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
-    const newItem = { id: item.id, name: item.name, category: item.category, price: item.price, image: item.image };
-    localStorage.setItem('cart', JSON.stringify([...existingCart, newItem]));
-    console.log('Added to cart');
-    setShowMessage({ ...showMessage, [item.id]: true });
-    setTimeout(() => {
-      setShowMessage({ ...showMessage, [item.id]: false });
-    }, 2000);
+    const productToAdd = {
+      ...item,
+      image: item.image.replace('data:image/jpeg;base64,', ''),
+    };
+    const isAlreadyInCart = existingCart.some((product: Product) => product.id === item.id);
+
+    if (isAlreadyInCart) {
+      setShowMessage("Item is already in cart");
+    } else {
+      localStorage.setItem('cart', JSON.stringify([...existingCart, productToAdd]));
+      setShowMessage("Added to cart");
+
+      // Trigger storage event to update cart count
+      window.dispatchEvent(new Event('storage'));
+    }
+
+    setTimeout(() => setShowMessage(null), 3000); // Hide the message after 3 seconds
+  };
+
+  const handleFavorite = (productId: number) => {
+    if (favorites.includes(productId)) {
+      removeFavoriteFromLocalStorage(productId);
+      setFavorites(favorites.filter(id => id !== productId));
+    } else {
+      saveFavoriteToLocalStorage(productId);
+      setFavorites([...favorites, productId]);
+    }
   };
 
   const renderProducts = (products: Product[]) => (
     <div className="flex flex-wrap -mx-2">
       {products.map((product) => (
         <div key={product.id} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 px-2 mb-4">
-          <div className="w-full rounded-lg overflow-hidden shadow-lg p-4 bg-[#1D3641] text-white">
-            <div className="relative" style={{ width: '256px', height: '144px' }}> {/* Adjusted width and height for 16:9 aspect ratio */}
+          <div className="w-full rounded-lg overflow-hidden shadow-lg p-4 bg-[#1D3641] text-white h-80 flex flex-col"> {/* Ensure full height */}
+            <div className="relative mb-2 h-48">
               <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
-              {showMessage[product.id] && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-green-500 text-lg font-bold">
-                  Added to cart!
-                </div>
-              )}
             </div>
-            <div className="p-2">
-              <p className="text-lg font-semibold">{product.name}</p>
-              <p className="text-sm text-gray-400 whitespace-nowrap">Category: {product.category}</p> {/* Updated text color and nowrap */}
-              <p className="text-md text-gray-400 whitespace-nowrap">Price: ${product.price}</p> {/* Updated text color and nowrap */}
-              <div className="flex justify-between space-x-2 mt-2">
-                <button
-                  className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2"
-                  onClick={() => handleQuickReview(product)}
-                >
-                  Demo
-                </button>
-                <button
-                  className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2"
-                  onClick={() => addToCart(product)}
-                >
-                  Add to Cart
+            <div className="flex-1">
+              <div className="flex justify-between items-center mb-2">
+                <p className="text-lg font-semibold">{product.name}</p>
+                <button onClick={() => handleFavorite(product.id)}>
+                  <StarIcon className={favorites.includes(product.id) ? "text-yellow-500" : "text-gray-400"} />
                 </button>
               </div>
+              <p className="text-sm text-gray-400 whitespace-nowrap">Category: {product.category}</p>
+              <p className="text-md text-gray-400 whitespace-nowrap">Price: ${product.price}</p>
+            </div>
+            <div className="flex justify-between space-x-2 mt-2">
+              <button
+                className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200"
+                onClick={() => addToCart(product)}
+              >
+                Add to Cart
+              </button>
+              <button
+                className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200"
+                onClick={() => handleQuickReview(product)}
+              >
+                Quick Review
+              </button>
             </div>
           </div>
         </div>
@@ -138,6 +182,11 @@ const CategoryBoxes = () => {
 
   return (
     <div className="p-5 mt-16 bg-[#1D3641]">
+      {showMessage && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded shadow-lg z-50">
+          {showMessage}
+        </div>
+      )}
       <div className="text-white text-2xl mb-4">Latest Contributions</div>
       {latestContributions.length === 0 ? (
         <div className="text-center text-white">

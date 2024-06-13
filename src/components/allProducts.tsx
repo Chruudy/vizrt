@@ -76,6 +76,9 @@ const AllProducts: React.FC = () => {
     } else {
       localStorage.setItem('cart', JSON.stringify([...existingCart, productToAdd]));
       setShowMessage("Added to cart");
+
+      // Trigger storage event to update cart count
+      window.dispatchEvent(new Event('storage'));
     }
 
     setTimeout(() => setShowMessage(null), 3000); // Hide the message after 3 seconds
@@ -87,7 +90,7 @@ const AllProducts: React.FC = () => {
   return (
     <div className="overflow-x-hidden">
       {showMessage && (
-        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-orange-600 text-white py-2 px-4 rounded shadow-lg z-50">
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded shadow-lg z-50">
           {showMessage}
         </div>
       )}
