@@ -35,7 +35,7 @@ const VizLiberoDemoInfo: React.FC = () => {
     image: VizLiberoImage,
     name: "Viz Libero",
     price: 1049,
-    id: "36",
+    id: "37",
   };
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const VizLiberoDemoInfo: React.FC = () => {
       Image: VizLiberoImage,
       name: "Viz Libero",
       price: 1049,
-      id: "36",
+      id: "37",
     };
 
     const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -121,7 +121,7 @@ const VizLiberoDemoInfo: React.FC = () => {
             time.
           </p>
           <h2 className="text-xl font-semibold text-center my-4">
-            Price: 1049kr
+            Price: $1049
           </h2>
           <div className="flex justify-center gap-4">
             <Link href="/demoTestPage2" passHref>

@@ -12,6 +12,7 @@ interface Product {
 const ShoppingCart = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [transactionComplete, setTransactionComplete] = useState(false);
+  const [transactionAmount, setTransactionAmount] = useState(0);
 
   useEffect(() => {
     const cartItems: Product[] = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -25,6 +26,12 @@ const ShoppingCart = () => {
   };
 
   const handlePayment = () => {
+    const totalAmount = products.reduce((sum, product) => {
+      const price = typeof product.price === 'string' ? parseFloat(product.price.replace('$', '')) : product.price;
+      return sum + (isNaN(price) ? 0 : price);
+    }, 0);
+
+    setTransactionAmount(totalAmount);
     setProducts([]);
     localStorage.setItem('cart', JSON.stringify([]));
     setTransactionComplete(true);
@@ -61,7 +68,7 @@ const ShoppingCart = () => {
         </div>
         {transactionComplete ? (
           <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded shadow-lg z-50">
-            Transaction Complete
+            Transaction Complete: You spent ${transactionAmount.toFixed(2)}
           </div>
         ) : (
           <>

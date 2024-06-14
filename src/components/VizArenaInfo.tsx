@@ -35,7 +35,7 @@ const VizArenaDemoInfo: React.FC = () => {
     image: VizArenaImage,
     name: "Viz Arena",
     price: 1499,
-    id: "35",
+    id: "36",
   };
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const VizArenaDemoInfo: React.FC = () => {
       image: { VizArenaImage },
       name: "Viz Arena",
       price: 1499,
-      id: "35",
+      id: "36",
     };
 
     const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -122,7 +122,7 @@ const VizArenaDemoInfo: React.FC = () => {
             informative for fans.
           </p>
           <h2 className="text-xl font-semibold text-center my-4">
-            Price: 1499kr
+            Price: $1499
           </h2>
           <div className="flex justify-center gap-4">
             <Link href="/demoTestPage1" passHref>

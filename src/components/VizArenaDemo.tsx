@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import VizArenaInput from "../images/viz_arena_input.jpg";
-import VizArena from "../images/viz_arena_img.jpg";
+import VizArenaImage from "../images/viz_arena_img.jpg";
 import Image from "next/image";
 import Link from "next/link";
 import backButton from "../images/back-button.png"
@@ -21,10 +21,10 @@ const VizArenaDemo: React.FC = () => {
 
   const handleAddToCart = () => {
     const productToAdd = {
-      image: { VizArena },
+      image: { VizArenaImage },
       name: "Viz Arena",
       price: 1499,
-      id: "viz-arena-1",
+      id: "36",
     };
 
     const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -127,7 +127,7 @@ const VizArenaDemo: React.FC = () => {
       {isPreviewOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center" onClick={toggleImagePreview}>
           <div className="cursor-pointer" style={{ maxWidth: '60%', maxHeight: '100%' }}>
-            <Image src={VizArena} alt="Viz Arena Demo Picture" layout="intrinsic" width={1200} height={675} objectFit="contain" />
+            <Image src={VizArenaImage} alt="Viz Arena Demo Picture" layout="intrinsic" width={1200} height={675} objectFit="contain" />
           </div>
         </div>
       )}
