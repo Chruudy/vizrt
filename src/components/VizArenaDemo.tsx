@@ -55,7 +55,7 @@ const VizArenaDemo: React.FC = () => {
 
       <div className="pl-52 pt-4 relative flex flex-col lg:flex-row ">
         <Image src={VizArenaInput} alt="Viz Arena Demo Picture" className="w-2/5 h-fill rounded-xl border border-black" />
-        <div className="max-w-xl bg-gray-900 rounded-xl mx-8 p-4 border border-black">
+        <div className="max-w-xl bg-grey090 rounded-xl mx-8 p-4 border border-black">
           <div className="flex flex-col space-y-4">
             <div className="flex items-center justify-between">
               <p className="text-white font-medium text-lg">Name:</p>
@@ -108,14 +108,14 @@ const VizArenaDemo: React.FC = () => {
 
             <div className="lg: flex justify-evenly">
               <div onClick={toggleImagePreview} className="cursor-pointer">
-                <button className="text-white font-medium text-base rounded-lg px-4 py-2 w-36 bg-gradient-to-r from-orange-500 to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200">
+                <button className="text-white font-medium text-base rounded-lg px-4 py-2 w-36 bg-gradient-to-r from-brandOrange to-brandOrangeDarker shadow-lg transform hover:scale-105 transition-transform duration-200">
                   Test
                 </button>
               </div>
 
               <button
                 onClick={handleAddToCart}
-                className="text-white font-medium text-base rounded-lg px-4 py-2 w-36 bg-gradient-to-r from-orange-500 to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200">
+                className="text-white font-medium text-base rounded-lg px-4 py-2 w-36 bg-gradient-to-r from-brandOrange to-brandOrangeDarker shadow-lg transform hover:scale-105 transition-transform duration-200">
                 Add to cart
               </button>
             </div>

@@ -6,11 +6,11 @@ const ProfileFollow: React.FC = () => {
     <div className="flex justify-center mt-4">
       <div className="text-center mx-4">
         <p className="font-bold">200</p>
-        <p className="text-gray-500">followers</p>
+        <p className="text-grey065">followers</p>
       </div>
       <div className="text-center mx-4">
         <p className="font-bold">100</p>
-        <p className="text-gray-500">following</p>
+        <p className="text-grey065">following</p>
       </div>
     </div>
   );

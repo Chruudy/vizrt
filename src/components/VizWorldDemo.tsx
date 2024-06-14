@@ -48,7 +48,7 @@ const VizWorldDemo: React.FC = () => {
 
             <div className="pt-4 relative flex flex-col lg:flex-row pl-52">
                 <Image src={VizWorldInput} alt="World Demo Picture" className="w-2/5 h-fill rounded-xl border border-black" />
-                <div className="max-w-xl bg-gray-900 rounded-xl mx-8 p-4 pr-20 border border-black">
+                <div className="max-w-xl bg-grey090 rounded-xl mx-8 p-4 pr-20 border border-black">
                     <div className="flex flex-col space-y-6">
                         <div className="flex items-center justify-between">
                             <p className="text-white font-medium text-lg">Country:</p>
@@ -73,21 +73,21 @@ const VizWorldDemo: React.FC = () => {
 
 
                         <div className="text-center">
-                            <button className="text-white font-medium text-base rounded-lg px-4 py-2 w-3/5 bg-gradient-to-r from-orange-500 to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200">
+                            <button className="text-white font-medium text-base rounded-lg px-4 py-2 w-3/5 bg-gradient-to-r from-brandOrange to-brandOrangeDarker shadow-lg transform hover:scale-105 transition-transform duration-200">
                                 Update state vote
                             </button>
                         </div>
 
                         <div className="flex space-between space-x-8">
                             <div onClick={toggleImagePreview} className="cursor-pointer">
-                                <button className="text-white font-medium text-base rounded-lg px-4 py-2 w-36 bg-gradient-to-r from-orange-500 to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200">
+                                <button className="text-white font-medium text-base rounded-lg px-4 py-2 w-36 bg-gradient-to-r from-brandOrange to-brandOrangeDarker shadow-lg transform hover:scale-105 transition-transform duration-200">
                                     Test
                                 </button>
                             </div>
 
                             <button
                                 onClick={handleAddToCart}
-                                className="text-white font-medium text-base rounded-lg px-4 py-2 w-36 bg-gradient-to-r from-orange-500 to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200">
+                                className="text-white font-medium text-base rounded-lg px-4 py-2 w-36 bg-gradient-to-r from-brandOrange to-brandOrangeDarker shadow-lg transform hover:scale-105 transition-transform duration-200">
                                 Add to cart
                             </button>
                         </div>

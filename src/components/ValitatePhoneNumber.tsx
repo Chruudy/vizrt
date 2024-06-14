@@ -16,7 +16,7 @@ const ValidatePhoneNumber: React.FC = () => {
             <input
               id="phoneNumber"
               type="text"
-              className="w-full px-4 py-2 bg-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 bg-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-blue01"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
             />
@@ -24,7 +24,7 @@ const ValidatePhoneNumber: React.FC = () => {
           <Link href="/profile" passHref>
             <button
               type="button"
-              className="w-full py-2 bg-orange-500 text-white rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="w-full py-2 bg-brandOrange text-white rounded hover:bg-brandOrangeDarker focus:outline-none focus:ring-2 focus:ring-brandOrange"
             >
               Validate
             </button>

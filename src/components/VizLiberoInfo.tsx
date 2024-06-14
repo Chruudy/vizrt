@@ -82,7 +82,7 @@ const VizLiberoDemoInfo: React.FC = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto my-10 p-6 bg-gray-900 rounded-xl">
+    <div className="max-w-6xl mx-auto my-10 p-6 bg-grey090 rounded-xl">
       <div className="flex justify-start mb-4">
         <Link href="/" passHref>
           <Image src={backButton} alt="Back button" width={32} height={32} />
@@ -97,11 +97,11 @@ const VizLiberoDemoInfo: React.FC = () => {
             className="w-full h-auto rounded-xl transform scale-105"
           />
         </div>
-        <div className="bg-gray-800 rounded-xl p-4 text-white">
+        <div className="bg-grey0 rounded-xl p-4 text-white">
           <div className="flex justify-between items-center mb-4">
             <h1 className="text-2xl font-semibold">Viz Libero AR</h1>
             <StarIcon
-              className={`text-3xl cursor-pointer ${isStarClicked ? "text-yellow-500" : "text-gray-300"
+              className={`text-3xl cursor-pointer ${isStarClicked ? "text-yellow-500" : "text-grey020"
                 }`}
               onClick={handleStarClick}
               aria-label="Toggle favorite"
@@ -125,13 +125,13 @@ const VizLiberoDemoInfo: React.FC = () => {
           </h2>
           <div className="flex justify-center gap-4">
             <Link href="/demoTestPage2" passHref>
-              <button className="bg-gradient-to-r from-orange-500 to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out text-sm">
+              <button className="bg-gradient-to-r from-brandOrange to-brandOrangeDarker shadow-lg transform hover:scale-105 transition-transform duration-200 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out text-sm">
                 Demo
               </button>
             </Link>
             <button
               onClick={handleAddToCart}
-              className="bg-gradient-to-r from-orange-500 to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out text-sm">
+              className="bg-gradient-to-r from-brandOrange to-brandOrangeDarker shadow-lg transform hover:scale-105 transition-transform duration-200 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out text-sm">
               Add to cart
             </button>
           </div>

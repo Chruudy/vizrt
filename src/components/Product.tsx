@@ -62,13 +62,13 @@ const Product: React.FC<ProductProps> = ({
           )}
         </button>
       </div>
-      <p className="text-sm text-gray-200 mb-2">{description}</p>
+      <p className="text-sm text-grey010 mb-2">{description}</p>
       <p className="text-sm font-semibold">${price}</p>
-      <button className="mt-4 text-base font-medium text-white w-full h-10 flex items-center justify-center rounded-md bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200">
+      <button className="mt-4 text-base font-medium text-white w-full h-10 flex items-center justify-center rounded-md bg-gradient-to-r from-brandOrange to-brandOrangeDarker shadow-lg transform hover:scale-105 transition-transform duration-200">
         View Product
       </button>
       <Link href="/popular">
-            <button className="transition-colors duration-400 ease-in-out hover:bg-orange-500 hover:text-black h-20 w-20">
+            <button className="transition-colors duration-400 ease-in-out hover:bg-brandOrange hover:text-black h-20 w-20">
               <StarIcon />
             </button>
           </Link>

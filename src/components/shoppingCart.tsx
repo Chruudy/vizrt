@@ -39,9 +39,9 @@ const ShoppingCart = () => {
     <div className="min-h-screen text-white p-6">
       <div className="container mx-auto">
         <h1 className="text-3xl font-bold mb-6">Shopping Cart</h1>
-        <div className="bg-gray-800 rounded-lg p-6 mb-6">
+        <div className="bg-grey090 rounded-lg p-6 mb-6">
           {products.map((product, index) => (
-            <div key={index} className="flex items-center mb-4 border-b border-gray-700 pb-4">
+            <div key={index} className="flex items-center mb-4 border-b border-grey085 pb-4">
               <div className="w-32 h-20 relative">
                 <Image src={`data:image/jpeg;base64,${product.image}`} alt={product.alt} layout="fill" objectFit="cover" className="rounded-lg" />
               </div>
@@ -50,7 +50,7 @@ const ShoppingCart = () => {
               </div>
               <div className="ml-4 text-right">
                 <p className="text-xl font-bold">{typeof product.price === 'string' ? product.price : `$${product.price}`}</p>
-                <button className="text-red-500 hover:text-red-700" onClick={() => removeFromCart(index)}>
+                <button className="text-red01 hover:text-red03" onClick={() => removeFromCart(index)}>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                   </svg>
@@ -70,7 +70,7 @@ const ShoppingCart = () => {
               <p className="text-2xl font-bold">${total.toFixed(2)}</p>
             </div>
             <div className="flex justify-end">
-              <button className="bg-orange-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-orange-600 transition duration-300" onClick={handlePayment}>Pay</button>
+              <button className="bg-brandOrange text-white px-6 py-3 rounded-lg font-bold hover:bg-brandOrangeDarker transition duration-300" onClick={handlePayment}>Pay</button>
             </div>
           </>
         )}

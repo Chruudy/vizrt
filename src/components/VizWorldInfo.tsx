@@ -99,12 +99,12 @@ const VizWorldDemoInfo: React.FC = () => {
             />
           </div>
         </div>
-        <div className="bg-gray-800 rounded-xl p-4 text-white flex-1 flex flex-col justify-between">
+        <div className="bg-grey085 rounded-xl p-4 text-white flex-1 flex flex-col justify-between">
           <div>
             <div className="flex justify-between items-center mb-4">
               <h1 className="text-2xl font-semibold">Viz World</h1>
               <StarIcon
-                className={`text-3xl cursor-pointer ${isStarClicked ? "text-yellow-500" : "text-gray-300"
+                className={`text-3xl cursor-pointer ${isStarClicked ? "text-yellow-500" : "text-grey020"
                   }`}
                 onClick={handleStarClick}
                 aria-label="Toggle favorite"
@@ -131,13 +131,13 @@ const VizWorldDemoInfo: React.FC = () => {
           </h2>
           <div className="flex justify-center gap-4">
             <Link href="/demoTestPage3" passHref>
-              <button className="bg-gradient-to-r from-orange-500 to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out text-sm">
+              <button className="bg-gradient-to-r from-brandOrange to-brandOrangeDarker shadow-lg transform hover:scale-105 transition-transform duration-200 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out text-sm">
                 Demo
               </button>
             </Link>
             <button
               onClick={handleAddToCart}
-              className="bg-gradient-to-r from-orange-500 to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out text-sm">
+              className="bg-gradient-to-r from-brandOrange to-brandOrangeDarker shadow-lg transform hover:scale-105 transition-transform duration-200 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out text-sm">
               Add to cart
             </button>
           </div>
