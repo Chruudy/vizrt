@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 interface Product {
   image: string;
@@ -55,12 +56,10 @@ const ShoppingCart = () => {
               <div className="ml-4 flex-1">
                 <h2 className="text-xl font-bold">{product.name}</h2>
               </div>
-              <div className="ml-4 text-right">
+              <div className="flex ml-4 text-right">
                 <p className="text-xl font-bold">{typeof product.price === 'string' ? product.price : `$${product.price}`}</p>
-                <button className="text-red-500 hover:text-red-700" onClick={() => removeFromCart(index)}>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
+                <button className="text-white hover:text-red-600" onClick={() => removeFromCart(index)}>
+                  <DeleteIcon className="h-6 w-6" />
                 </button>
               </div>
             </div>
