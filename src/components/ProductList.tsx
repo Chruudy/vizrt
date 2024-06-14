@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
-import StarIcon from "@mui/icons-material/Star"; // Import the star icon
+import StarIcon from "@mui/icons-material/Star";
 
 export interface Product {
   id: string;
@@ -11,10 +11,10 @@ export interface Product {
   image: string;
 }
 
-const FAVORITES_KEY = 'favoriteProducts';
+const FAVORITES_KEY = "favoriteProducts";
 
 const getFavoritesFromLocalStorage = (): string[] => {
-  if (typeof window === 'undefined') return [];
+  if (typeof window === "undefined") return [];
   const favorites = localStorage.getItem(FAVORITES_KEY);
   return favorites ? JSON.parse(favorites) : [];
 };
@@ -29,13 +29,15 @@ const saveFavoriteToLocalStorage = (productId: string) => {
 
 const removeFavoriteFromLocalStorage = (productId: string) => {
   let favorites = getFavoritesFromLocalStorage();
-  favorites = favorites.filter(id => id !== productId);
+  favorites = favorites.filter((id) => id !== productId);
   localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
 };
 
 const ProductList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [favorites, setFavorites] = useState<string[]>(getFavoritesFromLocalStorage());
+  const [favorites, setFavorites] = useState<string[]>(
+    getFavoritesFromLocalStorage()
+  );
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -57,7 +59,7 @@ const ProductList: React.FC = () => {
   const handleFavorite = (productId: string) => {
     if (favorites.includes(productId)) {
       removeFavoriteFromLocalStorage(productId);
-      setFavorites(favorites.filter(id => id !== productId));
+      setFavorites(favorites.filter((id) => id !== productId));
     } else {
       saveFavoriteToLocalStorage(productId);
       setFavorites([...favorites, productId]);
@@ -72,7 +74,10 @@ const ProductList: React.FC = () => {
       <h2 className="text-2xl font-bold mb-5">Product List</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (
-          <div key={product.id} className="bg-white border rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out">
+          <div
+            key={product.id}
+            className="bg-white border rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out"
+          >
             <div className="mb-4">
               <Image
                 src={`data:image/jpeg;base64,${product.image}`}

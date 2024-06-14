@@ -10,25 +10,32 @@ const AllProducts: React.FC = () => {
   const [sortBy, setSortBy] = useState("LastPublished");
   const [selectedType, setSelectedType] = useState("All");
   const [highestPrice, setHighestPrice] = useState<number>(0);
-  const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({ min: 0, max: 0 });
+  const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({
+    min: 0,
+    max: 0,
+  });
   const [showMessage, setShowMessage] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get("http://localhost:5065/api/Product");
-        const productsWithBase64Images = response.data.map((product: Product) => {
-          const base64Image = `data:image/jpeg;base64,${product.image}`;
-          return { ...product, image: base64Image };
-        });
+        const productsWithBase64Images = response.data.map(
+          (product: Product) => {
+            const base64Image = `data:image/jpeg;base64,${product.image}`;
+            return { ...product, image: base64Image };
+          }
+        );
 
         setProducts(productsWithBase64Images);
         setLoading(false);
 
         // Calculate and set the highest price
-        const maxPrice = Math.max(...productsWithBase64Images.map((product: any) => product.price));
+        const maxPrice = Math.max(
+          ...productsWithBase64Images.map((product: any) => product.price)
+        );
         setHighestPrice(maxPrice);
-        setPriceRange({ min: 0, max: maxPrice }); // Set initial price range
+        setPriceRange({ min: 0, max: maxPrice });
       } catch (err) {
         setError("Error fetching products");
         setLoading(false);
@@ -40,12 +47,18 @@ const AllProducts: React.FC = () => {
 
   const filteredProducts = products
     .filter((product) => {
-      if (selectedCategory === "Show-all" || product.category === selectedCategory) {
+      if (
+        selectedCategory === "Show-all" ||
+        product.category === selectedCategory
+      ) {
         return true;
       }
       return false;
     })
-    .filter((product) => product.price >= priceRange.min && product.price <= priceRange.max)
+    .filter(
+      (product) =>
+        product.price >= priceRange.min && product.price <= priceRange.max
+    )
     .sort((a, b) => {
       switch (sortBy) {
         case "Price":
@@ -65,27 +78,29 @@ const AllProducts: React.FC = () => {
     setPriceRange({ min, max });
   };
 
-
-
   const handleAddToCart = (product: Product) => {
-    const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
     const productToAdd = {
       ...product,
-      image: product.image.replace('data:image/jpeg;base64,', ''),
+      image: product.image.replace("data:image/jpeg;base64,", ""),
     };
-    const isAlreadyInCart = existingCart.some((item: Product) => item.id === product.id);
+    const isAlreadyInCart = existingCart.some(
+      (item: Product) => item.id === product.id
+    );
 
     if (isAlreadyInCart) {
       setShowMessage("Item is already in cart");
     } else {
-      localStorage.setItem('cart', JSON.stringify([...existingCart, productToAdd]));
+      localStorage.setItem(
+        "cart",
+        JSON.stringify([...existingCart, productToAdd])
+      );
       setShowMessage("Added to cart");
 
-      // Trigger storage event to update cart count
-      window.dispatchEvent(new Event('storage'));
+      window.dispatchEvent(new Event("storage"));
     }
 
-    setTimeout(() => setShowMessage(null), 3000); // Hide the message after 3 seconds
+    setTimeout(() => setShowMessage(null), 3000);
   };
 
   if (loading) return <div className="text-center py-4">Loading...</div>;
@@ -101,7 +116,10 @@ const AllProducts: React.FC = () => {
       <div className="grid grid-cols-12">
         <div className="bg-brandBGLighter h-full p-4 col-span-2">
           <div className="relative">
-            <label className="block text-white font-bold mb-2" htmlFor="Category">
+            <label
+              className="block text-white font-bold mb-2"
+              htmlFor="Category"
+            >
               Category:
             </label>
             <select
@@ -117,7 +135,10 @@ const AllProducts: React.FC = () => {
               <option value="Live Production">Live Production</option>
             </select>
             <div className="mb-4">
-              <label className="block text-white font-bold mb-2" htmlFor="graphicType">
+              <label
+                className="block text-white font-bold mb-2"
+                htmlFor="graphicType"
+              >
                 Graphic Type:
               </label>
               <select
@@ -133,7 +154,10 @@ const AllProducts: React.FC = () => {
               </select>
             </div>
             <div className="mb-4">
-              <label className="block text-white font-bold mb-2" htmlFor="priceRange">
+              <label
+                className="block text-white font-bold mb-2"
+                htmlFor="priceRange"
+              >
                 Price Range:
               </label>
               <input
@@ -142,7 +166,9 @@ const AllProducts: React.FC = () => {
                 min="0"
                 max={highestPrice}
                 value={priceRange.min}
-                onChange={(e) => handlePriceChange(parseInt(e.target.value), priceRange.max)}
+                onChange={(e) =>
+                  handlePriceChange(parseInt(e.target.value), priceRange.max)
+                }
                 className="w-full"
               />
               <input
@@ -151,7 +177,9 @@ const AllProducts: React.FC = () => {
                 min="0"
                 max={highestPrice}
                 value={priceRange.max}
-                onChange={(e) => handlePriceChange(priceRange.min, parseInt(e.target.value))}
+                onChange={(e) =>
+                  handlePriceChange(priceRange.min, parseInt(e.target.value))
+                }
                 className="w-full"
               />
               <div className="flex justify-between">
@@ -187,7 +215,9 @@ const AllProducts: React.FC = () => {
               <option value="Price">Price (Low to High)</option>
               <option value="ReversePrice">Price (High to Low)</option>
               <option value="Alphabetical">Alphabetical (Ascending)</option>
-              <option value="ReverseAlphabetical">Alphabetical (Descending)</option>
+              <option value="ReverseAlphabetical">
+                Alphabetical (Descending)
+              </option>
             </select>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">

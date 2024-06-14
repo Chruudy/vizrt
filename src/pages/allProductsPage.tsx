@@ -3,11 +3,11 @@ import Footer from "@/components/footer";
 import AllProducts from "@/components/allProducts";
 
 export default function allProductsPage() {
-  return(
+  return (
     <div>
-      <Header/>
-      <AllProducts/>
-      <Footer/>
+      <Header />
+      <AllProducts />
+      <Footer />
     </div>
-  )
+  );
 }

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import Product from './Product'; 
+import React, { useEffect, useState } from "react";
+import Product from "./Product";
 
 const PopularPage: React.FC = () => {
   const [popularProducts, setPopularProducts] = useState<any[]>([]);
 
   useEffect(() => {
-    const storedPopular = localStorage.getItem('popularProducts');
+    const storedPopular = localStorage.getItem("popularProducts");
     if (storedPopular) {
       setPopularProducts(JSON.parse(storedPopular));
     }
@@ -16,10 +16,10 @@ const PopularPage: React.FC = () => {
       (product) => product.id !== productId
     );
     setPopularProducts(updatedPopular);
-    localStorage.setItem('popularProducts', JSON.stringify(updatedPopular));
+    localStorage.setItem("popularProducts", JSON.stringify(updatedPopular));
   };
 
-  const groupedPopular: any[] = []; // Initialize the array correctly
+  const groupedPopular: any[] = [];
   for (let i = 0; i < popularProducts.length; i += 4) {
     groupedPopular.push(popularProducts.slice(i, i + 4));
   }
@@ -28,8 +28,8 @@ const PopularPage: React.FC = () => {
     <div className="w-full">
       <h2 className="text-2xl text-white font-bold mt-8 mb-4 text-center">
         {popularProducts.length > 0
-          ? 'Popular Products'
-          : 'There are no popular products at this time'}
+          ? "Popular Products"
+          : "There are no popular products at this time"}
       </h2>
       {popularProducts.length > 0 &&
         groupedPopular.map((group, index) => (
@@ -54,4 +54,3 @@ const PopularPage: React.FC = () => {
 };
 
 export default PopularPage;
-

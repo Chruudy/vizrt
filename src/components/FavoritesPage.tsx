@@ -57,7 +57,7 @@ const FavoritesPage: React.FC = () => {
       setShowMessage("Added to cart");
     }
 
-    setTimeout(() => setShowMessage(null), 3000); // Hide the message after 3 seconds
+    setTimeout(() => setShowMessage(null), 3000);
   };
 
   if (loading) return <div className="text-center py-4">Loading...</div>;

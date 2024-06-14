@@ -19,8 +19,7 @@ const Categories: React.FC = () => {
           <Link href="/categoriesPage">
             <button
               className={`relative w-24 h-24 rounded-3xl overflow-hidden shadow-lg transform transition-transform duration-200 
-                  ${isSportsPage ? "scale-105" : "hover:scale-105"
-                }`}
+                  ${isSportsPage ? "scale-105" : "hover:scale-105"}`}
             >
               <div className="absolute inset-0">
                 <Image
@@ -60,7 +59,9 @@ const Categories: React.FC = () => {
               />
             </div>
             <div className="absolute inset-0 bg-black opacity-60"></div>
-            <span className="relative text-white z-10 font-bold">Virtual & XR</span>
+            <span className="relative text-white z-10 font-bold">
+              Virtual & XR
+            </span>
           </button>
         </li>
         <li className="sm:flex hidden flex-col items-center">
@@ -86,7 +87,9 @@ const Categories: React.FC = () => {
               />
             </div>
             <div className="absolute inset-0 bg-black opacity-60"></div>
-            <span className="relative text-white z-10 font-bold">Live Production</span>
+            <span className="relative text-white z-10 font-bold">
+              Live Production
+            </span>
           </button>
         </li>
       </ul>

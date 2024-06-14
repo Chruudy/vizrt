@@ -82,14 +82,13 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
       if (productData.image) {
         setImagePreview(productData.image);
       }
-      // Clear the inputs and display success message
       setName("");
       setCategory("");
       setPrice(0);
       setImage(null);
       setImagePreview(null);
       setSuccessMessage("Product published successfully!");
-      setTimeout(() => setSuccessMessage(null), 3000); // Clear the message after 3 seconds
+      setTimeout(() => setSuccessMessage(null), 3000);
     } catch (error) {
       console.error("Error uploading product:", error);
     }
@@ -107,15 +106,12 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
     try {
       await axios.delete(`http://localhost:5065/api/Product/${productId}`);
       alert("Product deleted successfully!");
-      // Optionally refresh the page or handle UI update
     } catch (error) {
       console.error("Error deleting product", error);
     }
   };
 
   const onChangeView = () => {
-    // Implement the logic to change view or redirect to another page
-    // For example, redirect to the product management page
     router.push("/uploadtest");
   };
 

@@ -1,8 +1,8 @@
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 
-import profilePic from '../images/profilepic.jpeg'; // Ensure this is the correct path
+import profilePic from "../images/profilepic.jpeg";
 
 const ProfileInfo: React.FC = () => {
   return (
@@ -12,7 +12,7 @@ const ProfileInfo: React.FC = () => {
           src={profilePic}
           alt="Profile Picture"
           layout="fill"
-          objectFit='cover'
+          objectFit="cover"
           className="rounded-full"
         />
       </div>
@@ -28,7 +28,7 @@ const ProfileInfo: React.FC = () => {
             <span className="font-bold">100</span> following
           </div>
         </div>
-        <div className="flex space-x-2 mt-2"> {/* Tighter space between buttons */}
+        <div className="flex space-x-2 mt-2">
           <button className="text-xs px-2 py-1 text-white bg-blue01 rounded-full hover:bg-blue02 transition duration-200">
             Change Profile Picture
           </button>
@@ -36,7 +36,7 @@ const ProfileInfo: React.FC = () => {
             Edit Account
           </button>
         </div>
-        <div className="mt-2"> {/* Container for the Verify button */}
+        <div className="mt-2">
           <Link href="/Verify" passHref>
             <button className="text-sm px-4 py-2 text-white bg-green-500 rounded-full hover:bg-green-600 transition duration-200">
               Verify

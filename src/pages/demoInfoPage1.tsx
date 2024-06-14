@@ -1,15 +1,14 @@
 import React from "react";
-import Header from '../components/header';
+import Header from "../components/header";
 import VizArena from "../components/VizArenaInfo";
-import Footer from '../components/footer';
-//test
+import Footer from "../components/footer";
 
 export default function demoInfoPage() {
-    return (
-        <div className="overflow-x-hidden">
-            <Header />
-            <VizArena />
-            <Footer />
-        </div>
-    )
+  return (
+    <div className="overflow-x-hidden">
+      <Header />
+      <VizArena />
+      <Footer />
+    </div>
+  );
 }

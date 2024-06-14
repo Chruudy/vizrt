@@ -3,12 +3,11 @@ import VizArenaInput from "../images/viz_arena_input.jpg";
 import VizArenaImage from "../images/viz_arena_img.jpg";
 import Image from "next/image";
 import Link from "next/link";
-import backButton from "../images/back-button.png"
+import backButton from "../images/back-button.png";
 
 const VizArenaDemo: React.FC = () => {
-  const [selectedColor, setSelectedColor] = useState('#000000');
+  const [selectedColor, setSelectedColor] = useState("#000000");
 
-  // Function to handle changes in the color picker
   const handleColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedColor(event.target.value);
   };
@@ -38,9 +37,7 @@ const VizArenaDemo: React.FC = () => {
         JSON.stringify([...existingCart, productToAdd])
       );
     } else {
-      alert(
-        "Already added 'Viz Arena' to cart"
-      );
+      alert("Already added 'Viz Arena' to cart");
     }
   };
 
@@ -48,23 +45,42 @@ const VizArenaDemo: React.FC = () => {
     <div>
       <div className="flex pt-4 pl-52">
         <Link href="/demoInfoPage1">
-          <Image src={backButton} alt="Back button" width={32} height={32}></Image>
+          <Image
+            src={backButton}
+            alt="Back button"
+            width={32}
+            height={32}
+          ></Image>
         </Link>
         <p className="text-white text-lg pl-4 pt-0.5">Demo review</p>
       </div>
 
       <div className="pl-52 pt-4 relative flex flex-col lg:flex-row ">
-        <Image src={VizArenaInput} alt="Viz Arena Demo Picture" className="w-2/5 h-fill rounded-xl border border-black" />
+        <Image
+          src={VizArenaInput}
+          alt="Viz Arena Demo Picture"
+          className="w-2/5 h-fill rounded-xl border border-black"
+        />
         <div className="max-w-xl bg-grey090 rounded-xl mx-8 p-4 border border-black">
           <div className="flex flex-col space-y-4">
             <div className="flex items-center justify-between">
               <p className="text-white font-medium text-lg">Name:</p>
-              <input type="text" className="bg-white py-2 rounded-lg w-2/3 px-3 font-medium text-base" placeholder="Type here" />
+              <input
+                type="text"
+                className="bg-white py-2 rounded-lg w-2/3 px-3 font-medium text-base"
+                placeholder="Type here"
+              />
             </div>
 
             <div className="flex items-center justify-between">
               <p className="text-white font-medium text-lg">Number:</p>
-              <input type="number" className="bg-white py-2 rounded-lg w-2/3 px-3 text-base" placeholder="1" min="1" max="99" />
+              <input
+                type="number"
+                className="bg-white py-2 rounded-lg w-2/3 px-3 text-base"
+                placeholder="1"
+                min="1"
+                max="99"
+              />
             </div>
 
             <div className="flex items-center justify-between">
@@ -86,24 +102,47 @@ const VizArenaDemo: React.FC = () => {
 
             <div className="flex items-center justify-between">
               <p className="text-white font-medium text-lg">Colour:</p>
-              <input type="color" value={selectedColor} onChange={handleColorChange} className="h-8 w-2/3 rounded-lg" />
+              <input
+                type="color"
+                value={selectedColor}
+                onChange={handleColorChange}
+                className="h-8 w-2/3 rounded-lg"
+              />
             </div>
 
             <div className="flex items-center justify-between">
               <p className="text-white font-medium text-lg">Opacity:</p>
-              <input type="text" className="bg-white py-2 rounded-lg w-2/3 px-3 font-medium text-base" value="60 %" />
+              <input
+                type="text"
+                className="bg-white py-2 rounded-lg w-2/3 px-3 font-medium text-base"
+                value="60 %"
+              />
             </div>
 
             <div className="flex items-center space-x-3">
               <p className="text-white font-medium text-lg">X:</p>
-              <input type="text" className="bg-white py-2 rounded-lg font-medium text-base w-1/3 px-8" value="80 %" />
+              <input
+                type="text"
+                className="bg-white py-2 rounded-lg font-medium text-base w-1/3 px-8"
+                value="80 %"
+              />
               <p className="text-white font-medium text-lg">Y:</p>
-              <input type="text" className="bg-white py-2 rounded-lg font-medium text-base w-1/3 px-8" value="15 %" />
+              <input
+                type="text"
+                className="bg-white py-2 rounded-lg font-medium text-base w-1/3 px-8"
+                value="15 %"
+              />
             </div>
 
             <div className="flex items-center justify-between">
               <p className="text-white font-medium text-lg">Duration:</p>
-              <input type="number" className="bg-white py-2 rounded-lg w-2/3 px-3 font-medium text-base" min="5" max="15" placeholder="5 seconds" />
+              <input
+                type="number"
+                className="bg-white py-2 rounded-lg w-2/3 px-3 font-medium text-base"
+                min="5"
+                max="15"
+                placeholder="5 seconds"
+              />
             </div>
 
             <div className="lg: flex justify-evenly">
@@ -115,7 +154,8 @@ const VizArenaDemo: React.FC = () => {
 
               <button
                 onClick={handleAddToCart}
-                className="text-white font-medium text-base rounded-lg px-4 py-2 w-36 bg-gradient-to-r from-brandOrange to-brandOrangeDarker shadow-lg transform hover:scale-105 transition-transform duration-200">
+                className="text-white font-medium text-base rounded-lg px-4 py-2 w-36 bg-gradient-to-r from-brandOrange to-brandOrangeDarker shadow-lg transform hover:scale-105 transition-transform duration-200"
+              >
                 Add to cart
               </button>
             </div>
@@ -125,9 +165,22 @@ const VizArenaDemo: React.FC = () => {
 
       <div className="pt-16"></div>
       {isPreviewOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center" onClick={toggleImagePreview}>
-          <div className="cursor-pointer" style={{ maxWidth: '60%', maxHeight: '100%' }}>
-            <Image src={VizArenaImage} alt="Viz Arena Demo Picture" layout="intrinsic" width={1200} height={675} objectFit="contain" />
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center"
+          onClick={toggleImagePreview}
+        >
+          <div
+            className="cursor-pointer"
+            style={{ maxWidth: "60%", maxHeight: "100%" }}
+          >
+            <Image
+              src={VizArenaImage}
+              alt="Viz Arena Demo Picture"
+              layout="intrinsic"
+              width={1200}
+              height={675}
+              objectFit="contain"
+            />
           </div>
         </div>
       )}

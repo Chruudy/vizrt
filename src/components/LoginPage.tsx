@@ -1,34 +1,38 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { TextField, Button, IconButton } from '@mui/material';
-import { Google, Facebook, Twitter } from '@mui/icons-material';
-import axios from 'axios';
+import React, { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { TextField, Button, IconButton } from "@mui/material";
+import { Google, Facebook, Twitter } from "@mui/icons-material";
+import axios from "axios";
 import Logo from "../images/Vizrt-Logo-Orange.webp";
 
 const LoginPage: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const formData = new FormData();
-      formData.append('email', email);
-      formData.append('password', password);
+      formData.append("email", email);
+      formData.append("password", password);
 
-      const response = await axios.post("http://localhost:5065/user/login", formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
+      const response = await axios.post(
+        "http://localhost:5065/user/login",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
-      });
+      );
 
-      setError('');
-      router.push('/profile');  // Redirect to the /index page after successful login
+      setError("");
+      router.push("/profile");
     } catch (err) {
       if (axios.isAxiosError(err) && err.response) {
         setError(err.response.data);
@@ -40,11 +44,16 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center pb-6 pt-10 min-h-screen">
-      <main className="w-full max-w-md space-y-8 px-8" style={{ minHeight: '500px' }}>
+      <main
+        className="w-full max-w-md space-y-8 px-8"
+        style={{ minHeight: "500px" }}
+      >
         <div className="flex justify-center mb-8">
           <Image src={Logo} alt="Vizrt Logo" width={150} height={50} />
         </div>
-        <h2 className="mt-6 text-2xl font-bold text-white text-center">Login to your Account</h2>
+        <h2 className="mt-6 text-2xl font-bold text-white text-center">
+          Login to your Account
+        </h2>
         <form className="mt-8" onSubmit={handleLogin}>
           <TextField
             label="Email"
@@ -53,8 +62,8 @@ const LoginPage: React.FC = () => {
             className="mb-4"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            InputProps={{ className: 'bg-grey085 text-white' }}
-            InputLabelProps={{ className: 'text-grey035' }}
+            InputProps={{ className: "bg-grey085 text-white" }}
+            InputLabelProps={{ className: "text-grey035" }}
           />
           <TextField
             label="Password"
@@ -64,16 +73,16 @@ const LoginPage: React.FC = () => {
             className="mb-4"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            InputProps={{ className: 'bg-grey085 text-white' }}
-            InputLabelProps={{ className: 'text-grey035' }}
+            InputProps={{ className: "bg-grey085 text-white" }}
+            InputLabelProps={{ className: "text-grey035" }}
           />
-          {error && (
-            <div className="text-red01 mb-4">{error}</div>
-          )}
+          {error && <div className="text-red01 mb-4">{error}</div>}
           <div className="flex items-center justify-between">
             <div className="text-sm ml-auto">
               <Link href="/forgot-password" passHref>
-                <Button className="font-medium text-grey035 hover:text-white">Forgot your password?</Button>
+                <Button className="font-medium text-grey035 hover:text-white">
+                  Forgot your password?
+                </Button>
               </Link>
             </div>
           </div>
@@ -103,7 +112,9 @@ const LoginPage: React.FC = () => {
             </IconButton>
           </div>
           <Link href="/signup" passHref>
-            <Button fullWidth className="text-brandOrange">Don't have an account? Sign Up</Button>
+            <Button fullWidth className="text-brandOrange">
+              Don't have an account? Sign Up
+            </Button>
           </Link>
         </form>
       </main>

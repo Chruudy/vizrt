@@ -15,20 +15,17 @@ const Header: React.FC = () => {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  // Function to get cart items from localStorage
   const getCartCount = () => {
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
     setCartCount(cart.length);
   };
 
-  // Update cart count on component mount
   useEffect(() => {
     getCartCount();
 
-    // Add event listener to update cart count when cart is updated
-    window.addEventListener('storage', getCartCount);
+    window.addEventListener("storage", getCartCount);
     return () => {
-      window.removeEventListener('storage', getCartCount);
+      window.removeEventListener("storage", getCartCount);
     };
   }, []);
 

@@ -1,9 +1,9 @@
-import React from 'react';
-import Header from '../components/header';
-import Footer from '../components/footer';
-import ProfileInfo from '../components/profileInfo';
-import ProfileExperience from '../components/profileExperience';
-import Tabs from '../components/Tabs';
+import React from "react";
+import Header from "../components/header";
+import Footer from "../components/footer";
+import ProfileInfo from "../components/profileInfo";
+import ProfileExperience from "../components/profileExperience";
+import Tabs from "../components/Tabs";
 
 const Profile: React.FC = () => {
   return (
@@ -20,10 +20,19 @@ const Profile: React.FC = () => {
               </div>
               <h3 className="text-xl font-bold text-white">Skills</h3>
               <div className="flex flex-wrap mt-2">
-                {['TypeScript', 'React', 'TailWind CSS', 'HTML', 'Node.js', 'Figma'].map((skill) => (
-                  <span key={skill}
+                {[
+                  "TypeScript",
+                  "React",
+                  "TailWind CSS",
+                  "HTML",
+                  "Node.js",
+                  "Figma",
+                ].map((skill) => (
+                  <span
+                    key={skill}
                     className="bg-grey075 text-white py-1 px-3 m-2 rounded-full cursor-pointer 
-                                   hover:bg-grey085 hover:text-gray-300 transition duration-300">
+                                   hover:bg-grey085 hover:text-gray-300 transition duration-300"
+                  >
                     {skill}
                   </span>
                 ))}

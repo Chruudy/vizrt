@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import StarIcon from '@mui/icons-material/Star';
+import React, { useEffect, useState } from "react";
+import StarIcon from "@mui/icons-material/Star";
 import Link from "next/link";
 
 interface ProductProps {
@@ -24,7 +24,7 @@ const Product: React.FC<ProductProps> = ({
   const [isProductFavorite, setIsProductFavorite] = useState(isFavorite);
 
   useEffect(() => {
-    const storedFavorites = localStorage.getItem('favoriteProducts');
+    const storedFavorites = localStorage.getItem("favoriteProducts");
     if (storedFavorites) {
       const favorites = JSON.parse(storedFavorites);
       setIsProductFavorite(favorites.some((product: any) => product.id === id));
@@ -33,32 +33,37 @@ const Product: React.FC<ProductProps> = ({
 
   const handleToggleFavorite = () => {
     setIsProductFavorite(!isProductFavorite);
-    const storedFavorites = localStorage.getItem('favoriteProducts');
+    const storedFavorites = localStorage.getItem("favoriteProducts");
     let updatedFavorites = [];
     if (storedFavorites) {
       updatedFavorites = JSON.parse(storedFavorites);
     }
     if (isProductFavorite) {
-      updatedFavorites = updatedFavorites.filter((product: any) => product.id !== id);
+      updatedFavorites = updatedFavorites.filter(
+        (product: any) => product.id !== id
+      );
     } else {
       updatedFavorites.push({ id, name, description, price, imageUrl });
     }
-    localStorage.setItem('favoriteProducts', JSON.stringify(updatedFavorites));
+    localStorage.setItem("favoriteProducts", JSON.stringify(updatedFavorites));
     if (onRemoveFavorite && isProductFavorite) {
       onRemoveFavorite();
     }
   };
 
   return (
-    <div className="p-4 rounded-md flex flex-col justify-between mb-8" style={{ color: '#ffffff' }}>
+    <div
+      className="p-4 rounded-md flex flex-col justify-between mb-8"
+      style={{ color: "#ffffff" }}
+    >
       <img src={imageUrl} alt={name} className="mb-4" />
       <div className="flex items-center justify-between mb-2">
         <p className="font-semibold">{name}</p>
         <button onClick={handleToggleFavorite} className="ml-2">
           {isProductFavorite ? (
-            <StarIcon sx={{ fontSize: 24, color: '#FFD700' }} />
+            <StarIcon sx={{ fontSize: 24, color: "#FFD700" }} />
           ) : (
-            <StarIcon sx={{ fontSize: 24, color: 'gray' }} />
+            <StarIcon sx={{ fontSize: 24, color: "gray" }} />
           )}
         </button>
       </div>
@@ -68,11 +73,10 @@ const Product: React.FC<ProductProps> = ({
         View Product
       </button>
       <Link href="/popular">
-            <button className="transition-colors duration-400 ease-in-out hover:bg-brandOrange hover:text-black h-20 w-20">
-              <StarIcon />
-            </button>
-          </Link>
-
+        <button className="transition-colors duration-400 ease-in-out hover:bg-brandOrange hover:text-black h-20 w-20">
+          <StarIcon />
+        </button>
+      </Link>
     </div>
   );
 };

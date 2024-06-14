@@ -1,5 +1,4 @@
-// components/FollowStats.tsx
-import React from 'react';
+import React from "react";
 
 const ProfileFollow: React.FC = () => {
   return (

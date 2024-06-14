@@ -5,10 +5,10 @@ import Link from "next/link";
 import StarIcon from "@mui/icons-material/Star";
 import backButton from "../images/back-button.png";
 
-const FAVORITES_KEY = 'favoriteProducts';
+const FAVORITES_KEY = "favoriteProducts";
 
 const getFavoritesFromLocalStorage = (): string[] => {
-  if (typeof window === 'undefined') return [];
+  if (typeof window === "undefined") return [];
   const favorites = localStorage.getItem(FAVORITES_KEY);
   return favorites ? JSON.parse(favorites) : [];
 };
@@ -23,7 +23,7 @@ const saveFavoriteToLocalStorage = (productId: string) => {
 
 const removeFavoriteFromLocalStorage = (productId: string) => {
   let favorites = getFavoritesFromLocalStorage();
-  favorites = favorites.filter(id => id !== productId);
+  favorites = favorites.filter((id) => id !== productId);
   localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
 };
 
@@ -75,9 +75,7 @@ const VizArenaDemoInfo: React.FC = () => {
         JSON.stringify([...existingCart, productToAdd])
       );
     } else {
-      alert(
-        "Already added 'Viz Arena' to cart"
-      );
+      alert("Already added 'Viz Arena' to cart");
     }
   };
 
@@ -101,8 +99,9 @@ const VizArenaDemoInfo: React.FC = () => {
           <div className="flex justify-between items-center mb-4">
             <h1 className="text-2xl font-semibold">Viz Arena</h1>
             <StarIcon
-              className={`text-3xl cursor-pointer ${isStarClicked ? "text-yellow-500" : "text-gray-300"
-                }`}
+              className={`text-3xl cursor-pointer ${
+                isStarClicked ? "text-yellow-500" : "text-gray-300"
+              }`}
               onClick={handleStarClick}
               aria-label="Toggle favorite"
             />
@@ -140,8 +139,14 @@ const VizArenaDemoInfo: React.FC = () => {
         </div>
       </div>
       {isPreviewOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center" onClick={toggleImagePreview}>
-          <div className="cursor-pointer" style={{ maxWidth: "60%", maxHeight: "100%" }}>
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center"
+          onClick={toggleImagePreview}
+        >
+          <div
+            className="cursor-pointer"
+            style={{ maxWidth: "60%", maxHeight: "100%" }}
+          >
             <Image
               src={VizArenaImage}
               alt="Viz Arena Demo Picture"

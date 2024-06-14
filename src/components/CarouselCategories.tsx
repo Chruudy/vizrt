@@ -1,20 +1,20 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import tennis from '../images/tennis.webp';
-import football from '../images/football.webp';
-import esport2 from '../images/esport2.jpg';
-import volleyball from '../images/volleyball.jpg';
-import basketball from '../images/basketball.jpg';
-import golf from '../images/golf.jpeg';
+import tennis from "../images/tennis.webp";
+import football from "../images/football.webp";
+import esport2 from "../images/esport2.jpg";
+import volleyball from "../images/volleyball.jpg";
+import basketball from "../images/basketball.jpg";
+import golf from "../images/golf.jpeg";
 
 const images = [
-  { src: tennis, alt: 'Tennis', text: 'Tennis' },
-  { src: football, alt: 'Football', text: 'Football' },
-  { src: esport2, alt: 'E-sport', text: 'E-sport' },
-  { src: volleyball, alt: 'Volleyball', text: 'Volleyball' },
-  { src: basketball, alt: 'Basketball', text: 'Basketball' },
-  { src: golf, alt: 'Golf', text: 'Golf' },
+  { src: tennis, alt: "Tennis", text: "Tennis" },
+  { src: football, alt: "Football", text: "Football" },
+  { src: esport2, alt: "E-sport", text: "E-sport" },
+  { src: volleyball, alt: "Volleyball", text: "Volleyball" },
+  { src: basketball, alt: "Basketball", text: "Basketball" },
+  { src: golf, alt: "Golf", text: "Golf" },
 ];
 
 const CarouselCategories = () => {
@@ -34,11 +34,13 @@ const CarouselCategories = () => {
     });
 
   return (
-    <div className="relative flex flex-col items-center justify-center mt-14"> 
-      <div className="relative flex items-center justify-center perspective mt-14"> 
+    <div className="relative flex flex-col items-center justify-center mt-14">
+      <div className="relative flex items-center justify-center perspective mt-14">
         <button
           onClick={handlePrev}
-          className={`absolute left-1/2 top-1/2 transform -translate-y-1/2 -translate-x-96 p-4 bg-brandOrange text-white rounded-full z-40 flex items-center justify-center w-10 h-10 ${activeIndex === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`absolute left-1/2 top-1/2 transform -translate-y-1/2 -translate-x-96 p-4 bg-brandOrange text-white rounded-full z-40 flex items-center justify-center w-10 h-10 ${
+            activeIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
+          }`}
           disabled={activeIndex === 0}
         >
           {"<"}
@@ -80,7 +82,10 @@ const CarouselCategories = () => {
                     objectFit="cover"
                     className="rounded-xl"
                   />
-                  <div className="absolute bottom-0 left-0 right-0 text-white text-center font-bold bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" style={{ fontSize: '0.625rem' }}>
+                  <div
+                    className="absolute bottom-0 left-0 right-0 text-white text-center font-bold bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"
+                    style={{ fontSize: "0.625rem" }}
+                  >
                     {image.text}
                   </div>
                 </div>
@@ -90,7 +95,11 @@ const CarouselCategories = () => {
         </div>
         <button
           onClick={handleNext}
-          className={`absolute right-1/2 top-1/2 transform -translate-y-1/2 translate-x-96 p-4 bg-brandOrange text-white rounded-full z-40 flex items-center justify-center w-10 h-10 ${activeIndex === images.length - 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`absolute right-1/2 top-1/2 transform -translate-y-1/2 translate-x-96 p-4 bg-brandOrange text-white rounded-full z-40 flex items-center justify-center w-10 h-10 ${
+            activeIndex === images.length - 1
+              ? "opacity-50 cursor-not-allowed"
+              : ""
+          }`}
           disabled={activeIndex === images.length - 1}
         >
           {">"}

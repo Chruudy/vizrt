@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
-import Link from 'next/link';
+import React, { useState } from "react";
+import Link from "next/link";
 
 const ValidatePhoneNumber: React.FC = () => {
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   return (
-    <div className="flex flex-col items-center pb-6 pt-10 min-h-screen" style={{ backgroundColor: '#1D3641' }}>
+    <div
+      className="flex flex-col items-center pb-6 pt-10 min-h-screen"
+      style={{ backgroundColor: "#1D3641" }}
+    >
       <main className="w-full max-w-md space-y-8 px-8 min-h-[500px]">
-        <h2 className="mt-6 text-2xl font-bold text-white text-center">Validate Your Phone Number</h2>
+        <h2 className="mt-6 text-2xl font-bold text-white text-center">
+          Validate Your Phone Number
+        </h2>
         <form className="mt-8">
           <div className="mb-4">
             <label htmlFor="phoneNumber" className="block text-grey035 mb-2">

@@ -84,9 +84,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
       const productData: Product = response.data;
       setProduct(productData);
       if (productData.image) {
-        setImagePreview(productData.image); // Set image preview to uploaded image URL
+        setImagePreview(productData.image);
       }
-      // Clear the inputs and display success message
       setName("");
       setCategory("");
       setSubCategory("");
@@ -95,7 +94,6 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
       setSuccessMessage("Product published successfully!");
       setTimeout(() => {
         setSuccessMessage(null);
-        // Redirect to the main page after 3 seconds
         router.push("/");
       }, 3000);
     } catch (error) {
@@ -115,7 +113,6 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
     try {
       await axios.delete(`http://localhost:5065/api/Product/${productId}`);
       alert("Product deleted successfully!");
-      // Optionally refresh the page or handle UI update
     } catch (error) {
       console.error("Error deleting product", error);
     }
@@ -138,7 +135,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
                 maxHeight: "32rem",
                 maxWidth: "auto,",
                 objectFit: "contain",
-                position: "relative"
+                position: "relative",
               }}
             />
           </div>

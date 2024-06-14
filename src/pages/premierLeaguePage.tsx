@@ -3,11 +3,11 @@ import PremierLeague from "../components/PremierLeague";
 import Footer from "../components/footer";
 
 export default function premierLeague() {
-    return (
-        <div className="overflow-x-hidden">
-            <Header />
-            <PremierLeague />
-            <Footer />
-        </div>
-    );
-};
+  return (
+    <div className="overflow-x-hidden">
+      <Header />
+      <PremierLeague />
+      <Footer />
+    </div>
+  );
+}

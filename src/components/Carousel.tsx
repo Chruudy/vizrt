@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 interface CarouselProps {
   images: string[];
@@ -9,7 +9,6 @@ interface CarouselProps {
 
 const Carousel: React.FC<CarouselProps> = ({ images = [] }) => {
   const router = useRouter();
-  // Ensure images is always an array and handle the case where it might be empty
   const middleIndex = images.length > 0 ? Math.floor(images.length / 2) : 0;
   const [activeIndex, setActiveIndex] = useState(middleIndex);
 
@@ -26,17 +25,18 @@ const Carousel: React.FC<CarouselProps> = ({ images = [] }) => {
     });
 
   const handleMoreClick = () => {
-    router.push('/categoriesPage');
+    router.push("/categoriesPage");
   };
 
   return (
     <div className="mb-24 relative flex flex-col items-center justify-center">
-      <div className="mb-16">
-      </div>
+      <div className="mb-16"></div>
       <div className="relative flex items-center justify-center perspective mt-16">
         <button
           onClick={handlePrev}
-          className={`absolute left-1/2 top-1/2 transform -translate-y-3/4 -translate-x-96 p-4 bg-brandOrange text-white rounded-full z-40 flex items-center justify-center ${activeIndex === 0 ? 'opacity-50' : ''}`}
+          className={`absolute left-1/2 top-1/2 transform -translate-y-3/4 -translate-x-96 p-4 bg-brandOrange text-white rounded-full z-40 flex items-center justify-center ${
+            activeIndex === 0 ? "opacity-50" : ""
+          }`}
           style={{ width: "40px", height: "40px", borderRadius: "50%" }}
           disabled={activeIndex === 0}
         >
@@ -59,14 +59,15 @@ const Carousel: React.FC<CarouselProps> = ({ images = [] }) => {
                 alt={`Carousel image ${index}`}
                 width={1000}
                 height={1000}
-                className={`rounded-xl absolute top-0 left-0 w-full h-full object-cover transition-all duration-500 ease-in-out ${isCurrent
+                className={`rounded-xl absolute top-0 left-0 w-full h-full object-cover transition-all duration-500 ease-in-out ${
+                  isCurrent
                     ? "opacity-100 z-30"
                     : isNextOrPrev
-                      ? "opacity-100 z-20"
-                      : isNotInSight
-                        ? "opacity-100 z-10"
-                        : "opacity-100 z-10"
-                  }`}
+                    ? "opacity-100 z-20"
+                    : isNotInSight
+                    ? "opacity-100 z-10"
+                    : "opacity-100 z-10"
+                }`}
                 style={{
                   transform: `rotateY(${rotation}deg) translateZ(280px) scale(3)`,
                   height: isCurrent ? "80%" : isNextOrPrev ? "70%" : "60%",
@@ -79,7 +80,9 @@ const Carousel: React.FC<CarouselProps> = ({ images = [] }) => {
         </div>
         <button
           onClick={handleNext}
-          className={`absolute right-1/2 top-1/2 transform -translate-y-3/4 translate-x-96 p-4 bg-brandOrange text-white rounded-full z-40 flex items-center justify-center ${activeIndex === images.length - 1 ? 'opacity-50' : ''}`}
+          className={`absolute right-1/2 top-1/2 transform -translate-y-3/4 translate-x-96 p-4 bg-brandOrange text-white rounded-full z-40 flex items-center justify-center ${
+            activeIndex === images.length - 1 ? "opacity-50" : ""
+          }`}
           style={{ width: "40px", height: "40px", borderRadius: "50%" }}
           disabled={activeIndex === images.length - 1}
         >
