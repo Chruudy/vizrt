@@ -50,21 +50,21 @@ const Header: React.FC = () => {
       <ul className="flex items-center text-white mr-2">
         <li>
           <Link href="/uploadtest">
-            <button className="transition-colors duration-400 ease-in-out hover:bg-orange-500 hover:text-black h-20 w-20">
+            <button className="transition-colors duration-400 ease-in-out hover:bg-brandOrange hover:text-black h-20 w-20">
               <CreateIcon />
             </button>
           </Link>
         </li>
         <li>
           <Link href="/favorites">
-            <button className="transition-colors duration-400 ease-in-out hover:bg-orange-500 hover:text-black h-20 w-20">
+            <button className="transition-colors duration-400 ease-in-out hover:bg-brandOrange hover:text-black h-20 w-20">
               <StarIcon />
             </button>
           </Link>
         </li>
         <li className="relative">
           <Link href="/cart">
-            <button className="transition-colors duration-400 ease-in-out hover:bg-orange-500 hover:text-black h-20 w-20 flex items-center justify-center">
+            <button className="transition-colors duration-400 ease-in-out hover:bg-brandOrange hover:text-black h-20 w-20 flex items-center justify-center">
               <ShoppingCartIcon />
               {cartCount > 0 && (
                 <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
@@ -76,7 +76,7 @@ const Header: React.FC = () => {
         </li>
         <li>
           <Link href="/login">
-            <button className="transition-colors duration-400 ease-in-out hover:bg-orange-500 hover:text-black h-20 w-20">
+            <button className="transition-colors duration-400 ease-in-out hover:bg-brandOrange hover:text-black h-20 w-20">
               <Person2Icon />
             </button>
           </Link>
@@ -84,7 +84,7 @@ const Header: React.FC = () => {
         <li className="relative">
           <button
             onClick={toggleMenu}
-            className="transition-colors duration-400 ease-in-out hover:bg-orange-500 hover:text-black h-20 w-20 flex items-center justify-center"
+            className="transition-colors duration-400 ease-in-out hover:bg-brandOrange hover:text-black h-20 w-20 flex items-center justify-center"
           >
             <MenuIcon className="h-6 w-6" />
           </button>
@@ -92,19 +92,19 @@ const Header: React.FC = () => {
             <div className="absolute right-0 bg-[#212121] shadow-lg">
               <Link
                 href="/demoInfoPage1"
-                className="block text-white hover:bg-orange-500 hover:text-black px-4 py-2"
+                className="block text-white hover:bg-brandOrange hover:text-black px-4 py-2"
               >
                 Viz Arena
               </Link>
               <Link
                 href="/demoInfoPage2"
-                className="block text-white hover:bg-orange-500 hover:text-black px-4 py-2"
+                className="block text-white hover:bg-brandOrange hover:text-black px-4 py-2"
               >
                 Viz Libero
               </Link>
               <Link
                 href="/demoInfoPage3"
-                className="block text-white hover:bg-orange-500 hover:text-black px-4 py-2"
+                className="block text-white hover:bg-brandOrange hover:text-black px-4 py-2"
               >
                 Viz World
               </Link>

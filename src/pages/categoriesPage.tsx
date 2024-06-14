@@ -11,7 +11,7 @@ const CategoriesPage = () => {
       <Categories />
       <div className="text-center my-10">
         <h2 className="text-3xl font-bold text-white">SUBCATEGORIES</h2>
-        <div className="mt-2 border-b-4 border-orange-500 w-1/4 mx-auto"></div>
+        <div className="mt-2 border-b-4 border-brandOrange w-1/4 mx-auto"></div>
       </div>
       <div className="mb-10">
         <CarouselCategories />

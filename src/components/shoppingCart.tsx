@@ -47,9 +47,9 @@ const ShoppingCart = () => {
     <div className="min-h-screen text-white p-6">
       <div className="container mx-auto">
         <h1 className="text-3xl font-bold mb-6">Shopping Cart</h1>
-        <div className="bg-gray-800 rounded-lg p-6 mb-6">
+        <div className="bg-grey085 rounded-lg p-6 mb-6">
           {products.map((product, index) => (
-            <div key={index} className="flex items-center mb-4 border-b border-gray-700 pb-4">
+            <div key={index} className="flex items-center mb-4 border-b border-grey075 pb-4">
               <div className="w-32 h-20 relative">
                 <Image src={`data:image/jpeg;base64,${product.image}`} alt={product.alt} layout="fill" objectFit="cover" className="rounded-lg" />
               </div>
@@ -58,7 +58,7 @@ const ShoppingCart = () => {
               </div>
               <div className="flex ml-4 text-right">
                 <p className="text-xl font-bold">{typeof product.price === 'string' ? product.price : `$${product.price}`}</p>
-                <button className="text-white hover:text-red-600" onClick={() => removeFromCart(index)}>
+                <button className="text-white hover:text-red02" onClick={() => removeFromCart(index)}>
                   <DeleteIcon className="h-6 w-6" />
                 </button>
               </div>
@@ -71,12 +71,12 @@ const ShoppingCart = () => {
           </div>
         ) : (
           <>
-            <div className="bg-gray-800 rounded-lg p-6 mb-6 flex justify-between items-center">
+            <div className="bg-grey085 rounded-lg p-6 mb-6 flex justify-between items-center">
               <p className="text-2xl font-bold">Total:</p>
               <p className="text-2xl font-bold">${total.toFixed(2)}</p>
             </div>
             <div className="flex justify-end">
-              <button className="bg-orange-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-orange-600 transition duration-300" onClick={handlePayment}>Pay</button>
+              <button className="bg-brandOrange text-white px-6 py-3 rounded-lg font-bold hover:bg-brandOrangeDarker transition duration-300" onClick={handlePayment}>Pay</button>
             </div>
           </>
         )}
