@@ -3,6 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
+// This is the interface for the Product component
 interface Product {
   name: string;
   category: string;
@@ -11,10 +12,12 @@ interface Product {
   image?: string;
 }
 
+// This is the interface for the ProductForm component
 interface ProductFormProps {
   productId?: string | null;
 }
 
+// This is the ProductForm component
 const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
   const [name, setName] = useState<string>("");
   const [category, setCategory] = useState<string>("");
@@ -26,6 +29,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const router = useRouter();
 
+
+  //Here we are fetching the product data from the API
   useEffect(() => {
     if (productId) {
       axios
@@ -101,6 +106,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
     }
   };
 
+
+  //This is the function that handles the image change event
   const onImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const file = event.target.files[0];

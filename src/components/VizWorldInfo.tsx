@@ -38,6 +38,7 @@ const VizWorldDemoInfo: React.FC = () => {
     id: "38",
   };
 
+  // Check if the product is already in favorites
   useEffect(() => {
     const favorites = getFavoritesFromLocalStorage();
     setIsStarClicked(favorites.includes(product.id));
@@ -64,6 +65,7 @@ const VizWorldDemoInfo: React.FC = () => {
       id: "38",
     };
 
+    // Save the product to the cart
     const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
     const isAlreadyInCart = existingCart.some(
       (item: { id: string }) => item.id === productToAdd.id
@@ -79,6 +81,7 @@ const VizWorldDemoInfo: React.FC = () => {
     }
   };
 
+  // Render the product information
   return (
     <div className="max-w-6xl mx-auto my-10 p-6 bg-grey090 rounded-xl">
       <div className="flex justify-start mb-4">

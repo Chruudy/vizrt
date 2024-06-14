@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import StarIcon from "@mui/icons-material/Star";
 
+// This is the interface for the Product component
 export interface Product {
   id: string;
   name: string;
@@ -12,12 +13,14 @@ export interface Product {
 
 const FAVORITES_KEY = "favoriteProducts";
 
+// This function gets the favorite products from local storage
 const getFavoritesFromLocalStorage = (): string[] => {
   if (typeof window === "undefined") return [];
   const favorites = localStorage.getItem(FAVORITES_KEY);
   return favorites ? JSON.parse(favorites) : [];
 };
 
+// This function saves the favorite product to local storage
 const saveFavoriteToLocalStorage = (productId: string) => {
   const favorites = getFavoritesFromLocalStorage();
   if (!favorites.includes(productId)) {
@@ -26,12 +29,15 @@ const saveFavoriteToLocalStorage = (productId: string) => {
   }
 };
 
+
+// This function removes the favorite product from local storage
 const removeFavoriteFromLocalStorage = (productId: string) => {
   let favorites = getFavoritesFromLocalStorage();
   favorites = favorites.filter((id) => id !== productId);
   localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
 };
 
+// This is the ProductCard component
 interface ProductCardProps {
   product: Product;
   addToCart: (product: Product) => void;
@@ -46,6 +52,7 @@ const QuickReviewModal = ({
 }) => {
   const [showMessage, setShowMessage] = useState(false);
 
+  // This function adds the product to the cart
   const addToCart = () => {
     const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
     const newItem = {
@@ -102,10 +109,12 @@ const QuickReviewModal = ({
   );
 };
 
+// This is the ProductCard component
 const ProductCard: React.FC<ProductCardProps> = ({ product, addToCart }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [quickReviewOpen, setQuickReviewOpen] = useState(false);
 
+  //Here we check if the product is a favorite
   useEffect(() => {
     const favorites = getFavoritesFromLocalStorage();
     setIsFavorite(favorites.includes(product.id));
@@ -120,6 +129,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, addToCart }) => {
     setIsFavorite(!isFavorite);
   };
 
+  // This function opens the quick review modal
   const handleQuickReview = () => {
     setQuickReviewOpen(true);
   };

@@ -1,5 +1,6 @@
 import React from "react";
 
+//This is the ProfileFollow component that displays the number of followers and following
 const ProfileFollow: React.FC = () => {
   return (
     <div className="flex justify-center mt-4">

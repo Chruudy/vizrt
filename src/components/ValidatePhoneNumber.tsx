@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import Link from "next/link";
 
+// This is the ValidatePhoneNumber component
 const ValidatePhoneNumber: React.FC = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
 
   return (
+    // This is the main div that contains the validate phone number form
     <div
       className="flex flex-col items-center pb-6 pt-10 min-h-screen"
       style={{ backgroundColor: "#1D3641" }}

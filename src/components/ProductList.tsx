@@ -3,6 +3,7 @@ import axios from "axios";
 import Image from "next/image";
 import StarIcon from "@mui/icons-material/Star";
 
+// This is the interface for the Product component
 export interface Product {
   id: string;
   name: string;
@@ -13,12 +14,14 @@ export interface Product {
 
 const FAVORITES_KEY = "favoriteProducts";
 
+//here we are getting the favorite products from local storage
 const getFavoritesFromLocalStorage = (): string[] => {
   if (typeof window === "undefined") return [];
   const favorites = localStorage.getItem(FAVORITES_KEY);
   return favorites ? JSON.parse(favorites) : [];
 };
 
+//here we are saving the favorite product to local storage
 const saveFavoriteToLocalStorage = (productId: string) => {
   const favorites = getFavoritesFromLocalStorage();
   if (!favorites.includes(productId)) {
@@ -27,12 +30,14 @@ const saveFavoriteToLocalStorage = (productId: string) => {
   }
 };
 
+//here we are removing the favorite product from local storage
 const removeFavoriteFromLocalStorage = (productId: string) => {
   let favorites = getFavoritesFromLocalStorage();
   favorites = favorites.filter((id) => id !== productId);
   localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
 };
 
+//This is the ProductCard component
 const ProductList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [favorites, setFavorites] = useState<string[]>(
@@ -41,6 +46,7 @@ const ProductList: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  //here we are fetching the products from the api
   useEffect(() => {
     const fetchProducts = async () => {
       try {

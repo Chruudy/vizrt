@@ -24,6 +24,7 @@ const ContactItem = ({
   </div>
 );
 
+// Social media icons
 const FacebookSVG = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -79,6 +80,7 @@ const YoutubeSVG = () => (
   </svg>
 );
 
+// Social media icon component
 const SocialMediaIcon = ({
   svg,
   alt,
@@ -87,6 +89,7 @@ const SocialMediaIcon = ({
   alt: string;
 }) => <button className="w-6 h-6 hover:text-brandTextOrange">{svg}</button>;
 
+//This is the footer component that will be displayed on every page
 const Footer = () => {
   return (
     <footer className="bg-white text-black py-6 px-4">

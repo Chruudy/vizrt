@@ -5,10 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import backButton from "../images/back-button.png";
 
+// This is the VizLiberoDemo component that displays the Viz Libero demo
 const VizLiberoDemo: React.FC = () => {
   const [possession1, setPossession1] = useState(0);
   const [possession2, setPossession2] = useState(0);
 
+  // This function handles the change in possession 1
   const handlePossession1Change = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -33,6 +35,7 @@ const VizLiberoDemo: React.FC = () => {
 
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
+  // This function toggles the image preview
   const toggleImagePreview = () => {
     setIsPreviewOpen(!isPreviewOpen);
   };

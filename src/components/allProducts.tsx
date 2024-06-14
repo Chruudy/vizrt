@@ -16,6 +16,7 @@ const AllProducts: React.FC = () => {
   });
   const [showMessage, setShowMessage] = useState<string | null>(null);
 
+  //This is the useEffect hook that fetches the products from the API
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -30,7 +31,6 @@ const AllProducts: React.FC = () => {
         setProducts(productsWithBase64Images);
         setLoading(false);
 
-        // Calculate and set the highest price
         const maxPrice = Math.max(
           ...productsWithBase64Images.map((product: any) => product.price)
         );
@@ -45,6 +45,7 @@ const AllProducts: React.FC = () => {
     fetchProducts();
   }, []);
 
+  //This is the filter function that filters the products based on the selected category, price range and sort by
   const filteredProducts = products
     .filter((product) => {
       if (
@@ -77,7 +78,7 @@ const AllProducts: React.FC = () => {
   const handlePriceChange = (min: number, max: number) => {
     setPriceRange({ min, max });
   };
-
+  //This function adds the product to the cart
   const handleAddToCart = (product: Product) => {
     const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
     const productToAdd = {
@@ -107,6 +108,7 @@ const AllProducts: React.FC = () => {
   if (error) return <div className="text-center text-red01 py-4">{error}</div>;
 
   return (
+    //This is the main component that displays the products and the filters
     <div className="overflow-x-hidden">
       {showMessage && (
         <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg- text-white py-2 px-4 rounded shadow-lg z-50">

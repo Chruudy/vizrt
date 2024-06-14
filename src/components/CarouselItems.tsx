@@ -3,11 +3,13 @@ import axios from "axios";
 import Carousel from "./Carousel";
 import { Product } from "../components/ProductCard";
 
+//This is the component that fetches the images from the API and passes them to the Carousel component
 const CarouselItems = () => {
   const [images, setImages] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  //This is the useEffect hook that fetches the images from the API
   useEffect(() => {
     const fetchAllImages = async () => {
       try {

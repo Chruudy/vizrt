@@ -5,6 +5,7 @@ import backButton from "../images/back-button.png";
 import VizWorldInput from "../images/viz_world_input.jpg";
 import VizWorld from "../images/viz_world_img.jpg";
 
+// This is the VizWorldDemo component that displays the Viz World demo
 const VizWorldDemo: React.FC = () => {
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
@@ -20,6 +21,7 @@ const VizWorldDemo: React.FC = () => {
       id: "38",
     };
 
+    // Get the existing cart from local storage
     const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
     const isAlreadyInCart = existingCart.some(
       (item: { id: string }) => item.id === productToAdd.id
@@ -36,6 +38,7 @@ const VizWorldDemo: React.FC = () => {
   };
 
   return (
+    //This is the TSX code that displays the Viz World demo
     <div>
       <div className="flex pt-4 pl-52">
         <Link href="/demoInfoPage3">

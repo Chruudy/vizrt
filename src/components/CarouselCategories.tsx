@@ -8,6 +8,7 @@ import volleyball from "../images/volleyball.jpg";
 import basketball from "../images/basketball.jpg";
 import golf from "../images/golf.jpeg";
 
+// This is the images array that contains the images to be displayed in the carousel
 const images = [
   { src: tennis, alt: "Tennis", text: "Tennis" },
   { src: football, alt: "Football", text: "Football" },
@@ -17,16 +18,19 @@ const images = [
   { src: golf, alt: "Golf", text: "Golf" },
 ];
 
+// This is the CarouselCategories component that displays a 3D carousel of images
 const CarouselCategories = () => {
   const middleIndex = Math.floor(images.length / 2);
   const [activeIndex, setActiveIndex] = useState(middleIndex);
 
+// This function is used to handle the previous button click event
   const handlePrev = () =>
     setActiveIndex((prevActiveIndex) => {
       const newIndex = prevActiveIndex - 1;
       return newIndex < 0 ? images.length - 1 : newIndex;
     });
 
+// This function is used to handle the next button click event
   const handleNext = () =>
     setActiveIndex((prevActiveIndex) => {
       const newIndex = prevActiveIndex + 1;
@@ -34,6 +38,7 @@ const CarouselCategories = () => {
     });
 
   return (
+    // This is the container for the carousel
     <div className="relative flex flex-col items-center justify-center mt-14">
       <div className="relative flex items-center justify-center perspective mt-14">
         <button

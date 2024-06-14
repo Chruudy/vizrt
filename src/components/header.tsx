@@ -9,6 +9,8 @@ import Logo from "../images/Vizrt-Logo-Orange.webp";
 import Link from "next/link";
 import CreateIcon from "@mui/icons-material/Create";
 
+
+// This is the header component that will be displayed on every page.
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);

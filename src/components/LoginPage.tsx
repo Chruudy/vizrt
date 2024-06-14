@@ -8,12 +8,14 @@ import { Google, Facebook, Twitter } from "@mui/icons-material";
 import axios from "axios";
 import Logo from "../images/Vizrt-Logo-Orange.webp";
 
+//This is the Login Page component that will be displayed on the login page.
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
 
+//This is the function that handles the login of the user
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -41,8 +43,9 @@ const LoginPage: React.FC = () => {
       }
     }
   };
-
+  
   return (
+    //This is the main div that contains the login form
     <div className="flex flex-col items-center pb-6 pt-10 min-h-screen">
       <main
         className="w-full max-w-md space-y-8 px-8"

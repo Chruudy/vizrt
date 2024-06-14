@@ -13,6 +13,7 @@ import PLTable from "../images/pl_table_graphic.jpg";
 const PremierLeague: React.FC = () => {
   const [isStarClicked, setStarClicked] = useState(false);
 
+  // This function toggles the star icon when clicked
   const handleStarClick = () => {
     setStarClicked(!isStarClicked);
   };

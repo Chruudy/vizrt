@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import profilePic from "../images/profilepic.jpeg";
 
+//This is the ProfileInfo component that displays the user's profile information
 const ProfileInfo: React.FC = () => {
   return (
     <div className="flex flex-col items-center md:flex-row md:items-start space-x-4">

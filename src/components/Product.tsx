@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import StarIcon from "@mui/icons-material/Star";
 import Link from "next/link";
 
+// This is the interface for the Product component
 interface ProductProps {
   id: string;
   name: string;
@@ -12,6 +13,8 @@ interface ProductProps {
   onRemoveFavorite?: () => void;
 }
 
+
+// This is the Product component
 const Product: React.FC<ProductProps> = ({
   id,
   name,
@@ -23,6 +26,7 @@ const Product: React.FC<ProductProps> = ({
 }) => {
   const [isProductFavorite, setIsProductFavorite] = useState(isFavorite);
 
+  // This useEffect hook will run when the component mounts
   useEffect(() => {
     const storedFavorites = localStorage.getItem("favoriteProducts");
     if (storedFavorites) {
@@ -31,6 +35,7 @@ const Product: React.FC<ProductProps> = ({
     }
   }, [id]);
 
+  // This function will toggle the favorite status of the product
   const handleToggleFavorite = () => {
     setIsProductFavorite(!isProductFavorite);
     const storedFavorites = localStorage.getItem("favoriteProducts");

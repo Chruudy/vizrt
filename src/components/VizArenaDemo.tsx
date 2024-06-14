@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import backButton from "../images/back-button.png";
 
+// This is the VizArenaDemo component that displays the Viz Arena demo
 const VizArenaDemo: React.FC = () => {
   const [selectedColor, setSelectedColor] = useState("#000000");
 
@@ -42,6 +43,7 @@ const VizArenaDemo: React.FC = () => {
   };
 
   return (
+    //This is the TSX code that displays the Viz Arena demo
     <div>
       <div className="flex pt-4 pl-52">
         <Link href="/demoInfoPage1">

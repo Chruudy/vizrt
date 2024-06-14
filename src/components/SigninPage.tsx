@@ -7,6 +7,7 @@ import axios from "axios";
 import Logo from "../images/Vizrt-Logo-Orange.webp";
 import router from "next/router";
 
+//This is the SignUp Page component that will be displayed on the signup page.
 const SignUpPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -49,6 +50,8 @@ const SignUpPage: React.FC = () => {
   };
 
   return (
+    
+    //This is the main div that contains the signup form
     <div className="flex flex-col items-center pb-6 pt-10 min-h-screen">
       <main
         className="w-full max-w-md space-y-8 px-8"

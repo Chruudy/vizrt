@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 interface CarouselProps {
   images: string[];
 }
-
+//This is the Carousel component that displays a 3D carousel of images
 const Carousel: React.FC<CarouselProps> = ({ images = [] }) => {
   const router = useRouter();
   const middleIndex = images.length > 0 ? Math.floor(images.length / 2) : 0;
@@ -29,6 +29,7 @@ const Carousel: React.FC<CarouselProps> = ({ images = [] }) => {
   };
 
   return (
+    //This is the main structure of the Carousel component
     <div className="mb-24 relative flex flex-col items-center justify-center">
       <div className="mb-16"></div>
       <div className="relative flex items-center justify-center perspective mt-16">

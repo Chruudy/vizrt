@@ -7,12 +7,14 @@ import backButton from "../images/back-button.png";
 
 const FAVORITES_KEY = "favoriteProducts";
 
+// This function gets the favorite products from local storage
 const getFavoritesFromLocalStorage = (): string[] => {
   if (typeof window === "undefined") return [];
   const favorites = localStorage.getItem(FAVORITES_KEY);
   return favorites ? JSON.parse(favorites) : [];
 };
 
+// This function saves the favorite product to local storage
 const saveFavoriteToLocalStorage = (productId: string) => {
   const favorites = getFavoritesFromLocalStorage();
   if (!favorites.includes(productId)) {
@@ -21,12 +23,14 @@ const saveFavoriteToLocalStorage = (productId: string) => {
   }
 };
 
+// This function removes the favorite product from local storage
 const removeFavoriteFromLocalStorage = (productId: string) => {
   let favorites = getFavoritesFromLocalStorage();
   favorites = favorites.filter((id) => id !== productId);
   localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
 };
 
+// This is the VizArenaDemoInfo component that displays the Viz Arena demo information
 const VizArenaDemoInfo: React.FC = () => {
   const [isStarClicked, setIsStarClicked] = useState(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
@@ -38,6 +42,7 @@ const VizArenaDemoInfo: React.FC = () => {
     id: "36",
   };
 
+  // This useEffect hook checks if the product is a favorite
   useEffect(() => {
     const favorites = getFavoritesFromLocalStorage();
     setIsStarClicked(favorites.includes(product.id));
@@ -80,6 +85,7 @@ const VizArenaDemoInfo: React.FC = () => {
   };
 
   return (
+    // This is the TSX code that displays the Viz Arena demo information
     <div className="max-w-6xl mx-auto my-12 p-6 bg-grey090 rounded-xl">
       <div className="flex justify-start mb-4">
         <Link href="/" passHref>

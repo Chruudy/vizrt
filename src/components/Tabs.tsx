@@ -11,6 +11,7 @@ import unitedgraphic2 from "../images/unitedgraphic2.jpg";
 import graphic6 from "../images/graphic6.webp";
 import graphic7 from "../images/graphic7.jpeg";
 
+// This is the Tabs component that displays the tabs
 const Tabs: React.FC = () => {
   const [activeTab, setActiveTab] = useState("Owned");
 
@@ -33,6 +34,7 @@ const Tabs: React.FC = () => {
   };
 
   return (
+    // This is the main structure of the Tabs component
     <div className="text-center w-full">
       <div className="border-t border-white w-full mt-8" />
       <div className="flex justify-start mt-16 ml-4">

@@ -13,12 +13,14 @@ type Product = {
 
 const FAVORITES_KEY = "favoriteProducts";
 
+//This function gets the favorites from local storage
 const getFavoritesFromLocalStorage = (): number[] => {
   if (typeof window === "undefined") return [];
   const favorites = localStorage.getItem(FAVORITES_KEY);
   return favorites ? JSON.parse(favorites) : [];
 };
 
+//This function saves the favorite to local storage
 const saveFavoriteToLocalStorage = (productId: number) => {
   const favorites = getFavoritesFromLocalStorage();
   if (!favorites.includes(productId)) {
@@ -27,12 +29,14 @@ const saveFavoriteToLocalStorage = (productId: number) => {
   }
 };
 
+//This function removes the favorite from local storage
 const removeFavoriteFromLocalStorage = (productId: number) => {
   let favorites = getFavoritesFromLocalStorage();
   favorites = favorites.filter((id) => id !== productId);
   localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
 };
 
+//This is the quick review modal that pops up when the user clicks on the quick review button
 const QuickReviewModal = ({
   item,
   onClose,
@@ -42,6 +46,7 @@ const QuickReviewModal = ({
 }) => {
   const [showMessage, setShowMessage] = useState(false);
 
+  //This function adds the product to the cart
   const addToCart = () => {
     const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
     const newItem = {
@@ -98,6 +103,7 @@ const QuickReviewModal = ({
   );
 };
 
+//This is the main component that fetches the products and displays them in the category boxes
 const CategoryBoxes = () => {
   const [latestContributions, setLatestContributions] = useState<Product[]>([]);
   const [mostPopularPackages, setMostPopularPackages] = useState<Product[]>([]);
@@ -109,6 +115,7 @@ const CategoryBoxes = () => {
     getFavoritesFromLocalStorage()
   );
 
+  //This function fetches the products from the API
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -136,6 +143,7 @@ const CategoryBoxes = () => {
     fetchProducts();
   }, []);
 
+  //This function handles the quick review of the product
   const handleQuickReview = (item: Product) => setQuickReviewItem(item);
   const handleCloseQuickReview = () => setQuickReviewItem(null);
 
@@ -164,6 +172,8 @@ const CategoryBoxes = () => {
     setTimeout(() => setShowMessage(null), 3000);
   };
 
+
+  //This function handles the favorite button
   const handleFavorite = (productId: number) => {
     if (favorites.includes(productId)) {
       removeFavoriteFromLocalStorage(productId);
@@ -174,6 +184,8 @@ const CategoryBoxes = () => {
     }
   };
 
+
+  //This function renders the products
   const renderProducts = (products: Product[]) => (
     <div className="flex flex-wrap -mx-2">
       {products.map((product) => (

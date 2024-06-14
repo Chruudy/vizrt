@@ -4,18 +4,21 @@ import ProductCard, { Product } from './ProductCard';
 
 const FAVORITES_KEY = 'favoriteProducts';
 
+// Get favorite products from local storage
 const getFavoritesFromLocalStorage = (): string[] => {
   if (typeof window === 'undefined') return [];
   const favorites = localStorage.getItem(FAVORITES_KEY);
   return favorites ? JSON.parse(favorites) : [];
 };
 
+// Save favorite product to local storage
 const FavoritesPage: React.FC = () => {
   const [favoriteProducts, setFavoriteProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [showMessage, setShowMessage] = useState<string | null>(null);
 
+//This is the useEffect hook that fetches the favorite products from the API
   useEffect(() => {
     const fetchFavoriteProducts = async () => {
       try {
@@ -41,7 +44,7 @@ const FavoritesPage: React.FC = () => {
   }, []);
 
  
-
+//This is the function that adds a product to the cart
   const handleAddToCart = (product: Product) => {
     const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
     const productToAdd = {

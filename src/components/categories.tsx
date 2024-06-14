@@ -8,6 +8,7 @@ import virtual from "../images/virtual.webp";
 import esport from "../images/esport.jpeg";
 import live from "../images/live.jpeg";
 
+//This is the Categories component that displays the categories of products
 const Categories: React.FC = () => {
   const router = useRouter();
   const isSportsPage = router.pathname === "/categoriesPage";

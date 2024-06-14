@@ -5,6 +5,7 @@ import airbnbIcon from "../images/airbnb.png";
 import certificateIcon from "../images/certificate.png";
 import certificateIcon2 from "../images/certificate2.png";
 
+// This is the ProfileExperience component that displays the user's experience and certificates
 const ProfileExperience: React.FC = () => {
   return (
     <div className="mt-8 flex flex-col items-end">

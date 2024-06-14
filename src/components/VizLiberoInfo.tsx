@@ -7,6 +7,7 @@ import backButton from "../images/back-button.png";
 
 const FAVORITES_KEY = "favoriteProducts";
 
+// This function gets the favorite products from local storage
 const getFavoritesFromLocalStorage = (): string[] => {
   if (typeof window === "undefined") return [];
   const favorites = localStorage.getItem(FAVORITES_KEY);
@@ -38,6 +39,7 @@ const VizLiberoDemoInfo: React.FC = () => {
     id: "37",
   };
 
+  // Check if the product is already in favorites
   useEffect(() => {
     const favorites = getFavoritesFromLocalStorage();
     setIsStarClicked(favorites.includes(product.id));
@@ -80,6 +82,7 @@ const VizLiberoDemoInfo: React.FC = () => {
   };
 
   return (
+    // Add the following code to the return statement
     <div className="max-w-6xl mx-auto my-10 p-6 bg-grey090 rounded-xl">
       <div className="flex justify-start mb-4">
         <Link href="/" passHref>

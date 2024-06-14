@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import DeleteIcon from "@mui/icons-material/Delete";
 
+// This is the interface for the Product component
 interface Product {
   image: string;
   src: string;
@@ -10,11 +11,13 @@ interface Product {
   price: string | number;
 }
 
+// This is the ShoppingCart component
 const ShoppingCart = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [transactionComplete, setTransactionComplete] = useState(false);
   const [transactionAmount, setTransactionAmount] = useState(0);
 
+  //here we are getting the products from local storage
   useEffect(() => {
     const cartItems: Product[] = JSON.parse(
       localStorage.getItem("cart") || "[]"
