@@ -34,7 +34,6 @@ const removeFavoriteFromLocalStorage = (productId: string) => {
 
 interface ProductCardProps {
   product: Product;
-  onDemo: () => void;
   addToCart: (product: Product) => void;
 }
 
@@ -54,7 +53,7 @@ const QuickReviewModal = ({ product, onClose }: { product: Product; onClose: () 
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-gray-700 bg-opacity-95 p-6 shadow-lg w-96 text-center text-blue-100">
+      <div className="bg-grey035 bg-opacity-95 p-6 shadow-lg w-96 text-center text-blue-100">
         <div className="relative w-full h-48 mb-4">
           <Image src={product.image} alt={product.name} layout="fill" objectFit="cover" className="w-full h-full object-cover" />
           {showMessage && (
@@ -67,15 +66,15 @@ const QuickReviewModal = ({ product, onClose }: { product: Product; onClose: () 
         <p>Category: {product.category}</p>
         <p>Price: ${product.price}</p>
         <div className="flex justify-center space-x-4 mt-4">
-          <button className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2" onClick={addToCart}>Add to Cart</button>
-          <button className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2" onClick={onClose}>Close</button>
+          <button className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-brandOrange to-brandOrangeDarker shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2" onClick={addToCart}>Add to Cart</button>
+          <button className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-brandOrange to-brandOrangeDarker shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2" onClick={onClose}>Close</button>
         </div>
       </div>
     </div>
   );
 };
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, onDemo, addToCart }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, addToCart }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [quickReviewOpen, setQuickReviewOpen] = useState(false);
 
@@ -116,18 +115,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onDemo, addToCart })
         <div className="flex justify-between items-center mb-2">
           <h3 className="text-lg font-bold w-full">{product.name}</h3>
           <button onClick={handleFavorite} className="ml-2">
-            <StarIcon className={isFavorite ? "text-yellow-500" : "text-gray-400"} />
+            <StarIcon className={isFavorite ? "text-yellow-500" : "text-grey035"} />
           </button>
         </div>
-        <p className="text-gray-400 mb-2 w-full">Category: {product.category}</p>
-        <p className="text-gray-400 mb-2 w-full">Price: ${product.price}</p>
-        <hr className="my-2 border-t border-gray-300" /> 
+        <p className="text-grey035 mb-2 w-full">Category: {product.category}</p>
+        <p className="text-grey035 mb-2 w-full">Price: ${product.price}</p>
+        <hr className="my-2 border-t border-grey020" /> 
         <div className="flex justify-between">
           
-        <button onClick={() => addToCart(product)} className="text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2">
+        <button onClick={() => addToCart(product)} className="text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-brandOrange to-brandOrangeDarker shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2">
             Add to Cart
           </button>
-          <button onClick={handleQuickReview} className="text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2">
+          <button onClick={handleQuickReview} className="text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-brandOrange to-brandOrangeDarker shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2">
             Quick review
           </button>
         </div>

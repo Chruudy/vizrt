@@ -15,7 +15,7 @@ import graphic7 from '../images/graphic7.jpeg';
 const Tabs: React.FC = () => {
   const [activeTab, setActiveTab] = useState('Owned');
 
-  const images = {
+  const images: any = {
     Owned: [
       { src: unitedgraphic1, alt: 'Owned Image 1' },
       { src: graphic1, alt: 'Owned Image 2' },
@@ -40,7 +40,7 @@ const Tabs: React.FC = () => {
         {['Owned', 'Wishlist', 'Projects'].map((tab) => (
           <button
             key={tab}
-            className={`mx-2 py-2 px-4 rounded-lg text-black ${activeTab === tab ? 'bg-orange-500 shadow-lg transform scale-105 rounded-full' : 'bg-gray-200 rounded'}`}
+            className={`mx-2 py-2 px-4 rounded-lg text-black ${activeTab === tab ? 'bg-brandOrange shadow-lg transform scale-105 rounded-full' : 'bg-grey010 rounded'}`}
             onClick={() => setActiveTab(tab)}
           >
             {tab}
@@ -48,7 +48,7 @@ const Tabs: React.FC = () => {
         ))}
       </div>
       <div className="flex justify-start mt-8 ml-4 space-x-4">
-        {images[activeTab].map((image, index) => (
+        {images[activeTab].map((image: any, index: any) => (
           <div key={index} className="relative w-48 h-48 rounded-lg overflow-hidden shadow-md">
             <Image
               src={image.src}

@@ -82,7 +82,7 @@ const VizWorldDemoInfo: React.FC = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto my-10 p-6 bg-gray-900 rounded-xl">
+    <div className="max-w-6xl mx-auto my-10 p-6 bg-grey090 rounded-xl">
       <div className="flex justify-start mb-4">
         <Link href="/" passHref>
           <Image src={backButton} alt="Back button" width={32} height={32} />
@@ -131,13 +131,13 @@ const VizWorldDemoInfo: React.FC = () => {
           </h2>
           <div className="flex justify-center gap-4">
             <Link href="/demoTestPage3" passHref>
-              <button className="bg-gradient-to-r from-orange-500 to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out text-sm">
+              <button className="bg-gradient-to-r from-brandOrange to-brandOrangeDarker shadow-lg transform hover:scale-105 transition-transform duration-200 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out text-sm">
                 Demo
               </button>
             </Link>
             <button
               onClick={handleAddToCart}
-              className="bg-gradient-to-r from-orange-500 to-orange-800 shadow-lg transform hover:scale-105 transition-transform duration-200 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out text-sm">
+              className="bg-gradient-to-r from-brandOrange to-brandOrangeDarker shadow-lg transform hover:scale-105 transition-transform duration-200 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out text-sm">
               Add to cart
             </button>
           </div>

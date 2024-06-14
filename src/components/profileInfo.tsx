@@ -29,10 +29,10 @@ const ProfileInfo: React.FC = () => {
           </div>
         </div>
         <div className="flex space-x-2 mt-2"> {/* Tighter space between buttons */}
-          <button className="text-xs px-2 py-1 text-white bg-blue-500 rounded-full hover:bg-blue-600 transition duration-200">
+          <button className="text-xs px-2 py-1 text-white bg-blue01 rounded-full hover:bg-blue02 transition duration-200">
             Change Profile Picture
           </button>
-          <button className="text-xs px-2 py-1 text-white bg-orange-500 rounded-full hover:bg-orange-600 transition duration-200">
+          <button className="text-xs px-2 py-1 text-white bg-brandOrange rounded-full hover:bg-brandOrangeDarker transition duration-200">
             Edit Account
           </button>
         </div>
@@ -42,8 +42,8 @@ const ProfileInfo: React.FC = () => {
               Verify
             </button>
           </Link>
-          <Link href="/login" passHref>
-            <button className="ml-2 text-sm px-4 py-2 text-white bg-red-500 rounded-full hover:bg-red-700 transition duration-200">
+          <Link href="/" passHref>
+            <button className="ml-2 text-sm px-4 py-2 text-white bg-red01 rounded-full hover:bg-red3 transition duration-200">
               Sign Out
             </button>
           </Link>

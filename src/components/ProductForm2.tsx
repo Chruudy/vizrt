@@ -129,13 +129,13 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
           <div className="text-green-500 mb-4">{successMessage}</div>
         )}
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block text-grey085 text-sm font-bold mb-2">
             Category:
           </label>
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-grey085 leading-tight focus:outline-none focus:shadow-outline"
             required
           >
             <option value="">Select a category</option>
@@ -147,27 +147,27 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
           </select>
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block text-grey085 text-sm font-bold mb-2">
             Name:
           </label>
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-grey085 leading-tight focus:outline-none focus:shadow-outline"
             required
           />
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block text-grey085 text-sm font-bold mb-2">
             Price:
           </label>
           <input
             type="number"
             value={price}
             onChange={(e) => setPrice(Number(e.target.value))}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-grey085 leading-tight focus:outline-none focus:shadow-outline"
             required
           />
         </div>
@@ -179,7 +179,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
             type="file"
             accept="image/*"
             onChange={onImageChange}
-            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+            className="block w-full text-sm text-grey090 border border-grey020 rounded-lg cursor-pointer bg-grey010 focus:outline-none"
           />
         </div>
         {imagePreview && (
@@ -196,7 +196,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
         <div className="flex items-center justify-between">
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-blue01 hover:bg-blue03 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             {productId ? "Update" : "Add"} Product
           </button>
@@ -204,7 +204,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
             <button
               type="button"
               onClick={onDelete}
-              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
+              className="bg-red01 hover:bg-red03 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
             >
               Delete Product
             </button>
@@ -212,7 +212,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
           <button
             type="button"
             onClick={onChangeView}
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-red01 hover:bg-red03 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Change View
           </button>

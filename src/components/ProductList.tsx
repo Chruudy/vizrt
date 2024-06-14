@@ -65,7 +65,7 @@ const ProductList: React.FC = () => {
   };
 
   if (loading) return <div className="text-center py-4">Loading...</div>;
-  if (error) return <div className="text-center text-red-500 py-4">{error}</div>;
+  if (error) return <div className="text-center text-red01 py-4">{error}</div>;
 
   return (
     <div className="max-w-6xl mx-auto p-4 shadow-md rounded-md">
@@ -91,7 +91,7 @@ const ProductList: React.FC = () => {
               {favorites.includes(product.id) ? (
                 <StarIcon className="text-yellow-500" />
               ) : (
-                <StarIcon className="text-gray-400" />
+                <StarIcon className="text-grey035" />
               )}
             </button>
           </div>

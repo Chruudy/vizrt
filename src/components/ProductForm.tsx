@@ -123,7 +123,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
 
   return (
     <div className="w-full h-full mx-auto p-4 bg-brandBGLighter shadow-md rounded-md grid grid-cols-3 gap-4 text-white">
-      <div className="col-span-2 bg-gray-800 rounded border border-black">
+      <div className="col-span-2 bg-grey090 rounded border border-black">
         <h2 className="p-2">Preview</h2>
         {imagePreview && (
           <div className="mb-4">
@@ -165,7 +165,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-500 text-sm font-bold mb-2">
+            <label className="block text-grey065 text-sm font-bold mb-2">
               Category:
             </label>
             <select
@@ -183,7 +183,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
             </select>
           </div>
           <div className="mb-4">
-            <label className="block text-gray-500 text-sm font-bold mb-2">
+            <label className="block text-grey065 text-sm font-bold mb-2">
               Sub Category:
             </label>
             <select
@@ -200,7 +200,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
             </select>
           </div>
           <div className="mb-4">
-            <label className="block text-gray-500 text-sm font-bold mb-2">
+            <label className="block text-grey065 text-sm font-bold mb-2">
               Price:
             </label>
             <input
@@ -219,13 +219,13 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
               type="file"
               accept="image/*"
               onChange={onImageChange}
-              className="block w-full text-sm border text-white border-gray-500 rounded-lg cursor-pointer bg-gray-500 focus:outline-none"
+              className="block w-full text-sm border text-white border-grey065 rounded-lg cursor-pointer bg-grey065 focus:outline-none"
             />
           </div>
           <div className="flex items-center justify-between">
             <button
               type="submit"
-              className="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline bg-gradient-to-r from-orange-500 to-orange-800"
+              className="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline bg-gradient-to-r from-brandOrange to-brandOrangeDarker"
             >
               {productId ? "Update" : "Add"} Product
             </button>
@@ -233,7 +233,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId }) => {
               <button
                 type="button"
                 onClick={onDelete}
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-red01 hover:bg-red03 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               >
                 Delete Product
               </button>

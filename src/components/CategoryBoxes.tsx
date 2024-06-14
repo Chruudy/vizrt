@@ -50,7 +50,7 @@ const QuickReviewModal = ({ item, onClose }: { item: Product, onClose: () => voi
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-gray-700 bg-opacity-95 p-6 shadow-lg w-96 text-center text-blue-100">
+      <div className="bg-grey085 bg-opacity-95 p-6 shadow-lg w-96 text-center text-blue-100">
         <div className="relative w-full h-48 mb-4">
           <Image src={item.image} alt={item.name} layout="fill" objectFit="cover" className="w-full h-full object-cover" />
           {showMessage && (
@@ -63,8 +63,8 @@ const QuickReviewModal = ({ item, onClose }: { item: Product, onClose: () => voi
         <p>Category: {item.category}</p>
         <p>Price: ${item.price}</p>
         <div className="flex justify-center space-x-4 mt-4">
-          <button className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2" onClick={addToCart}>Add to Cart</button>
-          <button className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2" onClick={onClose}>Close</button>
+          <button className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-brandOrange to-brandOrangeDarker shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2" onClick={addToCart}>Add to Cart</button>
+          <button className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-brandOrange to-brandOrangeDarker shadow-lg transform hover:scale-105 transition-transform duration-200 mt-2" onClick={onClose}>Close</button>
         </div>
       </div>
     </div>
@@ -151,21 +151,21 @@ const CategoryBoxes = () => {
               <div className="flex justify-between items-center mb-2">
                 <p className="text-lg font-semibold">{product.name}</p>
                 <button onClick={() => handleFavorite(product.id)}>
-                  <StarIcon className={favorites.includes(product.id) ? "text-yellow-500" : "text-gray-400"} />
+                  <StarIcon className={favorites.includes(product.id) ? "text-yellow-500" : "text-grey035"} />
                 </button>
               </div>
-              <p className="text-sm text-gray-400 whitespace-nowrap">Category: {product.category}</p>
-              <p className="text-md text-gray-400 whitespace-nowrap">Price: ${product.price}</p>
+              <p className="text-sm text-grey035 whitespace-nowrap">Category: {product.category}</p>
+              <p className="text-md text-grey035 whitespace-nowrap">Price: ${product.price}</p>
             </div>
             <div className="flex justify-between space-x-2 mt-2">
               <button
-                className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200"
+                className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-brandOrange to-brandOrangeDarker shadow-lg transform hover:scale-105 transition-transform duration-200"
                 onClick={() => addToCart(product)}
               >
                 Add to Cart
               </button>
               <button
-                className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-700 shadow-lg transform hover:scale-105 transition-transform duration-200"
+                className="text-white text-xs font-medium w-24 h-8 flex items-center justify-center bg-gradient-to-r from-brandOrange to-brandOrangeDarker shadow-lg transform hover:scale-105 transition-transform duration-200"
                 onClick={() => handleQuickReview(product)}
               >
                 Quick Review

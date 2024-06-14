@@ -85,7 +85,7 @@ const SocialMediaIcon = ({
 }: {
   svg: React.ReactNode;
   alt: string;
-}) => <button className="w-6 h-6 hover:text-orange-500">{svg}</button>;
+}) => <button className="w-6 h-6 hover:text-brandTextOrange">{svg}</button>;
 
 const Footer = () => {
   return (
@@ -105,46 +105,46 @@ const Footer = () => {
           <h3 className="font-bold">Products</h3>
           <div className="flex items-center">
             <Link href="/demoInfoPage1">
-              <p className="text-blue-500">Viz Arena</p>
+              <p className="text-blue02">Viz Arena</p>
             </Link>
           </div>
           <div className="flex items-center">
             <Link href="/demoInfoPage2">
-              <p className="text-blue-500">Viz Libero</p>
+              <p className="text-blue02">Viz Libero</p>
             </Link>
           </div>
           <div className="flex items-center">
             <Link href="/demoInfoPage3">
-              <p className="text-blue-500">Viz World</p>
+              <p className="text-blue02">Viz World</p>
             </Link>
           </div>
         </div>
         <div className="col-span-1 space-y-4">
           <h3 className="font-bold">Support</h3>
-          <ContactItem src={phone} alt="Phone" className="text-blue-500">
+          <ContactItem src={phone} alt="Phone" className="text-blue02">
             +47 5523 0025
           </ContactItem>
-          <ContactItem src={email} alt="Email" className="text-blue-500">
+          <ContactItem src={email} alt="Email" className="text-blue02">
             vizrt@support.no
           </ContactItem>
         </div>
         <div className="col-span-1 space-y-4">
           <h3 className="font-bold">Global Headquarters (Bergen)</h3>
-          <ContactItem src={location} alt="Location" className="text-blue-500">
+          <ContactItem src={location} alt="Location" className="text-blue02">
             Vizrt Norway AS, Lars Hilles Gate 30, 5008 Bergen
           </ContactItem>
         </div>
       </div>
-      <div className="border-t border-blue-500 flex justify-between items-center my-6 pt-4">
-        <p className="text-xs text-gray-500">
+      <div className="border-t border-blue02 flex justify-between items-center my-6 pt-4">
+        <p className="text-xs text-grey070">
           Copyright Vizrt (2024). All rights reserved
         </p>
         <div className="flex space-x-4">
-          <a href="/privacy" className="text-xs text-gray-500">
+          <a href="/privacy" className="text-xs text-grey070">
             Cookie Policy
           </a>
-          <span className="text-xs text-gray-500">/</span>
-          <a href="/privacy" className="text-xs text-gray-500">
+          <span className="text-xs text-grey070">/</span>
+          <a href="/privacy" className="text-xs text-grey070">
             Privacy
           </a>
         </div>
