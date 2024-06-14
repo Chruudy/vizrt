@@ -187,7 +187,9 @@ const CategoryBoxes = () => {
               <Image
                 src={product.image}
                 alt={product.name}
-                className="w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover"
+                width={400}
+                height={400}
               />
             </div>
             <div className="flex-1">
