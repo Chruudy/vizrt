@@ -42,7 +42,7 @@ const ProfileInfo: React.FC = () => {
               Verify
             </button>
           </Link>
-          <Link href="/" passHref>
+          <Link href="/login" passHref>
             <button className="ml-2 text-sm px-4 py-2 text-white bg-red-500 rounded-full hover:bg-red-700 transition duration-200">
               Sign Out
             </button>
